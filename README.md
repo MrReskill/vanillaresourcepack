@@ -1,4 +1,4 @@
-# Minecraft Pocket Edition Resouce Pack Template
+# Minecraft Pocket Edition Resource Pack Template
 
 This is the most recent version of the add-on template. Click clone or download on the right and download the zip to get started ASAP.
 
