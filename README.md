@@ -6,3 +6,5 @@ This is the most recent version of the add-on template. Click clone or download 
 on cloning with git the repo locally with git make sure you have Git LFS installed.
 
 (The sole purpose of Git LFS is due to the sound files taking up 20 MB.)
+
+Behavior pack template located here: https://github.com/superusercode/vanillabehaviorpack
