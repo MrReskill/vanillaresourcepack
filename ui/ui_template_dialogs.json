@@ -9,14 +9,14 @@
   "standard_title_label": {
     "type": "label",
     "size": [ "default", 10 ],
-    "color": [ 0.275, 0.275, 0.275 ],
+    "color": "$title_text_color",
     "text": "$text_name",
     "layer": 4,
     "shadow": false,
     "bindings": [
       {
         "binding_type": "$title_text_binding_type",
-        "binding_condition": "$title_binding_condition",        
+        "binding_condition": "$title_binding_condition",
         "binding_name": "$text_name",
         "binding_name_override": "$text_name"
       }
@@ -142,9 +142,10 @@
     "anchor_to": "center",
     "$text_name|default": "",
     "$panel_indent_size|default": [ "100% - 16px", "100% - 31px" ],
+    "$custom_background|default": "dialog_background_hollow_3",
     "controls": [
       {
-        "common_panel@common.common_panel": { "$dialog_background": "dialog_background_hollow_3" }
+        "common_panel@common.common_panel": { "$dialog_background": "$custom_background" }
       },
       {
         "title_label@common_dialogs.title_label": { }
@@ -260,8 +261,9 @@
     "$text_name|default": "",
     "$show_close_button|default": true,
     "$use_compact_close_button|default": false,
+    "$custom_background": "common_dialogs.dialog_background_hollow_3",
     "controls": [
-      { "common_panel@common_dialogs.common_panel": { "$dialog_background": "dialog_background_hollow_3" } }
+      { "common_panel@common_dialogs.common_panel": { "$dialog_background": "$custom_background" } }
     ]
   },
 
@@ -280,7 +282,7 @@
 
   "dialog_background_common": {
     "type": "image",
-    "texture": "textures/gui/newgui/dialog-background-atlas",
+    "texture": "textures/ui/dialog_background_hollow_4",
     "layer": 1
   },
 
@@ -297,21 +299,22 @@
       {
         "control": {
           "type": "image",
-          "nineslice_size": 1.0,
-          "texture": "textures/gui/newgui/dialog-background-atlas",
+          "texture": "textures/ui/control",
           "layer": 1,
           "$common_background_size|default": [ "100% - 16px", "100%c - 27px" ],
           "$close_button_offset|default": [ 6, -21 ], 
           "size": "$common_background_size",
           "offset": [ 0, 7 ],
-          "uv": [ 14, 101 ],
-          "uv_size": [ 2, 2 ],
           "alpha": "$fill_alpha",
           "variables": [
             {
               "requires": "($show_close_button and $use_compact_close_button)",
               "$common_background_size": [ "100% - 16px", "100%c - 19px" ],
               "$close_button_offset": [ 6, -13 ]
+            },
+            {
+              "requires": "(not $show_close_button)",
+              "$common_background_size": [ "100% - 16px", "100%c - 6px" ]
             }
           ],
           "controls": [
@@ -358,36 +361,64 @@
 
   "dialog_background_opaque@common_dialogs.dialog_background_common": {
     "size": [ "100%", "100%c" ],
-    "nineslice_size": 4.0,
-    "uv": [ 0, 106 ],
-    "uv_size": [ 16, 16 ]
+    "texture": "textures/ui/dialog_background_opaque"
   },
-  
+
+  "dialog_background_opaque_with_child@common_dialogs.dialog_background_hollow_common": {
+    // +31 same as hollow_3 to fit
+    "size": [ "100%", "100%c + 31px" ],
+    "texture": "textures/ui/dialog_background_opaque",
+    // This isn't a hollow panel so we don't want to fill the hollow hole with the background color, so make it invisible
+    "$fill_alpha": 0.0
+  },
+
   "dialog_background_hollow_1@common_dialogs.dialog_background_hollow_common": {
     "size": [ "100%", "100%c" ],
-    "nineslice_size": [ 8, 23, 8, 76 ],
-    "uv": [ 0, 0 ],
-    "uv_size": [ 18, 101 ]
+    "texture": "textures/ui/dialog_background_hollow_1"
   },
   
   "dialog_background_hollow_2@common_dialogs.dialog_background_hollow_common": {
     "size": [ "100%", "100%c" ],
-    "nineslice_size": [ 8, 23, 8, 42 ],
-    "uv": [ 18, 0 ],
-    "uv_size": [ 18, 67 ]
+    "texture": "textures/ui/dialog_background_hollow_2"
   },
-  
+
   "dialog_background_hollow_3@common_dialogs.dialog_background_hollow_common": {
     "size": [ "100%", "100%c + 31px" ],
-    "nineslice_size": [ 8, 23, 8, 8 ],
-    "uv": [ 36, 0 ],
-    "uv_size": [ 18, 33 ]
+    "texture": "textures/ui/dialog_background_hollow_3"
   },
-  
+
   "dialog_background_hollow_4@common_dialogs.dialog_background_hollow_common": {
     "size": [ "100%", "100%c" ],
-    "nineslice_size": 8.0,
-    "uv": [ 54, 0 ],
-    "uv_size": [ 18, 18 ]
+    "texture": "textures/ui/dialog_background_hollow_4"
+  },
+
+  "background": {
+    "type": "panel",
+    "$fill_alpha|default": 0.8,
+    "$child_control|default": "common.empty_panel",
+    "variables": [
+      {
+        "requires": "$is_holographic",
+        "$fill_alpha": 1.0
+      }
+    ],
+    "controls": [
+      {
+        "image": {
+          "type": "image",
+          "texture": "textures/ui/control",
+          "layer": 1,
+          "size": [ "100%", "100%" ],
+          "alpha": "$fill_alpha",
+          "controls": [
+            {
+              "content@$child_control": {
+                "layer": 2
+              }
+            }
+          ]
+        }
+      }
+    ]
   }
 }

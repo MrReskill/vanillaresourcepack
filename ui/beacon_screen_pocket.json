@@ -13,30 +13,7 @@
     "type": "label",
     "anchor_from": "center",
     "anchor_to": "center",
-    "color": [ 1.0, 1.0, 1.0, 1.0 ],
-    "shadow": true
-  },
-
-  // Close Button //
-
-  "close_button_default@beacon_pocket.sprite_sheet_base": {
-    "uv": [ 60, 0 ],
-    "uv_size": [ 18, 18 ]
-  },
-  "close_button_pressed@beacon_pocket.close_button_default": {
-    "uv": [ 78, 0 ]
-  },
-  "close_button@common.button": {
-    "$pressed_button_name": "button.menu_exit",
-    "size": [ 18, 18 ],
-    "anchor_from": "top_right",
-    "anchor_to": "top_right",
-    "focus_enabled": false,
-    "controls": [
-      { "default@beacon_pocket.close_button_default": { } },
-      { "hover@beacon_pocket.close_button_default": { } },
-      { "pressed@beacon_pocket.close_button_pressed": { } }
-    ]
+    "color": "$pocket_title_text_color"
   },
 
   // Header //
@@ -50,10 +27,7 @@
       {
         "header_background": {
           "type": "image",
-          "nineslice_size": [ 3, 3, 3, 6 ],
-          "texture": "textures/gui/newgui/TopBar",
-          "uv": [ 0, 0 ],
-          "uv_size": [ 5, 8 ]
+          "texture": "textures/ui/header_bar"
         }
       },
       {
@@ -63,7 +37,7 @@
         }
       },
       {
-        "x@beacon_pocket.close_button": {
+        "x@common.legacy_pocket_close_button": {
           "layer": 1
         }
       }
@@ -71,45 +45,32 @@
   },
 
   // Base images //
-
-  "sprite_sheet_base": {
+  "panel_outline": {
     "type": "image",
-    "texture": "textures/gui/spritesheet"
+    "texture": "textures/ui/panel_outline"
   },
-  "gui_sheet_base": {
+  "dark_bg": {
     "type": "image",
-    "texture": "textures/gui/gui"
+    "texture": "textures/ui/item_cell"
   },
-  "panel_outline@beacon_pocket.sprite_sheet_base": {
-    "nineslice_size": 1.0,
-    "uv": [ 28, 42 ],
-    "uv_size": [ 4, 4 ]
-  },
-  "dark_bg@beacon_pocket.gui_sheet_base": {
-    "uv": [ 200, 46 ],
-    "uv_size": [ 16, 16 ],
-    "nineslice_size": 1.0
-  },
-  "background_image@beacon_pocket.sprite_sheet_base": {
-    "uv": [ 34, 43 ],
-    "uv_size": [ 14, 14 ],
-    "nineslice_size": 4.0
+  "background_image": {
+    "type": "image",
+    "texture": "textures/ui/background_image"
   },
 
   // Valid Item Images //
 
   "item_seperator": {
     "type": "image",
-    "texture": "textures/gui/newgui/beacon/beacon_item_seperator_pocket",
+    "texture": "textures/ui/beacon_item_seperator_pocket",
     "size": [ 5, 18 ],
-    "uv_size": [ 5, 18 ],
     "anchor_to": "left_middle",
     "anchor_from": "left_middle"
   },
   "item_renderer": {
     "type": "custom",
     "renderer": "inventory_item_renderer",
-    "size": [ 18, 18 ],
+    "size": [ 16, 16 ],
     "anchor_to": "left_middle",
     "anchor_from": "left_middle"
   },
@@ -169,10 +130,10 @@
 
   // Pyramid Images //
 
-  "pyramid_image@beacon_pocket.gui_sheet_base": {
+  "pyramid_image": {
+    "type": "image",
     "$pyramid_size|default": [ 19, 20 ],
     "size": "$pyramid_size",
-    "uv_size": [ 19, 20 ],
     "anchor_to": "center",
     "anchor_from": "center"
   },
@@ -185,7 +146,7 @@
     "controls": [
       {
         "pyramid_image@pyramid_image": {
-          "uv": "$pyramid_uv"
+          "texture": "$image_texture"
         }
       }
     ]
@@ -193,31 +154,27 @@
 
   // Backgrounds //
 
-  "background_panel@beacon_pocket.sprite_sheet_base": {
+  "background_panel": {
+    "type": "image",
     "size": [ "100%", "100%" ],
-    "nineslice_size": 4.0,
-    "uv": [ 0, 0 ],
-    "uv_size": [ 16, 16 ]
+    "texture": "textures/ui/background_panel"
   },
   "beacon_background": {
     "type": "image",
-    "texture": "textures/gui/newgui/beacon/beacon_background_pocket",
+    "texture": "textures/ui/effect_background",
     "size": [ "100%", "100%" ],
-    "nineslice_size": 4.0,
-    "uv_size": [ 10, 10 ],
     "anchor_from": "top_middle",
     "anchor_to": "top_middle",
     "controls": [
       {
-        "middle_strip@beacon_pocket.gui_sheet_base": {
+        "middle_strip": {
+          "type": "image",
           "offset": [ 0, 3 ],
           "layer": 1,
           "anchor_from": "top_middle",
           "anchor_to": "top_middle",
-          "uv": [ 131, 118 ],
-          "nineslice_size": 1.0,
-          "size": [ 2, "100%-6px" ],
-          "uv_size": [ 2, 1 ]
+          "texture": "textures/ui/middle_strip",
+          "size": [ 2, "100%-6px" ]
         }
       }
     ]
@@ -278,7 +235,6 @@
       {
         "highlight_square@common.pocket_ui_highlight_slot": {
           "visible": false,
-          "nineslice_size": 4.0,
 
           "bindings": [
             {
@@ -293,25 +249,18 @@
 
   "button_unchecked_default": {
     "type": "image",
-    "texture": "textures/gui/newgui/beacon/beacon_default_button_pocket",
-    "nineslice_size": 1.0,
-    "uv_size": [ 3, 3 ]
+    "texture": "textures/ui/beacon_default_button_pocket"
   },
   "button_unchecked_hover": {
     "type": "image",
-    "texture": "textures/gui/newgui/beacon/beacon_default_button_pocket",
-    "nineslice_size": 1.0,
-    "uv_size": [ 3, 3 ],
-    "uv": [ 0, 0 ],
+    "texture": "textures/ui/beacon_default_button_pocket",
     "controls": [
       { "highlight_hover_square@beacon_pocket.highlight_hover_square": { } }
     ]
   },
   "button_checked": {
     "type": "image",
-    "texture": "textures/gui/newgui/beacon/beacon_selected_button_pocket",
-    "nineslice_size": 1.0,
-    "uv_size": [ 3, 3 ]
+    "texture": "textures/ui/beacon_selected_button_pocket"
   },
   "button_checked_hover@beacon_pocket.button_checked": {
     "controls": [
@@ -392,28 +341,22 @@
       {
         "default": {
           "type": "image",
-          "texture": "textures/gui/newgui/beacon/beacon_default_button_pocket",
-          "nineslice_size": 1.0,
-          "uv_size": [ 3, 3 ]
+          "texture": "textures/ui/beacon_default_button_pocket"
         }
       },
       {
         "hover": {
           "type": "image",
-          "texture": "textures/gui/newgui/beacon/beacon_default_button_pocket",
-          "nineslice_size": 1.0,
-          "uv_size": [ 3, 3 ],
-          "uv": [ 0, 0 ],
+          "texture": "textures/ui/beacon_default_button_pocket",
           "controls": [
             { "highlight_hover_square@beacon_pocket.highlight_hover_square": { } }
           ]
         }
       },
       {
-        "pressed@beacon_pocket.gui_sheet_base": {
-          "nineslice_size": 1.0,
-          "uv_size": [ 22, 22 ],
-          "uv": [ 210, 184 ]
+        "pressed": {
+          "type": "image",
+          "texture": "textures/ui/beacon_button_locked"
         }
       }
     ]
@@ -433,10 +376,9 @@
       }
     ]
   },
-  "inactive_button_image@beacon_pocket.gui_sheet_base": {
-    "nineslice_size": 1.0,
-    "uv_size": [ 22, 22 ],
-    "uv": [ 210, 184 ]
+  "inactive_button_image": {
+    "type": "image",
+    "texture": "textures/ui/beacon_button_locked"
   },
   "inactive_button@beacon_pocket.base_button": {
     "$button_active": "#inactive",
@@ -455,9 +397,7 @@
   },
   "selected_button_image": {
     "type": "image",
-    "texture": "textures/gui/newgui/beacon/beacon_selected_button_pocket",
-    "nineslice_size": 1.0,
-    "uv_size": [ 3, 3 ]
+    "texture": "textures/ui/beacon_selected_button_pocket"
   },
   "selected_button@beacon_pocket.base_button": {
     "$button_active": "#selected",
@@ -489,24 +429,24 @@
   },
   "speed_secondary@beacon_pocket.secondary_effect_base": {
     "$effect_name": "speed",
-    "$image_uv": [ 0, 184 ]
+    "$image_texture": "textures/ui/speed_effect"
   },
   "haste_secondary@beacon_pocket.secondary_effect_base": {
     "$effect_name": "haste",
-    "$image_uv": [ 36, 184 ]
+    "$image_texture": "textures/ui/haste_effect"
   },
   "resist_secondary@beacon_pocket.secondary_effect_base": {
     "$effect_name": "resist",
-    "$image_uv": [ 108, 202 ]
+    "$image_texture": "textures/ui/resistance_effect"
 
   },
   "jump_secondary@beacon_pocket.secondary_effect_base": {
     "$effect_name": "jump",
-    "$image_uv": [ 36, 202 ]
+    "$image_texture": "textures/ui/jump_boost_effect"
   },
   "strength_secondary@beacon_pocket.secondary_effect_base": {
     "$effect_name": "strength",
-    "$image_uv": [ 72, 184 ]
+    "$image_texture": "textures/ui/strength_effect"
   },
   "secondary_effect_images@beacon_pocket.image_template": {
     "controls": [
@@ -521,14 +461,14 @@
 
   // Templates for button panel //
 
-  "base_image@beacon_pocket.gui_sheet_base": {
+  "base_image": {
+    "type": "image",
     "anchor_to": "center",
     "anchor_from": "center",
     "$image_size|default": [ 18, 18 ],
     "size": "$image_size",
-    "$image_uv_size|default": [ 18, 18 ],
-    "uv_size": "$image_uv_size",
-    "uv": "$image_uv",
+    "$image_texture|default": "",
+    "texture": "$image_texture",
     "layer": 5,
     "bindings": [
       {
@@ -600,7 +540,8 @@
         "label@beacon_pocket.generic_label": {
           "anchor_from": "center",
           "anchor_to": "center",
-          "text": "$text"
+          "text": "$text",
+          "color": "$beacon_power_title_text_color"
         }
       }
     ]
@@ -640,54 +581,54 @@
                 "controls": [
                   {
                     "level1@beacon_pocket.pyramid_panel": {
-                      "$pyramid_uv": [ 144, 228 ],
+                      "$image_texture": "textures/ui/pyramid_level_1",
                       "offset": [ 0, 0 ]
                     }
                   },
                   {
                     "speed_panel@beacon_pocket.panel_template": {
                       "offset": [ 31, 0 ],
-                      "$image_uv": [ 0, 184 ],
+                      "$image_texture": "textures/ui/speed_effect",
                       "$button_name": "speed"
                     }
                   },
                   {
                     "haste_panel@beacon_pocket.panel_template": {
                       "offset": [ 57, 0 ],
-                      "$image_uv": [ 36, 184 ],
+                      "$image_texture": "textures/ui/haste_effect",
                       "$button_name": "haste"
                     }
                   },
                   {
                     "level2@beacon_pocket.pyramid_panel": {
-                      "$pyramid_uv": [ 163, 228 ],
+                      "$image_texture": "textures/ui/pyramid_level_2",
                       "offset": [ 0, 26 ]
                     }
                   },
                   {
                     "resist_panel@beacon_pocket.panel_template": {
                       "offset": [ 31, 26 ],
-                      "$image_uv": [ 108, 202 ],
+                      "$image_texture": "textures/ui/resistance_effect",
                       "$button_name": "resist"
                     }
                   },
                   {
                     "jump_panel@beacon_pocket.panel_template": {
                       "offset": [ 57, 26 ],
-                      "$image_uv": [ 36, 202 ],
+                      "$image_texture": "textures/ui/jump_boost_effect",
                       "$button_name": "jump"
                     }
                   },
                   {
                     "level3@beacon_pocket.pyramid_panel": {
-                      "$pyramid_uv": [ 182, 228 ],
+                      "$image_texture": "textures/ui/pyramid_level_3",
                       "offset": [ 0, 52 ]
                     }
                   },
                   {
                     "strength_panel@beacon_pocket.panel_template": {
                       "offset": [ 45, 52 ],
-                      "$image_uv": [ 72, 184 ],
+                      "$image_texture": "textures/ui/strength_effect",
                       "$button_name": "strength"
                     }
                   }
@@ -725,7 +666,7 @@
                 "controls": [
                   {
                     "level4@beacon_pocket.pyramid_panel": {
-                      "$pyramid_uv": [ 201, 228 ],
+                      "$image_texture": "textures/ui/pyramid_level_4",
                       "offset": [ 0, 0 ],
                       "anchor_from": "top_middle",
                       "anchor_to": "top_middle"
@@ -736,7 +677,7 @@
                       "offset": [ -1, 26 ],
                       "anchor_from": "top_middle",
                       "anchor_to": "top_right",
-                      "$image_uv": [ 126, 184 ],
+                      "$image_texture": "textures/ui/regeneration_effect",
                       "$button_name": "regen"
                     }
                   },
@@ -808,8 +749,7 @@
             {
               "confirm_panel@beacon_pocket.panel_template": {
                 "offset": [ 36, 0 ],
-                "$image_uv": [ 144, 206 ],
-                "$image_uv_size": [ 14, 12 ],
+                "$image_texture": "textures/ui/confirm",
                 "$image_size": [ 14, 12 ],
                 "$button_name": "confirm",
                 "anchor_from": "center",
@@ -821,8 +761,7 @@
             {
               "cancel_panel@beacon_pocket.panel_template": {
                 "offset": [ 52, 0 ],
-                "$image_uv": [ 158, 206 ],
-                "$image_uv_size": [ 13, 13 ],
+                "$image_texture": "textures/ui/cancel",
                 "$image_size": [ 13, 13 ],
                 "$button_name": "cancel",
                 "anchor_from": "center",
@@ -870,16 +809,11 @@
     "controls": [
 
       { "gamepad_helpers@pocket_containers.gamepad_helpers": { "layer": 3 } },
-      { "inventory_selected_icon_button@common.inventory_selected_icon_button": { } },
-      { "bg@beacon_pocket.background_panel": { } },
+      { "inventory_selected_icon_button@common.inventory_selected_icon_button": {} },
+      { "bg@beacon_pocket.background_panel": {} },
       { "hold_icon@common.inventory_take_progress_icon_button": { "layer": 1 } },
       { "flying_item_renderer@beacon_pocket.flying_item_renderer": { "layer": 2 } },
-      {
-        "selected_item_details_factory": {
-          "type": "factory",
-          "control_name": "@pocket_containers.selected_item_details"
-        }
-      },
+      { "selected_item_details_factory@common.selected_item_details_factory": {} },
       {
         "root_panel": {
           "type": "panel",
@@ -901,7 +835,7 @@
                       "$pane_collection": "combined_hotbar_and_inventory_items"
                     }
                   },
-                  { "half_screen_beacon@beacon_pocket.half_screen_beacon": { } }
+                  { "half_screen_beacon@beacon_pocket.half_screen_beacon": {} }
                 ]
               }
             }

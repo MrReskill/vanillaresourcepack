@@ -9,38 +9,33 @@
   //---------------------------------------------------------------------------
   // Common
   //---------------------------------------------------------------------------
-  "generic_label": {
-    "type": "label",
-    "anchor_from": "top_middle",
-    "anchor_to": "top_middle",
-    "color": [ 1, 1, 1, 1.0 ],
-    "layer": 1
-  },
-
   "multiline_text_edit_control@common.multiline_text_edit_box": {
     "anchor_from": "center",
     "anchor_to": "center",
     "$place_holder_text": "npcscreen.addtext",
+    "$cancel_button_mapping|default": "button.menu_exit",
     "property_bag": {
       "#property_field": "#item_name"
     },
+    // Same as in ui_common, but reroute menu_cancel to close so we can make it go back/save/close appropriately
     "button_mappings": [
       {
         "from_button_id": "button.menu_select",
         "to_button_id": "button.menu_select",
         "handle_select": true,
+        "handle_deselect": true,
         "mapping_type": "pressed"
       },
       {
         "from_button_id": "button.menu_ok",
         "to_button_id": "button.menu_select",
         "handle_select": true,
-        "handle_deselect": true,
-        "mapping_type": "focused"
+        "handle_deselect": false,
+        "mapping_type": "pressed"
       },
       {
         "from_button_id": "button.menu_cancel",
-        "to_button_id": "button.menu_exit",
+        "to_button_id": "$cancel_button_mapping",
         "handle_select": false,
         "handle_deselect": true,
         "mapping_type": "global"
@@ -49,318 +44,752 @@
   },
 
   "text_edit_control@common.text_edit_box": {
-    "anchor_from": "center",
-    "anchor_to": "center",
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
     "property_bag": {
       "#property_field": "#item_name"
     }
   },
 
-  "label_padding": {
-    "type": "panel",
-    "size": [4, "100%"]
+  "label_padding@common.empty_panel": {
+    "size": [ "100%", 1 ]
+  },
+
+  // Stack panel under title bar that fills the frame
+  "main_stack_panel": {
+    "type": "stack_panel",
+    "orientation": "vertical",
+    "layer": 1,
+    "anchor_from": "top_middle",
+    "anchor_to": "top_middle",
+    "size": [ "100% - 8px", "100%c" ]
   },
 
   //---------------------------------------------------------------------------
-  // Prev Button
+  // Skin picker
   //---------------------------------------------------------------------------
-  "prev_skin_button@common.button": {
-    "$pressed_button_name": "button.prev_skin",
-    "anchor_from": "left_middle",
-    "anchor_to": "left_middle",
-    "size": [ 15, 20 ],
-    "offset": [ "-25%", "20%" ],
+  "skin_button": {
+    "type": "button",
 
+    "$focus_id|default": "",
+    "$focus_override_down|default": "",
+    "$focus_override_up|default": "",
+    "$focus_override_left|default": "",
+    "$focus_override_right|default": "",
+    "focus_identifier": "$focus_id",
+    "focus_change_down": "$focus_override_down",
+    "focus_change_up": "$focus_override_up",
+    "focus_change_left": "$focus_override_left",
+    "focus_change_right": "$focus_override_right",
+    "focus_enabled": true,
+
+    "bindings": [
+      {
+        "binding_type": "collection_details",
+        "binding_collection_name": "skins_collection",
+        "binding_collection_prefix": "skins"
+      }
+    ],
     "button_mappings": [
       {
         "from_button_id": "button.menu_select",
-        "to_button_id": "button.prev_skin",
+        "to_button_id": "button.view_skin",
         "mapping_type": "pressed"
       },
       {
         "from_button_id": "button.menu_ok",
-        "to_button_id": "button.prev_skin",
+        "to_button_id": "button.view_skin",
         "mapping_type": "focused"
-      }
-    ],
-    "controls": [
-      {
-        "default@common-classic.button_state_default": {
-          "controls": [ { "button_text@common.button_text": { "text": "<" } } ]
-        }
       },
       {
-        "hover@common-classic.button_state_hover": {
-          "controls": [
-            {
-              "button_text@common.button_text": {
-                "text": "<",
-                "color": [ 1.0, 1.0, 0.2 ]
-              }
-            }
-          ]
-        }
-      },
-      {
-        "pressed@common-classic.button_state_pressed": {
-          "controls": [
-            {
-              "button_text@common.button_text": {
-                "text": "<",
-                "color": [ 1.0, 1.0, 0.2 ],
-                "alpha": 0.65
-              }
-            }
-          ]
-        }
-      }
-    ]
-  },
-
-  //---------------------------------------------------------------------------
-  // Next Button
-  //---------------------------------------------------------------------------
-  "next_skin_button@common.button": {
-    "$pressed_button_name": "button.next_skin",
-    "anchor_from": "right_middle",
-    "anchor_to": "right_middle",
-    "size": [ 15, 20 ],
-    "offset": [ "25%", "20%" ],
-
-    "button_mappings": [
-      {
-        "from_button_id": "button.menu_select",
-        "to_button_id": "button.next_skin",
+        "to_button_id": "button.skin_unhovered",
         "mapping_type": "pressed"
       },
       {
-        "from_button_id": "button.menu_ok",
-        "to_button_id": "button.next_skin",
-        "mapping_type": "focused"
-      }
-    ],
-    "controls": [
-      {
-        "default@common-classic.button_state_default": {
-          "controls": [ { "button_text@common.button_text": { "text": ">" } } ]
-        }
-      },
-      {
-        "hover@common-classic.button_state_hover": {
-          "controls": [
-            {
-              "button_text@common.button_text": {
-                "text": ">",
-                "color": [ 1.0, 1.0, 0.2 ]
-              }
-            }
-          ]
-        }
-      },
-      {
-        "pressed@common-classic.button_state_pressed": {
-          "controls": [
-            {
-              "button_text@common.button_text": {
-                "text": ">",
-                "color": [ 1.0, 1.0, 0.2 ],
-                "alpha": 0.65
-              }
-            }
-          ]
-        }
+        "to_button_id": "button.skin_hovered",
+        "mapping_type": "pressed"
       }
     ]
   },
-  //---------------------------------------------------------------------------
-  // Close Button
-  //---------------------------------------------------------------------------
-  "close_button_default": {
-    "type": "image",
-    "texture": "textures/gui/newgui/portfolio/x_default",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 7 ]
-  },
 
-  "close_button_hover": {
-    "type": "image",
-    "texture": "textures/gui/newgui/portfolio/x_hover",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 7 ]
-  },
-
-  "close_button_pressed": {
-    "type": "image",
-    "texture": "textures/gui/newgui/portfolio/x_pressed",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 7 ]
-  },
-
-  //---------------------------------------------------------------------------
-  // PaperDoll Panel
-  //---------------------------------------------------------------------------
-
-  "paper_doll_panel": {
-    "type": "panel",
+  "skin_model": {
+    "type": "custom",
+    "renderer": "paper_doll_renderer",
+    "layer": 5,
     "anchor_from": "bottom_middle",
     "anchor_to": "bottom_middle",
-    "offset": [0, "-5%"],
-    "size": [ 48, 65 ],
-    "visible": "$show_skin_chooser",
+    "size": [ "100%", "100%" ],
+    "offset": [ 0, -10 ],
+    "use_selected_skin": false,
+    "enable_scissor_test": true,
+
+    "property_bag": {
+      "entity_type": "npc"
+    },
+    "bindings": [
+      {
+        "binding_type": "collection",
+        "binding_collection_name": "skins_collection",
+        "binding_name": "#skin_index"
+      }
+    ]
+  },
+
+  "skin_model_clipper": {
+    "type": "panel",
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "size": [ "100%", "100% - 2px" ],
+    "offset": [ 0, 2 ],
+    "clips_children": true
+  },
+
+  "skins_grid_item": {
+    "type": "panel",
+    "anchor_from": "bottom_left",
+    "anchor_to": "bottom_left",
+    "size": [ "default", "100%" ],
     "controls": [
       {
-        "paper_doll": {
-          "type": "custom",
-          "renderer": "paper_doll_renderer",
-          "property_bag": {
-            "entity_type": "npc"
-          },
-          "layer": 2,
-          "anchor_from": "center",
-          "anchor_to": "center",
-          "bindings": [
-             {
-              "binding_type": "global",
-              "binding_name": "#preview_skin"
+        "clip@npc_interact.skin_model_clipper": {
+          "controls": [
+            {
+              "model@npc_interact.skin_model": {}
             }
           ]
         }
       },
-      { "prev_skin_button@prev_skin_button": { } },
-      { "next_skin_button@next_skin_button": { } }
+      { "button@npc_interact.skin_button": {} },
+      {
+        // Frame that appears around this item if it is the selected one
+        "selectFrame@common.focus_border_white": {
+          "size": [ "100% - 1px", "100% - 2px" ],
+          "bindings": [
+            {
+              "binding_type": "collection",
+              "binding_name": "#skin_visible",
+              "binding_name_override": "#visible",
+              "binding_collection_name": "skins_collection"
+            }
+          ]
+        }
+      }
     ]
   },
 
+  "skins_grid": {
+    "type": "grid",
+    "anchor_from": "bottom_middle",
+    "anchor_to": "bottom_middle",
+    "offset": [ 0, 0 ],
+    "size": [ 160, 65 ],
+    "grid_item_template": "npc_interact.skins_grid_item",
+    "grid_dimension_binding": "#skins_grid_dimensions",
+    "collection_name": "skins_collection",
+    "bindings": [
+      {
+        "binding_name": "#skins_grid_dimensions"
+      }
+    ]
+  },
 
-  //---------------------------------------------------------------------------
-  // Name Panel
-  //---------------------------------------------------------------------------
-  "name_panel": {
-    "type": "stack_panel",
-    "orientation": "horizontal",
-    "layer": 1,
-    "offset": [ "2.5%", "5%" ],
-    "anchor_from": "top_left",
-    "anchor_to": "top_left",
-    "size": [ "80%", "5%" ],
-    "visible": "$editable",
+  "cycle_pack_button@common_buttons.light_glyph_button": {
+    "$button_content": "skin_picker.chevron_image"
+  },
+
+  "cycle_pack_left_button@npc_interact.cycle_pack_button": {
+    "anchor_from": "bottom_left",
+    "anchor_to": "bottom_left",
+    "$chevron_image_name": "textures/ui/chevron_left",
+    "$pressed_button_name": "button.cycle_pack_left"
+  },
+
+  "cycle_pack_right_button@npc_interact.cycle_pack_button": {
+    "anchor_from": "bottom_right",
+    "anchor_to": "bottom_right",
+    "$chevron_image_name": "textures/ui/chevron_right",
+    "$pressed_button_name": "button.cycle_pack_right"
+  },
+
+  "banner_fill": {
+    "type": "image",
+    "texture": "textures/ui/Banners"
+  },
+
+  "skin_picker@npc_interact.banner_fill": {
+    "anchor_from": "bottom_middle",
+    "anchor_to": "bottom_middle",
+    "size": [ "100%", 65 ],
+    "offset": [ -1, -10 ],
+    "layer": 5,
     "controls": [
       {
-        "generic_label@generic_label": {
+        "left@npc_interact.cycle_pack_left_button": {
+          "size": [ 30, "100%" ],
+          "bindings": [
+            {
+              "binding_name": "#cycle_pack_left_button_visible",
+              "binding_name_override": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "sg@npc_interact.skins_grid": {
+        }
+      },
+      {
+        "right@npc_interact.cycle_pack_right_button": {
+          "size": [ 30, "100%" ],
+          "bindings": [
+            {
+              "binding_name": "#cycle_pack_left_button_visible",
+              "binding_name_override": "#visible"
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+  //---------------------------------------------------------------------------
+  // Basic Panel
+  //---------------------------------------------------------------------------
+  "name_edit@npc_interact.text_edit_control": {
+    "max_length": 32,
+    "size": [ "100%", 14 ],
+    "$wrap": false,
+    "$text_edit_box_content_binding_name": "#name_text",
+    "$text_box_name": "#name_text_box",
+    "$text_edit_box_binding_condition": "once"
+  },
+
+  "dialog_edit@npc_interact.multiline_text_edit_control": {
+    "max_length": 0,
+    "size": [ "100%", 75 ],
+    "$text_edit_box_content_binding_name": "#interact_text",
+    "$text_box_name": "#interact_text_box",
+    "$text_edit_box_binding_condition": "once",
+    "$cancel_button_mapping": "button.exit_basic",
+    "constrain_to_rect": true
+  },
+
+  "advanced_button": {
+    // This button is small, and we want it to be centered, so wrap in in a panel and center relative to that
+    "type": "panel",
+    "size": [ "100%", "100%c" ],
+    "controls": [
+      {
+        "button@common_buttons.light_text_form_fitting_button": {
+          "$pressed_button_name": "button.advanced_settings",
+          "$button_text": "npcscreen.advancedsettings",
+          "layer": 2,
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [ 0, 2 ]
+        }
+      }
+    ]
+  },
+
+  "basic_stack_panel@npc_interact.main_stack_panel": {
+    "controls": [
+      { "top_pad@common.empty_panel": { "size": [ "100%", 4 ] } },
+      {
+        "name_label@edu_common.light_label": {
           "text": "npcscreen.name"
         }
       },
-      { "padding@npc_interact.label_padding": { } },
+      { "name_padding@npc_interact.label_padding": {} },
+      { "name_edit@npc_interact.name_edit": {} },
+      { "dialog_pre_padding@npc_interact.label_padding": {} },
       {
-        "text_edit_control@npc_interact.text_edit_control": {
-          "max_length": 16,
-          "size": [ "fill", "100%" ],
-          "$wrap": false,
-          "$text_edit_box_content_binding_name": "#name_text",
-          "$text_box_name": "#name_text_box",
-          "$text_edit_box_binding_condition": "once"
+        "dialog_label@edu_common.light_label": {
+          "text": "npcscreen.dialog"
         }
+      },
+      { "dialog_post_padding@npc_interact.label_padding": {} },
+      { "dialog_edit@npc_interact.dialog_edit": {} },
+      { "appearance_pre_padding@npc_interact.label_padding": {} },
+      {
+        "appearance_label@edu_common.light_label": {
+          "text": "npcscreen.appearance"
+        }
+      },
+      { "appearance_post_padding@npc_interact.label_padding": {} },
+      { "skins@npc_interact.skin_picker": {} },
+      { "advanced_button@npc_interact.advanced_button": {} }
+    ]
+  },
+
+  "basic_content": {
+    // Arbitrary type, just want to group all basic controls together
+    "type": "panel",
+    "controls": [
+      { "basic@npc_interact.basic_stack_panel": {} }
+    ],
+    "bindings": [
+      {
+        "binding_name": "#basic_visible",
+        "binding_name_override": "#visible",
+        "binding_type": "global"
       }
     ]
   },
 
   //---------------------------------------------------------------------------
-  // link Panel
+  // Advanced Panel
   //---------------------------------------------------------------------------
-  "link_panel": {
+  "advanced_stack_panel@npc_interact.main_stack_panel": {
+    "controls": [
+      { "top_pad@common.empty_panel": { "size": [ "100%", 4 ] } },
+      { "add_help_p1@npc_interact.add_help_p1": {} },
+      { "add_help_p2@npc_interact.add_help_p2": {} },
+      { "actions@npc_interact.action_panel": {} },
+      { "add_buttons@npc_interact.add_buttons": {} }
+    ]
+  },
+
+  "action_title@edu_common.dark_label": {
+    "anchor_from": "top_left",
+    "anchor_to": "top_left"
+  },
+
+  "plus_icon": {
+    "type": "image",
+    "size": [ 15, 15 ],
+    "layer": 2,
+    "texture": "textures/ui/plus"
+  },
+
+  "plus_button@common_buttons.light_glyph_button": {
+    "size": [ 30, 30 ],
+    "layer": 1,
+    "$button_content": "npc_interact.plus_icon",
+    "$pressed_button_name": "button.expand_action_edit",
+    "bindings": [
+      {
+        "binding_type": "collection_details",
+        "binding_collection_name": "actions_collection",
+        "binding_collection_prefix": "actions"
+      }
+    ]
+  },
+
+  "action_text_edit@npc_interact.multiline_text_edit_control": {
+    "size": [ 252, 50 ],
+    "max_length": 1024,
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "$text_edit_box_content_binding_type": "collection",
+    "$text_edit_box_grid_collection_name": "actions_collection",
+    "$text_edit_box_content_binding_name": "#action_text",
+    "$text_box_name": "action_text_box",
+    "$text_edit_box_binding_condition": "visible",
+    "$cancel_button_mapping": "button.exit_advanced",
+    "enabled_newline": true
+  },
+
+  "maximized_action_edit@npc_interact.multiline_text_edit_control": {
+    "size": [ "100%", "100%" ],
+    "$text_edit_box_content_binding_name": "#maximized_action_text",
+    "$text_box_name": "maximized_action_edit_box",
+    "$text_edit_box_binding_condition": "visible",
+    "$place_holder_text": "#maximized_placeholder_text",
+    "$cancel_button_mapping": "button.exit_maximized",
+    "max_length": 1024,
+    "enabled_newline": true,
+    "bindings": [
+      {
+        "binding_name": "#maximized_edit_visible",
+        "binding_name_override": "#visible"
+      },
+      {
+        "binding_name": "#maximized_placeholder_text"
+      }
+    ]
+  },
+
+  "action_edit": {
     "type": "stack_panel",
     "orientation": "horizontal",
-    "layer": 1,
-    "offset": [ 0, "-30%" ],
-    "anchor_from": "bottom_middle",
-    "anchor_to": "bottom_middle",
-    "size": [ "95%", "5%" ],
-    "visible": "$editable",
+    "size": [ "100%", "50px" ],
     "controls": [
       {
-        "generic_label@generic_label": {
-          "text": "npcscreen.learnMore"
+        "text_edit@npc_interact.action_text_edit": {
+          "$place_holder_text": "$action_edit_placeholder"
         }
       },
-      { "padding@npc_interact.label_padding": { } },
       {
-        "text_edit_control@npc_interact.text_edit_control": {
-          "max_length": 1000,
-          "$font_size": "medium",
-          "size": [ "fill", "100%" ],
-          "$text_edit_box_content_binding_name": "#url_text",
-          "$text_box_name": "#url_text_box",
-          "$text_edit_box_binding_condition": "once",
-          "$place_holder_text": "npcscreen.addurl",
+        "expand@npc_interact.plus_button": {
+          "size": [ 30, 50 ]
+        }
+      }
+    ]
+  },
+
+  "button_name_edit@npc_interact.text_edit_control": {
+    "max_length": 16,
+    "size": [ "100%", 14 ],
+    "$wrap": false,
+    "$text_edit_box_content_binding_type": "collection",
+    "$text_edit_box_grid_collection_name": "actions_collection",
+    "$text_edit_box_content_binding_name": "#button_name_text",
+    "$text_box_name": "button_name_edit",
+    "$text_edit_box_binding_condition": "once",
+    // Shouldn't be needed, but for some reason this control doesn't pad the label properly
+    "$text_edit_box_label_anchor_point": "left_middle",
+    "bindings": [
+      {
+        "binding_type": "collection",
+        "binding_name": "#button_name_edit_visible",
+        "binding_name_override": "#visible",
+        "binding_collection_name": "actions_collection"
+      }
+    ]
+  },
+
+  "button_mode_toggle@edu_common.slider_toggle": {
+    "$toggle_name": "button_mode_toggle",
+    "$toggle_state_binding_name": "#button_mode_enabled",
+    "$toggle_grid_collection_name": "actions_collection",
+    "$toggle_binding_type": "collection",
+    "bindings": [
+      {
+        "binding_type": "collection_details",
+        "binding_collection_name": "actions_collection",
+        "binding_collection_prefix": "actions"
+      },
+      {
+        "binding_type": "$toggle_binding_type",
+        "binding_condition": "$toggle_binding_condition",
+        "binding_collection_name": "$toggle_grid_collection_name",
+        "binding_name": "$toggle_state_binding_name",
+        "binding_name_override": "#toggle_state"
+      },
+      {
+        "binding_type": "$toggle_enabled_binding_type",
+        "binding_condition": "$toggle_enabled_binding_condition",
+        "binding_collection_name": "$toggle_grid_collection_name",
+        "binding_name": "$toggle_enabled_binding_name",
+        "binding_name_override": "#enabled"
+      }
+    ]
+  },
+
+  "button_mode": {
+    "type": "stack_panel",
+    "orientation": "horizontal",
+    "size": [ "100%", 16 ],
+    "controls": [
+      { "toggle@npc_interact.button_mode_toggle": {} },
+      // Can't use $option_label because the text has to be dark
+      {
+        "offset_wrap@common.empty_panel": {
+          "size": [ "100%c", "100%c" ],
+          "controls": [
+            {
+              "label@edu_common.dark_label": {
+                "text": "npcscreen.action.buttonmode",
+                "offset": [ 2, 3 ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "bindings": [
+      {
+        // Actions on close are not allowed for url actions, so hide this toggle in that case
+        "binding_type": "collection",
+        "binding_name": "(not #is_url_action)",
+        "binding_name_override": "#visible",
+        "binding_collection_name": "actions_collection"
+      }
+    ]
+  },
+
+  "button_name_label@edu_common.dark_label": {
+    "text": "npcscreen.action.buttonname",
+    "bindings": [
+      {
+        // Actions on close are not allowed for url actions, so show this label instead
+        "binding_type": "collection",
+        "binding_name": "#is_url_action",
+        "binding_name_override": "#visible",
+        "binding_collection_name": "actions_collection"
+      }
+    ]
+  },
+
+  "action_template@npc_interact.main_stack_panel": {
+    "size": [ "100% - 12px", "100%c" ],
+    "offset": [ 0, 5 ],
+    "controls": [
+      {
+        "title@npc_interact.action_title": {
+          "text": "$action_title"
+        }
+      },
+      { "label_pad@common.empty_panel": { "size": [ "100%", 2 ] } },
+      { "edit@npc_interact.action_edit": {} },
+      { "edit_pad@common.empty_panel": { "size": [ "100%", 3 ] } },
+      { "button_mode@npc_interact.button_mode": {} },
+      { "mode_pad@common.empty_panel": { "size": [ "100%", 3 ] } },
+      { "button_name_label@npc_interact.button_name_label": {} },
+      { "button_name@npc_interact.button_name_edit": {} }
+    ]
+  },
+
+  "action_command@npc_interact.action_template": {
+    "$action_title": "npcscreen.action.command.title",
+    "$action_edit_placeholder": "npcscreen.action.command.placeholder",
+    "bindings": [
+      {
+        // All action types are in the control, but only one is visible through bindings
+        "binding_type": "collection",
+        "binding_name": "#is_command_action",
+        "binding_name_override": "#visible",
+        "binding_collection_name": "actions_collection"
+      },
+      {
+        "binding_name": "#commands_enabled",
+        "binding_name_override": "#enabled"
+      }
+    ]
+  },
+
+  "action_url@npc_interact.action_template": {
+    "$action_title": "npcscreen.action.url.title",
+    "$action_edit_placeholder": "npcscreen.action.url.placeholder",
+    "bindings": [
+      {
+        // All action types are in the control, but only one is visible through bindings
+        "binding_type": "collection",
+        "binding_name": "#is_url_action",
+        "binding_name_override": "#visible",
+        "binding_collection_name": "actions_collection"
+      }
+    ]
+  },
+
+  "padded_action": {
+    "type": "stack_panel",
+    "size": [ "100%", "100%c" ],
+    "orientation": "vertical",
+    "controls": [
+      { "action@npc_interact.action": {} },
+      {
+        "padding": {
+          "type": "panel",
+          "size": [ "100%", 10 ]
+        }
+      }
+    ]
+  },
+
+  "action": {
+    "type": "image",
+    "texture": "textures/ui/dialog_background_opaque",
+    "size": [ "100%", "100%c" ],
+    "controls": [
+      {
+        "trash@edu_common.photo_trash_button": {
+          "anchor_from": "top_right",
+          "anchor_to": "top_right",
+          "offset": [ -4, 4 ],
           "button_mappings": [
             {
               "from_button_id": "button.menu_select",
-              "to_button_id": "button.menu_select",
-              "handle_select": true,
+              "to_button_id": "button.delete_action",
               "mapping_type": "pressed"
-            },
+            }
+          ],
+          "bindings": [
             {
-              "from_button_id": "button.menu_ok",
-              "to_button_id": "button.menu_select",
-              "handle_select": true,
-              "handle_deselect": true,
-              "mapping_type": "focused"
-            },
-            {
-              "from_button_id": "button.menu_cancel",
-              "to_button_id": "button.menu_exit",
-              "handle_select": false,
-              "handle_deselect": true,
-              "mapping_type": "global"
+              "binding_type": "collection_details",
+              "binding_collection_name": "actions_collection",
+              "binding_collection_prefix": "actions"
             }
           ]
         }
+      },
+      { "command@npc_interact.action_command": {} },
+      { "url@npc_interact.action_url": {} }
+    ]
+  },
+
+  // Collection of "actions", meaning url or command buttons
+  "action_panel": {
+    "type": "stack_panel",
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "size": [ "100%", "100%c" ],
+    "factory": {
+      "name": "action_item_factory",
+      "control_name": "npc_interact.padded_action"
+    },
+    "collection_name": "actions_collection",
+    "bindings": [
+      {
+        "binding_name": "#action_count",
+        "binding_name_override": "#collection_length"
       }
     ]
   },
 
-  "link_panel_not_editable": {
-    "type": "panel",
-    "layer": 1,
-    "offset": [ 0, "-30%" ],
-    "anchor_from": "bottom_middle",
-    "anchor_to": "bottom_middle",
-    "size": [ "25%", "5%" ],
-    "visible": "$show_url",
+  "add_button@common_buttons.light_text_button": {
+    "$pressed_button_name": "button.add_url",
+    "$button_text": "npcscreen.addurl",
+    "size": [ 135, 20 ]
+  },
+
+  "help_label@edu_common.light_label": {
+    "size": [ 135, "default" ]
+  },
+
+  // Help text that is visible when no actions have been added
+  "add_help_section": {
+    "type": "stack_panel",
+    "orientation": "horizontal",
+    "size": [ "100%", "100%c" ],
+    "bindings": [
+      {
+        "binding_name": "#help_visible",
+        "binding_name_override": "#visible"
+      }
+    ],
     "controls": [
       {
-        "hyperlink_button@common.hyperlink_button": {
-          "$pressed_button_name": "button.npc_open_uri",
-          "controls": [
+        "url@npc_interact.help_label": {
+          "text": "$url_text"
+        }
+      },
+      { "padding@common.empty_panel": { "size": [ 23, 0 ] } },
+      {
+        "command@npc_interact.help_label": {
+          "text": "$command_text"
+        }
+      }
+    ]
+  },
+
+  "add_help_p1@npc_interact.add_help_section": {
+    "$url_text": "npcscreen.help.url.a",
+    "$command_text": "npcscreen.help.command.a"
+  },
+
+  "add_help_p2@npc_interact.add_help_section": {
+    "$url_text": "npcscreen.help.url.b",
+    "$command_text": "npcscreen.help.command.b"
+  },
+
+  "add_buttons": {
+    "type": "stack_panel",
+    "orientation": "horizontal",
+    "size": [ "100%", "100%c" ],
+    "controls": [
+      {
+        "add_url@npc_interact.add_button": {
+          "$pressed_button_name": "button.add_url",
+          "$button_text": "npcscreen.addurl"
+        }
+      },
+      { "padding@common.empty_panel": { "size": [ 23, 0 ] } },
+      {
+        "add_command@npc_interact.add_button": {
+          "$pressed_button_name": "button.add_command",
+          "$button_text": "#add_command_text",
+          "$button_text_binding_type": "global",
+          "bindings": [
             {
-              "default@common-classic.button_state_default": {
-                "controls": [ { "button_text@common.button_text": { "text": "selectWorld.learnMore" } } ]
-              }
-            },
+              "binding_name": "#commands_enabled",
+              "binding_name_override": "#enabled"
+            }
+          ]
+        }
+      }
+    ],
+    "bindings": [
+      {
+        "binding_name": "#add_buttons_enabled",
+        "binding_name_override": "#enabled"
+      }
+    ]
+  },
+
+  "advanced_scrolling_panel@common.scrolling_panel": {
+    "$show_background": false,
+    "size": [ "100%", "100%" ],
+    "$scrolling_content": "npc_interact.advanced_scrolling_content"
+  },
+
+  "advanced_scrolling_content": {
+    // Arbitrary type, just want to group all advanced controls together
+    "type": "panel",
+    "size": [ "100%", "100%c" ],
+    "controls": [
+      { "advanced@npc_interact.advanced_stack_panel": {} }
+    ],
+    "bindings": [
+      {
+        "binding_name": "#advanced_visible",
+        "binding_name_override": "#visible",
+        "binding_type": "global"
+      }
+    ]
+  },
+
+  //---------------------------------------------------------------------------
+  // Student Panel
+  //---------------------------------------------------------------------------
+  "message_model@npc_interact.skin_model": {
+    // This window has a zoomed in top portion of the paper doll, so offset down and oversize a bit to zoom in
+    "offset": [ 0, 18 ],
+    "size": [ "100%", "150%" ],
+    "rotation": "custom_y",
+    "bindings": [
+      {
+        "binding_type": "global",
+        // Binding itself doesn't do anything, but the callback is used to fill the property bag
+        "binding_name": "#student_model_update"
+      }
+    ]
+  },
+
+  "clipped_message_model@npc_interact.skin_model_clipper": {
+    "controls": [
+      { "model@npc_interact.message_model": {} }
+    ]
+  },
+
+  "message_model_window@npc_interact.banner_fill": {
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "size": [ 109, "100%" ],
+    "controls": [
+      { "model@npc_interact.clipped_message_model": {} }
+    ]
+  },
+
+  "student_message_bubble": {
+    "type": "image",
+    "texture": "textures/ui/dialog_bubble",
+    "anchor_from": "top_right",
+    "anchor_to": "top_right",
+    "size": [ 222, "100%" ],
+    "controls": [
+      {
+        "message@edu_common.dark_label": {
+          "offset": [ 8, 4 ],
+          "size": [ "100% - 14px", "100% - 4px" ],
+          "text": "#text",
+          // Same binding as for the editable view
+          "bindings": [
             {
-              "hover@common-classic.button_state_hover": {
-                "controls": [
-                  {
-                    "button_text@common.button_text": {
-                      "text": "selectWorld.learnMore",
-                      "color": [ 1.0, 1.0, 0.2 ]
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "pressed@common-classic.button_state_pressed": {
-                "controls": [
-                  {
-                    "button_text@common.button_text": {
-                      "text": "selectWorld.learnMore",
-                      "color": [ 1.0, 1.0, 0.2 ],
-                      "alpha": 0.65
-                    }
-                  }
-                ]
-              }
+              "binding_name": "#interact_text",
+              "binding_type": "global",
+              "binding_name_override": "#text"
             }
           ]
         }
@@ -368,102 +797,332 @@
     ]
   },
 
-  // -----------------------------------------------
-  //
-  //    screen
-  //
-  // -----------------------------------------------
+  // Point on the speach bubble, positioned right at the edge of the bubble pointing into the paper doll window
+  "bubble_point": {
+    "type": "image",
+    "texture": "textures/ui/dialog_bubble_point",
+    "anchor_from": "right_middle",
+    "anchor_to": "right_middle",
+    "size": [ 16, 18 ],
+    // Minus the size of the dialog bubble
+    "offset": [ "-222px + 2px", "-10%" ],
+    "layer": 4
+  },
 
-  "screen_common": {
+  "student_message_section@common.empty_panel": {
+    "size": [ "100%", 100 ],
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "controls": [
+      { "model@npc_interact.message_model_window": {} },
+      { "point@npc_interact.bubble_point": {} },
+      { "message@npc_interact.student_message_bubble": {} }
+    ]
+  },
+
+  // Wrap in panel so we can make the buttons a bit smaller for padding
+  "student_button@common.empty_panel": {
+    // Grid has 3 columns, so 1/3 size
+    "size": [ "33.3333%", 20 ],
+    "controls": [
+      {
+        "button@common_buttons.light_text_button": {
+          "$pressed_button_name": "button.student_button",
+          "layer": 4,
+          "size": [ "100% - 2px", "100% - 2px" ],
+          "bindings": [
+            {
+              "binding_type": "collection_details",
+              "binding_collection_name": "student_buttons_collection",
+              "binding_collection_prefix": "student_buttons"
+            }
+          ]
+        }
+      },
+      {
+        // Need to use my own label instead of button text so I can change the color
+        "url_label@edu_common.dark_label": {
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "text": "#text",
+          "color": [ 0, 0, 1 ],
+          "layer": 50,
+          "bindings": [
+            {
+              "binding_name": "#student_button_text",
+              "binding_type": "collection",
+              "binding_name_override": "#text",
+              "binding_collection_name": "student_buttons_collection"
+            },
+            {
+              "binding_name": "#is_url_button",
+              "binding_type": "collection",
+              "binding_name_override": "#visible",
+              "binding_collection_name": "student_buttons_collection"
+            }
+          ]
+        }
+      },
+      {
+        "command_label@edu_common.dark_label": {
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "text": "#text",
+          "layer": 50,
+          "bindings": [
+            {
+              "binding_name": "#student_button_text",
+              "binding_type": "collection",
+              "binding_name_override": "#text",
+              "binding_collection_name": "student_buttons_collection"
+            },
+            {
+              "binding_name": "#is_command_button",
+              "binding_type": "collection",
+              "binding_name_override": "#visible",
+              "binding_collection_name": "student_buttons_collection"
+            }
+          ]
+        }
+      }
+    ],
+    "bindings": [
+      {
+        "binding_name": "#student_button_visible",
+        "binding_type": "collection",
+        "binding_name_override": "#visible",
+        "binding_collection_name": "student_buttons_collection"
+      }
+    ]
+  },
+
+  "student_buttons@common.empty_panel": {
+    "size": [ "100%", "100%c" ],
+    "controls": [
+      {
+        "buttons": {
+          "type": "grid",
+          // A bit bigger than 100% so edges line up with other ui, as the buttons are -2px smaller for padding
+          "size": [ "100% + 2px", "default" ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "grid_item_template": "npc_interact.student_button",
+          "grid_dimension_binding": "#student_button_grid_dimensions",
+          "collection_name": "student_buttons_collection",
+          "bindings": [
+            {
+              "binding_name": "#student_button_grid_dimensions"
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+  "student_stack_panel@npc_interact.main_stack_panel": {
+    "size": [ "100%", "100%c" ],
+    "controls": [
+      { "top_pad@common.empty_panel": { "size": [ "100%", 4 ] } },
+      { "message@npc_interact.student_message_section": {} },
+      { "message_pad@common.empty_panel": { "size": [ "100%", 4 ] } },
+      { "buttons@npc_interact.student_buttons": {} }
+    ]
+  },
+
+  "student_view_content": {
+    // Arbitrary type, just want to group all advanced controls together
+    "type": "panel",
+    "size": [ "100%", "100%c" ],
+    "controls": [
+      { "student@npc_interact.student_stack_panel": {} }
+    ],
+    "bindings": [
+      {
+        "binding_name": "#student_view_visible",
+        "binding_name_override": "#visible",
+        "binding_type": "global"
+      }
+    ]
+  },
+
+  // -----------------------------------------------
+  // Base window
+  // -----------------------------------------------
+  "close_button_base": {
+    "type": "button",
+    "size": [ 21, 21 ],
+    "layer": 10,
+    "offset": [ -2, 2 ],
+    "locked_control": "",
+    "default_control": "default",
+    "hover_control": "hover",
+    "pressed_control": "pressed",
+    "focus_enabled": false,
+    "$close_button_panel_size": [ 15, 15 ],
+    "$close_button_to_button_id": "button.menu_exit",
+
+    "button_mappings": [
+      {
+        "from_button_id": "button.menu_select",
+        "to_button_id": "$close_button_to_button_id",
+        "mapping_type": "pressed"
+      },
+      {
+        "from_button_id": "button.menu_ok",
+        "to_button_id": "$close_button_to_button_id",
+        "mapping_type": "focused"
+      },
+      {
+        // Catch ESC here too
+        "from_button_id": "button.menu_cancel",
+        "to_button_id": "$close_button_to_button_id",
+        "mapping_type": "global"
+      }
+    ],
+    "controls": [
+      {
+        "default@common.close_button_panel": {
+          "$close_button_texture": "$default_texture"
+        }
+      },
+      {
+        "hover@common.close_button_panel": {
+          "$close_button_texture": "$hover_texture"
+        }
+      },
+      {
+        "pressed@common.close_button_panel": {
+          "$close_button_texture": "$pressed_texture"
+        }
+      }
+    ],
+    "bindings": [
+      {
+        "binding_name": "$visibility_binding_name",
+        "binding_name_override": "#visible"
+      }
+    ]
+  },
+
+  "close_button_holder": {
+    "type": "panel",
+    "size": [ "100%c", "100%c" ],
+    // Weird anchoring since this needs to be above the top right corner, outside the panel indent
+    "anchor_from": "top_right",
+    "anchor_to": "bottom_right",
+    "offset": [ 8, -2 ],
+    "controls": [
+      {
+        "close@common.close_button": {
+          "$close_button_to_button_id": "button.exit_basic",
+          "bindings": [
+            {
+              "binding_name": "#basic_visible",
+              "binding_name_override": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "minimize@npc_interact.close_button_base": {
+          "$close_button_to_button_id": "button.exit_maximized",
+          "$default_texture": "textures/ui/minimize",
+          "$hover_texture": "textures/ui/minimizeHover",
+          "$pressed_texture": "textures/ui/minimizePress",
+          "$visibility_binding_name": "#maximized_edit_visible"
+        }
+      },
+      {
+        "back@npc_interact.close_button_base": {
+          "$close_button_to_button_id": "button.exit_advanced",
+          "$default_texture": "textures/ui/back_button_default",
+          "$hover_texture": "textures/ui/back_button_hover",
+          "$pressed_texture": "textures/ui/back_button_pressed",
+          "$visibility_binding_name": "#advanced_visible"
+        }
+      }
+    ]
+  },
+
+  "main_content@common.empty_panel": {
+    "controls": [
+      { "basic@npc_interact.basic_content": {} },
+      { "advanced@npc_interact.advanced_scrolling_panel": {} },
+      { "maximized_action_edit@npc_interact.maximized_action_edit": {} },
+      { "close@npc_interact.close_button_holder": {} }
+    ]
+  },
+
+  "root_panel@common_dialogs.main_panel_no_buttons": {
+    "size": [ 325, 250 ],
+    "layer": 1,
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "$title_panel": "common_dialogs.standard_title_label",
+    "$text_name": "#title_text",
+    "$title_text_binding_type": "global",
+    // Can't use default button because we need to change the icon to indicate if it's going to go back or close the window
+    "$show_close_button": false
+  },
+
+  "npc_screen@common.base_screen": {
+    "type": "screen",
+    "controls": [
+      {
+        // Teacher window containing basic and advanced editing screens
+        "teacher@npc_interact.root_panel": {
+          "$child_control": "npc_interact.main_content",
+          "bindings": [
+            {
+              "binding_name": "#teacher_view_visible",
+              "binding_name_override": "#visible",
+              "binding_type": "global"
+            }
+          ]
+        }
+      },
+      {
+        // Student view is form fitting because there could be any amount of student buttons and we don't want dead space
+        "student@common_dialogs.form_fitting_main_panel_no_buttons": {
+          "size": [ 350, "100%c" ],
+          "$child_control": "npc_interact.student_view_content",
+          "$title_panel": "common_dialogs.standard_title_label",
+          "$text_name": "#title_text",
+          "$title_text_binding_type": "global",
+          "$close_button_to_button_id": "button.exit_student",
+          "$custom_background": "common_dialogs.dialog_background_opaque_with_child",
+          "bindings": [
+            {
+              "binding_name": "#student_view_visible",
+              "binding_name_override": "#visible",
+              "binding_type": "global"
+            }
+          ]
+        }
+      }
+    ],
     "button_mappings": [
       {
         "from_button_id": "button.menu_cancel",
-        "to_button_id": "button.menu_exit",
+        // The multiline text edit boxes catch exiting from all screens except student because it doesn't have any, so catch that here.
+        "to_button_id": "button.exit_student",
         "mapping_type": "global"
       },
       {
-        "from_button_id": "button.menu_up",
-        "to_button_id": "button.menu_up",
-        "mapping_type": "global",
-        "scope": "view"
+        "from_button_id": "button.menu_cancel",
+        "to_button_id": "button.menu_continue",
+        "mapping_type": "global"
       },
       {
-        "from_button_id": "button.menu_down",
-        "to_button_id": "button.menu_down",
-        "mapping_type": "global",
-        "scope": "view"
+        "from_button_id": "button.menu_exit",
+        "to_button_id": "button.menu_continue",
+        "mapping_type": "global"
       },
       {
-        "from_button_id": "button.menu_left",
-        "to_button_id": "button.menu_left",
+        "from_button_id": "button.menu_vr_realign",
+        "to_button_id": "button.menu_vr_realign",
         "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_right",
-        "to_button_id": "button.menu_right",
-        "mapping_type": "global",
-        "scope": "view"
-      }
-    ]
-  },
-
-
-  "npc_screen@screen_common": {
-    "type": "screen",
-    "controls": [
-      { "screen_background@common.screen_background": { } },
-      {
-        "root_panel@common.root_panel": {
-          "size": [ "60%", "85%" ],
-          "layer": 1,
-          "anchor_from": "center",
-          "anchor_to": "center",
-          "offset": [ 0, -11 ],
-          "variables": [
-            {
-              "requires": "$editable",
-              "$editable": true,
-              "$url_panel": "npc_interact.link_panel",
-              "$back_ground_size": [ "100%", "100%" ]
-            },
-            {
-              "requires": "$not_editable",
-              "$editable": false,
-              "$url_panel": "npc_interact.link_panel_not_editable",
-              "$back_ground_size": [ "100%", "75%" ]
-            }
-          ],
-          "controls": [
-            {
-              "root_panel@common.root_panel": {
-                "layer": 0,
-                "anchor_from": "top_middle",
-                "anchor_to": "top_middle",
-                "size": "$back_ground_size",
-                "$show_close_button": true,
-                "controls": [
-                  { "common_panel@common.common_panel": { } }
-                ]
-              }
-            },
-
-            { "name_panel@npc_interact.name_panel": { } },
-            {
-              "multiline_text_edit_control@npc_interact.multiline_text_edit_control": {
-                "max_length": 256,
-                "offset": [ 0, "-13%" ],
-                "$offset": [ 2, 2 ],
-                "size": [ "95%", "50%" ],
-                "$text_edit_box_content_binding_name": "#interact_text",
-                "$text_box_name": "#interact_text_box",
-                "$text_edit_box_binding_condition": "once"
-              }
-            },
-            { "$url_panel@$url_panel": { } },
-            { "paper_doll_panel@npc_interact.paper_doll_panel": { } }
-          ]
-        }
+        "scope": "controller"
       }
     ]
   }

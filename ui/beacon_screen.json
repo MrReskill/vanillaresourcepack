@@ -4,17 +4,21 @@
   // Screens
   //---------------------------------------------------------------------------
 
-  "beacon_panel@common.inventory_screen_common": {
+  "beacon_panel": {
+    "type": "panel",
     "controls": [
-      { "container_gamepad_helpers@common.container_gamepad_helpers": { } },
-      { "screen_background@common.screen_background": { } },
+      { "container_gamepad_helpers@common.container_gamepad_helpers": {} },
+      {
+        "flying_item_renderer@common.flying_item_renderer": {
+          "layer": 7
+        }
+      },
       {
         "root_panel@common.root_panel": {
           "layer": 1,
           "size": [ 256, 219 ],
           "controls": [
-            { "input_panel@common.input_panel": { } },
-            { "common_panel@common.common_panel": { } },
+            { "common_panel@common.common_panel": {} },
             {
               "beacon_inventory": {
                 "type": "panel",
@@ -29,11 +33,20 @@
                     "payment_panel@beacon.payment_panel": {
                       "offset": [ 0, 8 ],
                       "layer": 2
-                    }                 
+                    }
                   },
-                  { "inventory_panel_bottom_half@common.inventory_panel_bottom_half": { } },
-                  { "hotbar_grid_template@common.hotbar_grid_template": { } },
-                  { "inventory_selected_icon_button@common.inventory_selected_icon_button": { } }
+                  {
+                    "inventory_panel_bottom_half@common.inventory_panel_bottom_half": {
+                      "layer": 2,
+                      "$button_ref": "beacon.inventory_slot_button"
+                    }
+                  },
+                  {
+                    "hotbar_grid_template@common.hotbar_grid_template": {
+                      "$button_ref": "beacon.hotbar_slot_button"
+                    }
+                  },
+                  { "inventory_selected_icon_button@common.inventory_selected_icon_button": {} }
                 ]
               }
             }
@@ -43,17 +56,42 @@
     ]
   },
 
+  "inventory_slot_button@common.container_slot_button_prototype": {
+    "focus_mapping": [
+      {
+        "focus_identifier": "inventory_items8",
+        "focus_change_right": "FOCUS_OVERRIDE_STOP"
+      },
+      {
+        "focus_identifier": "inventory_items17",
+        "focus_change_right": "FOCUS_OVERRIDE_STOP"
+      },
+      {
+        "focus_identifier": "inventory_items26",
+        "focus_change_right": "FOCUS_OVERRIDE_STOP"
+      }
+    ]
+  },
+
+  "hotbar_slot_button@common.container_slot_button_prototype": {
+    "focus_mapping": [
+      {
+        "focus_identifier": "hotbar_items8",
+        "focus_change_right": "FOCUS_OVERRIDE_STOP"
+      }
+    ]
+  },
+
   "image_atlas": {
-    "type": "image",
-    "texture": "textures/gui/gui"
+    "type": "image"
   },
 
   "pyramid_image@beacon.image_atlas": {
     "size": [ 19, 20 ],
-    "uv_size": [ 19, 20 ],
     "anchor_to": "top_left",
     "anchor_from": "top_middle"
   },
+
   "pyramid_panel": {
     "type": "panel",
     "size": [ "100%", "100%" ],
@@ -62,25 +100,25 @@
     "controls": [
       {
         "level1@beacon.pyramid_image": {
-          "uv": [ 144, 228 ],
+          "texture": "textures/ui/pyramid_level_1",
           "offset": [ -98, 18 ]
         }
       },
       {
         "level2@beacon.pyramid_image": {
-          "uv": [ 163, 228 ],
+          "texture": "textures/ui/pyramid_level_2",
           "offset": [ -98, 43 ]
         }
       },
       {
         "level3@beacon.pyramid_image": {
-          "uv": [ 182, 228 ],
+          "texture": "textures/ui/pyramid_level_3",
           "offset": [ -98, 68 ]
         }
       },
       {
         "level4@beacon.pyramid_image": {
-          "uv": [ 201, 228 ],
+          "texture": "textures/ui/pyramid_level_4",
           "offset": [ 42, 18 ]
         }
       }
@@ -88,15 +126,14 @@
   },
   "item_seperator@beacon.image_atlas": {
     "size": [ 5, 18 ],
-    "uv_size": [ 5, 18 ],
-    "uv": [ 171, 206 ],
+    "texture": "textures/ui/item_seperator",
     "anchor_to": "top_left",
     "anchor_from": "top_left"
   },
   "item_renderer": {
     "type": "custom",
     "renderer": "inventory_item_renderer",
-    "size": [ 18, 18 ],
+    "size": [ 16, 16 ],
     "anchor_to": "top_left",
     "anchor_from": "top_left"
   },
@@ -156,9 +193,7 @@
   "base_image@beacon.image_atlas": {
     "$image_size|default": [ 18, 18 ],
     "size": "$image_size",
-    "$image_uv_size|default": [ 18, 18 ],
-    "uv_size": "$image_uv_size",
-    "uv": "$image_uv",
+    "texture": "$image_texture",
     "bindings": [
       {
         "binding_name": "#button_visible",
@@ -178,49 +213,46 @@
       }
     ]
   },
-  "hover_state@common.button_state_hover": {
+  "hover_state": {
+    "type": "image",
+    "texture": "",
     "controls": [
-      { "hover_text@beacon.hover_text": { } }
+      { "hover_text@beacon.hover_text": {} }
     ]
   },
 
   "button_unchecked_default@beacon.image_atlas": {
-    "uv_size": [ 22, 22 ],
-    "uv": [ 166, 184 ]
+    "texture": "textures/ui/beacon_button_default"
   },
   "button_unchecked_hover@beacon.image_atlas": {
     "size": [ 22, 22 ],
-    "uv_size": [ 22, 22 ],
-    "uv": [ 232, 184 ],
+    "texture": "textures/ui/beacon_button_hover",
     "controls": [
       { "hover_text@beacon.hover_text": { } }
     ]
   },
   "button_checked_hover@beacon.image_atlas": {
-    "uv_size": [ 22, 22 ],
-    "uv": [ 188, 184 ],
+    "texture": "textures/ui/beacon_button_pressed",
     "controls": [
       { "hover_text@beacon.hover_text": { } }
     ]
   },
   "button_locked@beacon.image_atlas": {
-    "uv_size": [ 22, 22 ],
-    "uv": [ 210, 184 ]
+    "texture": "textures/ui/beacon_button_locked"
   },
   "button_locked_hover@beacon.image_atlas": {
-    "uv_size": [ 22, 22 ],
-    "uv": [ 210, 184 ],
+    "texture": "textures/ui/beacon_button_locked",
     "controls": [
       { "hover_text@beacon.hover_text": { } }
     ]
   },
   "button_checked@beacon.image_atlas": {
-    "uv_size": [ 22, 22 ],
-    "uv": [ 188, 184 ]
+    "texture": "textures/ui/beacon_button_pressed"
   },
   "toggle_button@common.toggle": {
     "size": [ 22, 22 ],
     "layer": 1,
+    "focus_wrap_enabled": false,
     "$toggle_name": "$button_name",
     "$unchecked_control": "beacon.button_unchecked_default",
     "$checked_control": "beacon.button_checked",
@@ -265,6 +297,7 @@
   "base_button@common.button": {
     "size": [ 22, 22 ],
     "layer": 0,
+    "focus_wrap_enabled": false,
     "bindings": [
       {
         "binding_name": "$button_active",
@@ -279,21 +312,21 @@
     ],
     "controls": [
       {
-        "default@common.button_state_default": {
-          "uv_size": [ 22, 22 ],
-          "uv": [ 166, 184 ]
+        "default": {
+          "type": "image",
+          "texture": "textures/ui/beacon_button_default"
         }
       },
       {
-        "hover@beacon.hover_state": {
-          "uv_size": [ 22, 22 ],
-          "uv": [ 232, 184 ]
+        "hover": {
+          "type": "image",
+          "texture": "textures/ui/beacon_button_hover"
         }
       },
       {
-        "pressed@common.button_state_pressed": {
-          "uv_size": [ 22, 22 ],
-          "uv": [ 188, 184 ]
+        "pressed": {
+          "type": "image",
+          "texture": "textures/ui/beacon_button_pressed"
         }
 
       }
@@ -320,15 +353,14 @@
     "button_mappings": [ ],
     "controls": [
       {
-        "default@common.button_state_default": {
-          "uv_size": [ 22, 22 ],
-          "uv": [ 210, 184 ]
+        "default": {
+          "type": "image",
+          "texture": "textures/ui/beacon_button_locked"
         }
       },
       {
         "hover@beacon.hover_state": {
-          "uv_size": [ 22, 22 ],
-          "uv": [ 210, 184 ]
+          "texture": "textures/ui/beacon_button_locked"
         }
       }
     ]
@@ -339,15 +371,15 @@
     "pressed_control": "",
     "controls": [
       {
-        "default@common.button_state_default": {
-          "uv_size": [ 22, 22 ],
-          "uv": [ 188, 184 ]
+        "default": {
+          "type": "image",
+          "texture": "textures/ui/beacon_button_pressed"
         }
       },
       {
-        "hover@beacon.hover_state": {
-          "uv_size": [ 22, 22 ],
-          "uv": [ 188, 184 ]
+        "hover": {
+          "type": "image",
+          "texture": "textures/ui/beacon_button_pressed"
         }
       }
     ]
@@ -364,24 +396,23 @@
   },
   "speed_secondary@beacon.secondary_effect_base": {
     "$effect_name": "speed",
-    "$image_uv": [ 0, 184 ]
+    "$image_texture": "textures/ui/speed_effect"
   },
   "haste_secondary@beacon.secondary_effect_base": {
     "$effect_name": "haste",
-    "$image_uv": [ 36, 184 ]
+    "$image_texture": "textures/ui/haste_effect"
   },
   "resist_secondary@beacon.secondary_effect_base": {
     "$effect_name": "resist",
-    "$image_uv": [ 108, 202 ]
-
+    "$image_texture": "textures/ui/resistance_effect"
   },
   "jump_secondary@beacon.secondary_effect_base": {
     "$effect_name": "jump",
-    "$image_uv": [ 36, 202 ]
+    "$image_texture": "textures/ui/jump_boost_effect"
   },
   "strength_secondary@beacon.secondary_effect_base": {
     "$effect_name": "strength",
-    "$image_uv": [ 72, 184 ]
+    "$image_texture": "textures/ui/strength_effect"
   },
   "image_template": {
     "type": "panel",
@@ -445,7 +476,7 @@
           "controls": [
             {
               "toggle_template@beacon.toggle_template": {
-                "$image_uv": [ 0, 184 ]
+                "$image_texture": "textures/ui/speed_effect"
               }
             }
           ]
@@ -455,35 +486,35 @@
         "haste_panel@beacon.panel_template": {
           "offset": [ -39, 18 ],
           "$button_name": "haste",
-          "$image_uv": [ 36, 184 ]
+          "$image_texture": "textures/ui/haste_effect"
         }
       },
       {
         "resist_panel@beacon.panel_template": {
           "offset": [ -63, 43 ],
           "$button_name": "resist",
-          "$image_uv": [ 108, 202 ]
+          "$image_texture": "textures/ui/resistance_effect"
         }
       },
       {
         "jump_panel@beacon.panel_template": {
           "offset": [ -39, 43 ],
           "$button_name": "jump",
-          "$image_uv": [ 36, 202 ]
+          "$image_texture": "textures/ui/jump_boost_effect"
         }
       },
       {
         "strength_panel@beacon.panel_template": {
           "offset": [ -51, 68 ],
           "$button_name": "strength",
-          "$image_uv": [ 72, 184 ]
+          "$image_texture": "textures/ui/strength_effect"
         }
       },
       {
         "regen_panel@beacon.panel_template": {
           "offset": [ 28, 43 ],
           "$button_name": "regen",
-          "$image_uv": [ 126, 184 ]
+          "$image_texture": "textures/ui/regeneration_effect"
         }
       },
       {
@@ -506,8 +537,7 @@
         "confirm_panel@beacon.panel_template": {
           "offset": [ 48, 0 ],
           "$button_name": "confirm",
-          "$image_uv": [ 144, 206 ],
-          "$image_uv_size": [ 14, 12 ],
+          "$image_texture": "textures/ui/confirm",
           "$image_size": [ 14, 12 ],
           "$button_control": "beacon.button_template",
           "anchor_from": "center",
@@ -518,8 +548,7 @@
         "cancel_panel@beacon.panel_template": {
           "offset": [ 74, 0 ],
           "$button_name": "cancel",
-          "$image_uv": [ 158, 206 ],
-          "$image_uv_size": [ 13, 13 ],
+          "$image_texture": "textures/ui/cancel",
           "$image_size": [ 13, 13 ],
           "$button_control": "beacon.button_template",
           "anchor_from": "center",
@@ -547,16 +576,13 @@
   "beacon_label@common.section_heading_label": {
     "anchor_from": "top_middle",
     "anchor_to": "top_middle",
-    "color": "white",
+    "color": "$beacon_power_title_text_color",
     "shadow": true
   },
   "beacon_inner_panel": {
     "type": "image",
-    "texture": "textures/gui/gui",
+    "texture": "textures/ui/effect_background",
     "size": [ 212, 97 ],
-    "nineslice_size": 4.0,
-    "uv": [ 130, 106 ],
-    "uv_size": [ 120, 32 ],
     "anchor_from": "top_middle",
     "anchor_to": "top_middle",
     "controls": [
@@ -568,10 +594,8 @@
           "layer": 1,
           "anchor_from": "top_middle",
           "anchor_to": "top_middle",
-          "uv": [ 131, 118 ],
-          "nineslice_size": 1.0,
-          "size": [ 2, "100%-6px" ],
-          "uv_size": [ 2, 1 ]
+          "texture": "textures/ui/middle_strip",
+          "size": [ 2, "100%-6px" ]
         }
       },
       {
@@ -595,16 +619,14 @@
     "variables": [
       {
         "requires": "$desktop_screen",
-        "$visible_screen": "beacon.beacon_panel"
+        "$screen_content": "beacon.beacon_panel",
+        "$screen_bg_content": "common.screen_background"
       },
       {
         "requires": "$pocket_screen",
-        "$visible_screen": "beacon_pocket.beacon_panel",
+        "$screen_content": "beacon_pocket.beacon_panel",
         "$close_on_player_hurt": true
       }
-    ],
-    "controls": [
-      { "screen@$visible_screen": { } }
     ]
   }
 }

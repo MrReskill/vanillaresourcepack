@@ -8,9 +8,8 @@
   "clipboard_icon": {
     "layer": 1,
     "type": "image",
-    "texture": "textures/gui/newgui/copy",
-    "size": [ 13, 14 ],
-    "uv_size": [ 13, 14 ]
+    "texture": "textures/ui/copy",
+    "size": [ 13, 14 ]
   },
 
   "clipboard_icon_wrapper": {
@@ -30,9 +29,8 @@
   "trash_icon": {
     "layer": 1,
     "type": "image",
-    "texture": "textures/gui/newgui/portfolio/trash_default",
-    "size": [ 11, 12 ],
-    "uv_size": [ 11, 12 ]
+    "texture": "textures/ui/trash_default",
+    "size": [ 11, 12 ]
   },
 
   "trash_icon_wrapper": {
@@ -52,9 +50,8 @@
   "refresh_icon": {
     "layer": 1,
     "type": "image",
-    "texture": "textures/gui/newgui/refresh",
-    "size": [ 18, 14 ],
-    "uv_size": [ 18, 14 ]
+    "texture": "textures/ui/refresh",
+    "size": [ 18, 14 ]
   },
 
   "refresh_icon_wrapper": {
@@ -77,6 +74,7 @@
 
   "text_label": {
     "type": "label",
+    "color": "$main_header_text_color",
     "size": [ "default", "default" ],
     "layer": 1,
     "text": "$text_label",
@@ -115,10 +113,9 @@
 
   },
 
-  "background_indent_no_top@achievement.main_banner": {
-    "uv": [ 0, 1 ],
-    "nineslice_size": [ 1, 0, 1, 1 ],
-    "uv_size": [ 3, 2 ]
+  "background_indent_no_top": {
+    "type": "image",
+    "texture": "textures/ui/background_indent_no_top"
   },
 
   "black_background_fill@resource_packs.black_image": {
@@ -391,6 +388,7 @@
                   {
                     "error_label": {
                       "type": "label",
+                      "color": "$main_header_text_color",
                       "size": [ "100% - 8px", "default" ],
                       "offset": [ 4, 4 ],
                       "anchor_from": "top_left",
@@ -448,6 +446,7 @@
       {
         "pack_type_label": {
           "type": "label",
+          "color": "$main_header_text_color",
           "size": [ "100%", "default" ],
           "anchor_from": "top_left",
           "anchor_to": "top_left",
@@ -645,30 +644,6 @@
         "from_button_id": "button.menu_cancel",
         "to_button_id": "button.menu_exit",
         "mapping_type": "global"
-      },
-      {
-        "from_button_id": "button.menu_up",
-        "to_button_id": "button.menu_up",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_down",
-        "to_button_id": "button.menu_down",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_left",
-        "to_button_id": "button.menu_left",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_right",
-        "to_button_id": "button.menu_right",
-        "mapping_type": "global",
-        "scope": "view"
       },
       {
         "from_button_id": "button.menu_tab_left",

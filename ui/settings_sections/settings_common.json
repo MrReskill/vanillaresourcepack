@@ -10,8 +10,16 @@
     "$alpha|default": 1.0,
     "type": "image",
     "layer": 1,
-    "texture": "textures/gui/newgui/arrowRight",
-    "uv_size": [ 8, 8 ],
+    "texture": "textures/ui/arrowRight",
+    "size": [ 8, 8 ],
+    "alpha": "$alpha"
+  },
+
+  "dropdown_chevron_image": {
+    "$alpha|default": 1.0,
+    "type": "image",
+    "layer": 1,
+    "texture": "textures/ui/dropdown_chevron",
     "size": [ 8, 8 ],
     "alpha": "$alpha"
   },
@@ -24,35 +32,33 @@
     "anchor_to": "center"
   },
 
-  "link_button@common.hyperlink_button": {
-    "$button_label_text|default": "unset $button_label_text",
+  "link_button@common_buttons.hyperlink_button": {
+    "$button_text|default": "unset $button_text",
     "size": [ "100%", 30 ],
     "anchor_from": "center",
     "anchor_to": "center",
     "property_bag": {
       "#hyperlink": "unset #hyperlink in property_bag"
-    },
-    "controls": [
-      { "default@common.new_button_state_default": { } },
-      { "hover@common.new_button_state_hover": { } },
-      { "pressed@common.new_button_state_pressed": { } }
-    ]
+    }
   },
 
   "option_group_label": {
     "type": "panel",
     "size": [ "100%", "100%c + 9px" ],
     "$text|default": "unset $text",
+    "$text_bindings|default": [],
     "controls": [
       {
         "text": {
           "type": "label",
+          "color": "$main_header_text_color",
           "text": "$text",
           "anchor_from": "top_left",
           "anchor_to": "top_left",
           "max_size": [ "100%", "default" ],
           "offset": [ 0, 4 ],
-          "locked_alpha": 0.5
+          "locked_alpha": 0.5,
+          "bindings": "$text_bindings"
         }
       }
     ]
@@ -64,7 +70,7 @@
     "$enabled|default": true,
     "$option_enabled_binding_name|default": "",
     "controls": [
-      { "option_generic_core@settings_common.option_generic_core": { } }
+      { "option_generic_core@settings_common.option_generic_core": {} }
     ]
   },
 
@@ -75,9 +81,10 @@
     "$allow_data_binding|default": true,
     "$option_label|default": "",
     "$show_option_label|default": true,
-    "$label_bindings|default": [ ],
+    "$label_bindings|default": [],
     "$one_line_layout|default": false,
     "$option_enabled_binding_type|default": "global",
+    "$label_offset|default": [ 0, 0 ],
     "type": "stack_panel",
     "size": [ "100%", "100%c" ],
     "enabled": "$enabled",
@@ -104,14 +111,24 @@
           "size": [ "100%", "100%c" ],
           "controls": [
             {
-              "option_label": {
-                "type": "label",
-                "size": [ "100%", "default" ],
-                "layer": 1,
-                "text": "$option_label",
-                "visible": "$show_option_label",
-                "bindings": "$label_bindings",
-                "locked_alpha": 0.5
+              "option_label_panel": {
+                "type": "panel",
+                "size": [ "100%", "100%c" ],
+                "controls": [
+                  {
+                    "option_label": {
+                      "type": "label",
+                      "color": "$main_header_text_color",
+                      "size": [ "100%", "default" ],
+                      "offset": "$label_offset",
+                      "layer": 1,
+                      "text": "$option_label",
+                      "visible": "$show_option_label",
+                      "bindings": "$label_bindings",
+                      "locked_alpha": 0.5
+                    }
+                  }
+                ]
               }
             },
             {
@@ -164,6 +181,7 @@
             {
               "option_label": {
                 "type": "label",
+                "color": "$main_header_text_color",
                 "layer": 1,
                 "size": "$label_size",
                 "offset": "$label_offset",
@@ -196,7 +214,6 @@
     "$text_box_enabled_binding_name": "$option_enabled_binding_name",
     "enabled": "$enabled",
     "$place_holder_text": "$option_place_holder_text",
-    "$place_holder_text_color": [ 0.5, 0.5, 0.5, 1.0 ],
     "variables": [
       {
         "requires": "(not $option_enabled_binding_name or not $enabled)",
@@ -221,7 +238,6 @@
           "$text_box_enabled_binding_name": "$option_enabled_binding_name",
           "enabled": "$enabled",
           "$place_holder_text": "$option_place_holder_text",
-          "$place_holder_text_color": [ 0.5, 0.5, 0.5, 1.0 ],
           "variables": [
             {
               "requires": "(not $option_enabled_binding_name or not $enabled)",
@@ -244,26 +260,24 @@
   "option_toggle_state_template": {
     "type": "image",
     "size": [ 30, 16 ],
-    "uv_size": [ 30, 16 ],
-    "uv": [ 0, 0 ],
     "anchor_from": "top_left",
     "anchor_to": "top_left"
   },
 
   "option_toggle_on@settings_common.option_toggle_state_template": {
-    "texture": "textures/gui/newgui/settings/toggle_on"
+    "texture": "textures/ui/toggle_on"
   },
 
   "option_toggle_off@settings_common.option_toggle_state_template": {
-    "texture": "textures/gui/newgui/settings/toggle_off"
+    "texture": "textures/ui/toggle_off"
   },
 
   "option_toggle_on_hover@settings_common.option_toggle_state_template": {
-    "texture": "textures/gui/newgui/settings/toggle_on_hover"
+    "texture": "textures/ui/toggle_on_hover"
   },
 
   "option_toggle_off_hover@settings_common.option_toggle_state_template": {
-    "texture": "textures/gui/newgui/settings/toggle_off_hover"
+    "texture": "textures/ui/toggle_off_hover"
   },
 
   "option_toggle_on_locked@settings_common.option_toggle_on": {
@@ -291,6 +305,8 @@
     "$checked_locked_control": "settings_common.option_toggle_on_locked",
     "$checked_locked_hover_control": "settings_common.option_toggle_on_locked",
 
+    "$enable_directional_toggling": true,
+
     "enabled": "$enabled",
     "variables": [
       {
@@ -302,36 +318,37 @@
   },
 
   "radio_visuals_unchecked@radio_visuals": {
-    "$radio_texture": "textures/gui/newgui/settings/radio_off"
+    "$radio_texture": "textures/ui/radio_off"
   },
 
   "radio_visuals_checked@radio_visuals": {
-    "$radio_texture": "textures/gui/newgui/settings/radio_on"
+    "$radio_texture": "textures/ui/radio_on"
   },
 
   "radio_visuals_unchecked_locked@radio_visuals": {
-    "$radio_texture": "textures/gui/newgui/settings/radio_off",
+    "$radio_texture": "textures/ui/radio_off",
     "$alpha": 0.5
   },
 
   "radio_visuals_checked_locked@radio_visuals": {
-    "$radio_texture": "textures/gui/newgui/settings/radio_on",
+    "$radio_texture": "textures/ui/radio_on",
     "$alpha": 0.5
   },
 
   "radio_visuals_unchecked_hover@radio_visuals": {
-    "$radio_texture": "textures/gui/newgui/settings/radio_off_hover"
+    "$radio_texture": "textures/ui/radio_off_hover"
   },
 
   "radio_visuals_checked_hover@radio_visuals": {
-    "$radio_texture": "textures/gui/newgui/settings/radio_on_hover"
+    "$radio_texture": "textures/ui/radio_on_hover"
   },
 
   "radio_visuals": {
     "type": "panel",
     "size": [ "100%", 16 ],
     "$alpha|default": 1.0,
-    "$radio_label_bindings|default": [ ],
+    "$radio_label_bindings|default": [],
+    "$radio_label_color|default": "$main_header_text_color",
     "controls": [
       {
         "radio_image": {
@@ -340,9 +357,7 @@
           "alpha": "$alpha",
           "anchor_from": "left_middle",
           "anchor_to": "left_middle",
-          "size": [ 10, 10 ],
-          "uv_size": [ 10, 10 ],
-          "uv": [ 0, 0 ]
+          "size": [ 10, 10 ]
         }
       },
       {
@@ -351,6 +366,7 @@
           "anchor_from": "left_middle",
           "anchor_to": "left_middle",
           "text": "$radio_label_text",
+          "color": "$radio_label_color",
           "offset": [ 16, 0.5 ],
           "size": [ "100% - 16px", "default" ],
           "alpha": "$alpha",
@@ -361,14 +377,14 @@
   },
 
   "radio_with_label_core@common.radio_toggle": {
-    "$unchecked_control": "settings_common.radio_visuals_unchecked",
-    "$checked_control": "settings_common.radio_visuals_checked",
-    "$unchecked_hover_control": "settings_common.radio_visuals_unchecked_hover",
-    "$checked_hover_control": "settings_common.radio_visuals_checked_hover",
-    "$unchecked_locked_control": "settings_common.radio_visuals_unchecked_locked",
-    "$unchecked_locked_hover_control": "settings_common.radio_visuals_unchecked_locked",
-    "$checked_locked_control": "settings_common.radio_visuals_checked_locked",
-    "$checked_locked_hover_control": "settings_common.radio_visuals_checked_locked",
+    "$unchecked_control|default": "settings_common.radio_visuals_unchecked",
+    "$checked_control|default": "settings_common.radio_visuals_checked",
+    "$unchecked_hover_control|default": "settings_common.radio_visuals_unchecked_hover",
+    "$checked_hover_control|default": "settings_common.radio_visuals_checked_hover",
+    "$unchecked_locked_control|default": "settings_common.radio_visuals_unchecked_locked",
+    "$unchecked_locked_hover_control|default": "settings_common.radio_visuals_unchecked_locked",
+    "$checked_locked_control|default": "settings_common.radio_visuals_checked_locked",
+    "$checked_locked_hover_control|default": "settings_common.radio_visuals_checked_locked",
     "$radio_toggle_group": true,
     "size": [ "100%", "100%c" ],
     "$toggle_name|default": "$toggle_state_binding_name",
@@ -388,7 +404,7 @@
   "option_radio_group_control": {
     "type": "stack_panel",
     "size": [ "100%", "100%c" ],
-    "controls": "$radio_buttons"
+    "controls": "$radio_buttons",
     /* Here's an example of how $radio_buttons should be defined:
     "$radio_buttons": [
       {
@@ -405,6 +421,13 @@
       }
     ]
     */
+    "$radio_factory|default": { "name": "empty" },
+    "$radio_collection_name|default": "",
+    "$radio_bindings|default": [],
+
+    "factory": "$radio_factory",
+    "collection_name": "$radio_collection_name",
+    "bindings": "$radio_bindings"
   },
 
   "radio_with_label": {
@@ -415,7 +438,7 @@
     "offset": [ 3, 0 ],
     "$enabled|default": true,
     "controls": [
-      { "radio_with_label_core@settings_common.radio_with_label_core": { } }
+      { "radio_with_label_core@settings_common.radio_with_label_core": {} }
     ]
   },
 
@@ -444,62 +467,59 @@
     ]
   },
 
-  "options_dropdown_toggle_button_state": {
-    "type": "panel",
-    "size": [ "100%", "100%" ],
-    "$alpha|default": 1.0,
+  "default_options_dropdown_toggle_button_state_content": {
+    "type": "stack_panel",
+    // new_button_state has a layer of 2
+    "layer": 3,
+    "orientation": "horizontal",
+    "size": [ "100% - 16px", "100% - 8px" ],
     "controls": [
       {
-        "new_button_state@common.new_button_state": {
-          "texture": "$label_texture",
-          "alpha": "$alpha"
+        "label_panel": {
+          "type": "panel",
+          "layer": 1,
+          "size": [ "fill", "100%" ],
+          "controls": [
+            {
+              "label@common.new_button_label": {
+                "layer": 1,
+                "$options_dropdown_label_color_binding_type|default": "none",
+                "$options_dropdown_label_color_binding|default": "",
+                "anchor_from": "left_middle",
+                "anchor_to": "left_middle",
+                "size": [ "100%", "default" ],
+                "max_size": [ "100%", "100%" ],
+                "text": "$options_dropdown_toggle_label_binding",
+                "alpha": "$content_alpha",
+
+                "$options_dropdown_toggle_label_binding_type|default": "global",
+                "$options_dropdown_toggle_label_binding_collection_name|default": "",
+                "bindings": [
+                  {
+                    "binding_name": "$options_dropdown_toggle_label_binding",
+                    "binding_condition": "none",
+                    "binding_type": "$options_dropdown_toggle_label_binding_type",
+                    "binding_collection_name": "$options_dropdown_toggle_label_binding_collection_name"
+                  },
+                  {
+                    "binding_name": "$options_dropdown_label_color_binding",
+                    "binding_type": "$options_dropdown_label_color_binding_type",
+                    "binding_name_override": "#color"
+                  }
+                ]
+              }
+            }
+          ]
         }
       },
       {
-        "content": {
-          "type": "stack_panel",
-          // new_button_state has a layer of 2
-          "layer": 3,
-          "orientation": "horizontal",
-          "size": [ "100% - 16px", "100% - 8px" ],
+        "arrow_panel": {
+          "type": "panel",
+          "layer": 1,
+          "size": [ "100%c", "100%" ],
           "controls": [
             {
-              "label_panel": {
-                "type": "panel",
-                "layer": 1,
-                "size": [ "fill", "100%" ],
-                "controls": [
-                  {
-                    "label@common.new_button_label": {
-                      "layer": 1,
-                      "anchor_from": "left_middle",
-                      "anchor_to": "left_middle",
-                      "size": [ "100%", "default" ],
-                      "max_size": [ "100%", "100%" ],
-                      "text": "$options_dropdown_toggle_label_binding",
-                      "alpha": "$alpha",
-                      "bindings": [
-                        {
-                          "binding_name": "$options_dropdown_toggle_label_binding",
-                          "binding_condition": "none"
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "arrow_panel": {
-                "type": "panel",
-                "layer": 1,
-                "size": [ "100%c", "100%" ],
-                "controls": [
-                  {
-                    "arrow_image@arrow_image": { }
-                  }
-                ]
-              }
+              "dropdown_chevron_image@dropdown_chevron_image": {}
             }
           ]
         }
@@ -507,46 +527,14 @@
     ]
   },
 
-  "options_dropdown_toggle_button_state_default@settings_common.options_dropdown_toggle_button_state": {
-    "$label_texture": "textures/gui/newgui/ButtonWithBorder"
-  },
-
-  "options_dropdown_toggle_button_state_hover@settings_common.options_dropdown_toggle_button_state": {
-    "$text_color": "white",
-    "$label_texture": "textures/gui/newgui/ButtonWithBorderHover"
-  },
-
-  "options_dropdown_toggle_button_state_checked@settings_common.options_dropdown_toggle_button_state": {
-    "$label_texture": "textures/gui/newgui/ButtonWithBorderPressedNoHover"
-  },
-
-  "options_dropdown_toggle_button_state_checked_hover@settings_common.options_dropdown_toggle_button_state": {
-    "$text_color": "white",
-    "$label_texture": "textures/gui/newgui/ButtonWithBorderPressed"
-  },
-
-  "options_dropdown_toggle_button_state_locked@settings_common.options_dropdown_toggle_button_state_default": {
-    "$alpha": 0.5
-  },
-
-  "options_dropdown_toggle_button_state_checked_locked@settings_common.options_dropdown_toggle_button_state_checked": {
-    "$alpha": 0.5
-  },
-
-  "options_dropdown_toggle_control@common.toggle": {
+  "options_dropdown_toggle_control@common_toggles.light_template_toggle": {
     "size": [ "100%", "100%" ],
-    "$unchecked_control": "settings_common.options_dropdown_toggle_button_state_default",
-    "$checked_control": "settings_common.options_dropdown_toggle_button_state_checked",
-    "$unchecked_hover_control": "settings_common.options_dropdown_toggle_button_state_hover",
-    "$checked_hover_control": "settings_common.options_dropdown_toggle_button_state_checked_hover",
-    "$unchecked_locked_control": "settings_common.options_dropdown_toggle_button_state_locked",
-    "$unchecked_locked_hover_control": "settings_common.options_dropdown_toggle_button_state_locked",
-    "$checked_locked_control": "settings_common.options_dropdown_toggle_button_state_checked_locked",
-    "$checked_locked_hover_control": "settings_common.options_dropdown_toggle_button_state_checked_locked",
+    "$button_type_panel|default": "settings_common.default_options_dropdown_toggle_button_state_content",
 
     "enabled": "$enabled",
-    "$toggle_enabled_binding_name": "$option_enabled_binding_name",
-    "$toggle_enabled_binding_type": "global",
+    "$toggle_enabled_binding_name|default": "$option_enabled_binding_name",
+    "$toggle_enabled_binding_type|default": "global",
+    "$toggle_binding_type|default": "global",
     "variables": [
       {
         "requires": "(not $option_enabled_binding_name or not $enabled)",
@@ -570,7 +558,8 @@
           // you need to specify a unique name with "$dropdown_name"
           "$dropdown_name|default": "unset $dropdown_name",
           // you need to specify a the label with "$options_dropdown_toggle_label_binding"
-          "$options_dropdown_toggle_label_binding|default": "unset $options_dropdown_toggle_label_text"
+          "$options_dropdown_toggle_label_binding|default": "unset $options_dropdown_toggle_label_text",
+          "$locked_alpha": 0.5
         }
       }
     ]
@@ -578,14 +567,13 @@
 
   "option_info_label_control": {
     "type": "image",
-    "nineslice_size": 1.0,
-    "texture": "textures/gui/newgui/settings/text_label_box",
-    "uv_size": [ 4, 4 ],
+    "texture": "textures/ui/text_label_box",
     "size": [ "100%", "100%c + 6px" ],
     "controls": [
       {
         "control": {
           "type": "label",
+          "color": "$main_header_text_color",
           "size": [ "100% - 8px", "default" ],
           "layer": 1,
           "text": "$container_text_binding_name",
@@ -613,9 +601,18 @@
     "$control_name": "settings_common.option_radio_group_control"
   },
 
-  "option_radio_dropdown_group@settings_common.option_radio_group": {
+  "option_radio_dropdown_group": {
+    "type": "panel",
     "size": [ "100% - 4px", "100%c + 4px" ],
-    "offset": [ 2, 2 ]
+    "offset": [ 2, 2 ],
+    "controls": [
+      {
+        "radio_control_group@settings_common.option_radio_group_control": {
+          "anchor_from": "top_left",
+          "anchor_to": "top_left"
+        }
+      }
+    ]
   },
 
   "option_text_edit@settings_common.option_generic": {
@@ -648,6 +645,8 @@
 
   "dynamic_dialog_screen@common.base_screen": {
     "type": "screen",
+    "cache_screen": true,
+
     "button_mappings": [
       {
         "from_button_id": "button.menu_cancel",
@@ -655,8 +654,256 @@
         "mapping_type": "global"
       },
       {
-        "from_button_id": "button.menu_inventory_cancel",
-        "to_button_id": "button.menu_exit",
+        "from_button_id": "button.menu_tab_left",
+        "to_button_id": "button.menu_tab_left",
+        "mapping_type": "global",
+        "scope": "view"
+      },
+      {
+        "from_button_id": "button.menu_tab_right",
+        "to_button_id": "button.menu_tab_right",
+        "mapping_type": "global",
+        "scope": "view"
+      }
+    ],
+    "$screen_content": "settings_common.settings_content"
+  },
+
+  "settings_content": {
+    "type": "panel",
+    "controls": [
+      {
+        "stack_panel": {
+          "type": "stack_panel",
+          "size": [ "100%", "100%" ],
+          "controls": [
+            {
+              "content_panel": {
+                "type": "panel",
+                "size": [ "100%", "fill" ],
+
+                "controls": [
+                  {
+                    "common_panel@common.common_panel": {
+                      "size": [ "100% - 4px", "100% - 4px" ],
+                      "$dialog_background": "dialog_background_hollow_3",
+                      "$show_divider": true,
+                      "$divider_offset": [ "40%", "22px" ]
+                    }
+                  },
+                  {
+                    "container": {
+                      "type": "panel",
+                      "size": [ "100% - 4px", "100% - 4px" ],
+                      "controls": [
+                        { "$dialog_content@$dialog_content": {} }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "gamepad_panel": {
+                "type": "panel",
+                "size": [ "100%", "100%c" ],
+
+                "controls": [
+                  {
+                    "gamepad_helpers@settings_common.gamepad_helpers": {}
+                  }
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#gamepad_helper_visible",
+                    "binding_name_override": "#visible"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "popup_dialog_factory": {
+          "type": "factory",
+          "control_ids": {
+            "purchase_failed": "@realms_create.popup_dialog__purchase_failed",
+            "purchase_in_progress": "@realms_create.popup_dialog__purchase_in_progress",
+            "share_by_link": "@realms_whitelist.popup_dialog__share_by_link"
+          }
+        }
+      }
+    ]
+  },
+
+  "toggle_button_control": {
+    "type": "panel",
+    "$glyph_offset|default": [ 5, 0 ],
+    "$glyph_anchor_from|default": "left_middle",
+    "$glyph_anchor_to|default": "left_middle",
+    "$button_label_offset|default": [ 34, 0 ],
+    "layer": 2,
+    "controls": [
+      {
+        "glyph": {
+          "type": "image",
+          "anchor_from": "$glyph_anchor_from",
+          "anchor_to": "$glyph_anchor_to",
+          "offset": "$glyph_offset",
+          "texture": "$glyph_texture",
+          "size": "$glyph_size",
+          "layer": 3,
+          "color": "$glyph_color",
+          "alpha": "$content_alpha",
+
+          "$glyph_bindings|default": [],
+          "bindings": "$glyph_bindings"
+        }
+      },
+      {
+        "glyph_color": {
+          "type": "image",
+          "anchor_from": "$glyph_anchor_from",
+          "anchor_to": "$glyph_anchor_to",
+          "offset": "$glyph_offset",
+          "texture": "$glyph_color_texture",
+          "size": "$glyph_size",
+          "layer": 4,
+          "alpha": "$content_alpha",
+
+          "$glyph_color_bindings|default": [],
+          "bindings": "$glyph_color_bindings"
+        }
+      },
+      {
+        "progress_loading_bars@progress.progress_loading_bars": {
+          "anchor_from": "left_middle",
+          "anchor_to": "left_middle",
+          "color": "$glyph_color",
+          "offset": [ 5, 0 ],
+          "layer": 5,
+          "size": "$glyph_size",
+          "visible": false,
+          "$glyph_progress_bindings|default": [],
+          "bindings": "$glyph_progress_bindings"
+        }
+      },
+      {
+        "tab_button_text": {
+          "type": "label",
+          "anchor_from": "left_middle",
+          "anchor_to": "left_middle",
+          "size": [ "100% - 38px", "default" ],
+          "max_size": [ "100% - 38px", "100% - 4px" ],
+          "offset": "$button_label_offset",
+          "text": "$button_text",
+          "layer": 3,
+          "color": "$text_color",
+          "alpha": "$content_alpha",
+
+          "$button_text_binding_type|default": "none",
+          "$button_text_grid_collection_name|default": "",
+          "$button_text_binding_condition|default": "none",
+
+          "bindings": [
+            {
+              "binding_type": "$button_text_binding_type",
+              "binding_condition": "$button_text_binding_condition",
+              "binding_collection_name": "$button_text_grid_collection_name",
+              "binding_name": "$button_text",
+              "binding_name_override": "$button_text"
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+  "section_toggle_base@common_toggles.light_ui_toggle": {
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "size": [ "100%", "30px" ],
+    "$button_size_override": [ "100%", "100% + 1px" ],
+    "$button_type_panel": "settings_common.toggle_button_control",
+
+    "$radio_toggle_group": true,
+    "$toggle_name": "navigation_tab",
+    "$toggle_group_default_selected": "$default_selector_toggle_index",
+
+    "$toggle_tab_focus_binding_type": "global",
+    "$toggle_tab_focus_binding_name": "#navigation_tab_focus_precedence",
+    "$toggle_on_hover_binding_type": "global",
+    "$toggle_on_hover_binding_name": "#toggle_on_hover"
+  },
+
+  // upper right title
+  "section_title_label": {
+    "type": "label",
+    "anchor_from": "top_middle",
+    "anchor_to": "top_middle",
+    "layer": 2,
+    "color": "$title_text_color",
+    "text": "#section_title",
+    "bindings": [
+      {
+        "binding_name": "#section_title"
+      }
+    ]
+  },
+
+  // upper left title
+  "dialog_title_label": {
+    "type": "label",
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "layer": 2,
+    "color": "$title_text_color",
+    "text": "#dialog_title",
+    "bindings": [
+      {
+        "binding_name": "#dialog_title"
+      }
+    ]
+  },
+
+  "dialog_content": {
+    "type": "panel",
+    "anchor_from": "top_middle",
+    "anchor_to": "top_middle",
+    "controls": [
+      { "dialog_title_label@settings_common.dialog_title_label": { "offset": [ 8, 9 ] } },
+      { "selector_area@settings_common.selector_area": {} },
+      { "section_title_label@settings_common.section_title_label": { "offset": [ "20%", 9 ] } },
+      { "content_area@settings_common.content_area": {} }
+    ]
+  },
+
+  "selector_group_label": {
+    "type": "label",
+    "size": [ "100%", "default" ],
+    "color": "$main_header_text_color",
+    "offset": [ 15, 0 ]
+  },
+
+  "scrollable_selector_area_content": {
+    "type": "panel",
+    "offset": [ "2px", "2px" ],
+    "size": [ "100% - 4px", "100%c + 4px" ],
+    "controls": [
+      { "$selector_stack_panel@$selector_stack_panel": {} }
+    ]
+  },
+
+  "modal_area_panel_base": {
+    "type": "input_panel",
+    "layer": 1,
+    "$menu_cancel_button_id|default": "button.menu_exit",
+    "$modal_binding_name|default": "",
+    "button_mappings": [
+      {
+        "from_button_id": "button.menu_cancel",
+        "to_button_id": "$menu_cancel_button_id",
         "mapping_type": "global"
       },
       {
@@ -696,201 +943,38 @@
         "scope": "view"
       }
     ],
-    "$screen_content": "settings_common.settings_content"
-  },
-
-  "settings_content": {
-    "type": "panel",
-    "controls": [
+    "bindings": [
       {
-        "common_panel@common.common_panel": {
-          "size": "$extra_large_screen_size",
-          "$dialog_background": "dialog_background_hollow_3",
-          "$show_divider": true,
-          "$divider_offset": [ "40%", "22px" ]
-        }
-      },
-      {
-        "container": {
-          "type": "panel",
-          "size": "$extra_large_screen_size",
-          "controls": [
-            { "$dialog_content@$dialog_content": { } }
-          ]
-        }
-      },
-      {
-        "popup_dialog_factory": {
-          "type": "factory",
-          "control_ids": {
-            "purchase_failed": "@realms_create.popup_dialog__purchase_failed",
-            "purchase_in_progress": "@realms_create.popup_dialog__purchase_in_progress"
-          }
-        }
+        "binding_name": "$modal_binding_name",
+        "binding_name_override": "#modal"
       }
     ]
   },
 
-  "toggle_button_control": {
+  "inactive_modal_pane_fade": {
     "type": "image",
-    "texture": "$button_texture",
-    "$color|default": "$default_text_color",
-    "$alpha|default": 1.0,
-    "$glyph_atlas|default": "textures/gui/newgui/settings/glyph_atlas",
-    "$glyph_uvsize|default": [ 25, 17 ],
-    "$glyph_color_atlas|default": "textures/gui/newgui/settings/glyph_color_atlas",
-    "layer": 2,
-    "nineslice_size": 2.0,
-    "uv_size": [ 6, 6 ],
-    "controls": [
-      {
-        "glyph": {
-          "type": "image",
-          "anchor_from": "left_middle",
-          "anchor_to": "left_middle",
-          "offset": [ 5, 0 ],
-          "texture": "$glyph_atlas",
-          "size": "$glyph_uvsize",
-          "layer": 3,
-          "color": "$color",
-          "alpha": "$alpha",
-          "uv": "$glyph_uv",
-          "uv_size": "$glyph_uvsize"
-        }
-      },
-      {
-        "glyph_color": {
-          "type": "image",
-          "anchor_from": "left_middle",
-          "anchor_to": "left_middle",
-          "offset": [ 5, 0 ],
-          "texture": "$glyph_color_atlas",
-          "size": "$glyph_uvsize",
-          "layer": 4,
-          "alpha": "$alpha",
-          "uv": "$glyph_uv",
-          "uv_size": "$glyph_uvsize"
-        }
-      },
-      {
-        "tab_button_text": {
-          "type": "label",
-          "anchor_from": "left_middle",
-          "anchor_to": "left_middle",
-          "size": [ "100% - 38px", "default" ],
-          "max_size": [ "100% - 38px", "100% - 4px" ],
-          "offset": [ 34, 0 ],
-          "text": "$button_label_text",
-          "layer": 3,
-          "color": "$color",
-          "alpha": "$alpha"
-        }
-      }
-    ]
-  },
-
-  "toggle_state_inactive@settings_common.toggle_button_control": {
-    "$button_texture": "textures/gui/newgui/ButtonWithBorder"
-  },
-
-  "toggle_state_inactive_hover@settings_common.toggle_button_control": {
-    "$color": "$active_text_color",
-    "$button_texture": "textures/gui/newgui/ButtonWithBorderHover"
-  },
-
-  "toggle_state_active@settings_common.toggle_button_control": {
-    "$button_texture": "textures/gui/newgui/ButtonWithBorderPressedNoHover"
-  },
-
-  "toggle_state_active_hover@settings_common.toggle_button_control": {
-    "$color": "$active_text_color",
-    "$button_texture": "textures/gui/newgui/ButtonWithBorderPressed"
-  },
-
-  "section_toggle_base@common.toggle": {
-    "anchor_from": "top_left",
-    "anchor_to": "top_left",
-    "size": [ "100%", "30px" ],
-
-    "$unchecked_control": "settings_common.toggle_state_inactive",
-    "$checked_control": "settings_common.toggle_state_active",
-    "$unchecked_hover_control": "settings_common.toggle_state_inactive_hover",
-    "$checked_hover_control": "settings_common.toggle_state_active_hover",
-    "$unchecked_locked_control": "settings_common.toggle_state_inactive",
-    "$unchecked_locked_hover_control": "settings_common.toggle_state_inactive",
-    "$checked_locked_control": "settings_common.toggle_state_active",
-    "$checked_locked_hover_control": "settings_common.toggle_state_active",
-
-    "$radio_toggle_group": true,
-    "$toggle_name": "navigation_tab",
-    "$toggle_group_default_selected": "$default_selector_toggle_index"
-  },
-
-  // upper right title
-  "section_title_label": {
-    "type": "label",
-    "anchor_from": "top_middle",
-    "anchor_to": "top_middle",
-    "layer": 2,
-    "color": "$default_text_color",
-    "text": "#section_title",
+    "size": [ "100%", "100%" ],
+    "texture": "textures/ui/White",
+    "color": [ 0.5, 0.5, 0.5 ],
+    "alpha": 0.5,
+    "layer": 25,
     "bindings": [
       {
-        "binding_name": "#section_title"
+        "binding_name": "$modal_binding_name",
+        "binding_name_override": "#visible"
       }
     ]
   },
 
-  // upper left title
-  "dialog_title_label": {
-    "type": "label",
-    "anchor_from": "top_left",
-    "anchor_to": "top_left",
-    "layer": 2,
-    "color": "$default_text_color",
-    "text": "#dialog_title",
-    "bindings": [
-      {
-        "binding_name": "#dialog_title"
-      }
-    ]
-  },
-
-  "dialog_content": {
-    "type": "panel",
-    "anchor_from": "top_middle",
-    "anchor_to": "top_middle",
-    "controls": [
-      { "dialog_title_label@settings_common.dialog_title_label": { "offset": [ 8, 9 ] } },
-      { "selector_area@settings_common.selector_area": { } },
-      { "section_title_label@settings_common.section_title_label": { "offset": [ "20%", 9 ] } },
-      { "content_area@settings_common.content_area": { } }
-    ]
-  },
-
-  "selector_group_label": {
-    "type": "label",
-    "size": [ "100%", "default" ],
-    "color": [ 1, 1, 1 ],
-    "offset": [ 15, 0 ]
-  },
-
-  "scrollable_selector_area_content": {
-    "type": "panel",
-    "offset": [ "2px", "2px" ],
-    "size": [ "100% - 4px", "100%c + 4px" ],
-    "controls": [
-      { "$selector_stack_panel@$selector_stack_panel": { } }
-    ]
-  },
-
-  // left side
-  "selector_area": {
-    "type": "panel",
+  // left side - need to be a layer higher than the right side to guarantee we fire button.menu_exit and not button.back_to_selector_area when not using modal behavior such as in keyboard+mouse input
+  "selector_area@settings_common.modal_area_panel_base": {
     "offset": [ "8px", "23px" ],
     "size": [ "40% - 8px", "100% - 31px" ],
     "anchor_from": "top_left",
     "anchor_to": "top_left",
+    "$menu_cancel_button_id": "button.menu_exit",
+    "$modal_binding_name": "#selector_area_focused",
+    "layer": 2,
     "controls": [
       {
         "scrolling_panel@common.scrolling_panel": {
@@ -899,51 +983,83 @@
           "$scroll_size": [ "5px", "100% - 4px" ],
           "$scroll_bar_left_padding_size": [ 0, 0 ]
         }
+      },
+      {
+        "inactive_modal_pane_fade@settings_common.inactive_modal_pane_fade": {
+          "bindings": [
+            {
+              "binding_name": "#content_area_focused",
+              "binding_name_override": "#visible"
+            }
+          ]
+        }
       }
     ]
   },
 
   // right side
-  "content_area": {
-    "type": "stack_panel",
+  "content_area@settings_common.modal_area_panel_base": {
     "offset": [ "-8px", "23px" ],
     "size": [ "60% - 13px", "100% - 31px" ],
     "anchor_from": "top_right",
     "anchor_to": "top_right",
+    "$menu_cancel_button_id": "button.back_to_selector_area",
+    "$modal_binding_name": "#content_area_focused",
+    "layer": 1,
     "controls": [
       {
-        "header_panel": {
-          "type": "panel",
-          "layer": 20,
-          "size": ["100%", "100%c"],
-          "anchor_from": "top_left",
-          "anchor_to": "top_left",
+        "control": {
+          "type": "stack_panel",
+          "size": [ "100%", "100%" ],
+          "anchor_from": "top_right",
+          "anchor_to": "top_right",
           "controls": [
             {
-              "content@$section_header_panels": {}
+              "header_panel": {
+                "type": "panel",
+                "layer": 20,
+                "size": [ "100%", "100%c" ],
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "controls": [
+                  {
+                    "content@$section_header_panels": {}
+                  }
+                ]
+              }
+            },
+            {
+              "scrolling_panel@common.scrolling_panel": {
+                "size": [ "100%", "fill" ],
+                "$scrolling_content": "$section_content_panels",
+                "$show_background": false,
+                "$scroll_size": [ "5px", "100% - 4px" ],
+                "$scroll_bar_left_padding_size": [ 0, 0 ]
+              }
+            },
+            {
+              "footer_panel": {
+                "type": "panel",
+                "layer": 20,
+                "size": [ "100%", "100%c" ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "controls": [
+                  {
+                    "content@$section_footer_panels": {}
+                  }
+                ]
+              }
             }
           ]
         }
       },
       {
-        "scrolling_panel@common.scrolling_panel": {
-          "size": ["100%", "fill"],
-          "$scrolling_content": "$section_content_panels",
-          "$show_background": false,
-          "$scroll_size": [ "5px", "100% - 4px" ],
-          "$scroll_bar_left_padding_size": [ 0, 0 ]
-        }
-      },
-      {
-        "footer_panel": {
-          "type": "panel",
-          "layer": 20,
-          "size": ["100%", "100%c"],
-          "anchor_from": "bottom_left",
-          "anchor_to": "bottom_left",
-          "controls": [
+        "inactive_modal_pane_fade@settings_common.inactive_modal_pane_fade": {
+          "bindings": [
             {
-              "content@$section_footer_panels": {}
+              "binding_name": "#selector_area_focused",
+              "binding_name_override": "#visible"
             }
           ]
         }
@@ -952,9 +1068,28 @@
   },
 
   "screen_base@settings_common.dynamic_dialog_screen": {
-    "$default_text_color": [ 0.275, 0.275, 0.275 ],
-    "$active_text_color": [ 1.00, 1.00, 1.00 ],
     "$dialog_content": "settings_common.dialog_content"
+  },
+
+  "gamepad_helpers": {
+    "type": "stack_panel",
+    "orientation": "horizontal",
+    "offset": [ 0, "-6px" ],
+    "size": [ "100%c", 16 ],
+    "layer": "$gamepad_helper_layer",
+    "$gamepad_helper_layer|default": 0,
+    "anchor_from": "bottom_middle",
+    "anchor_to": "bottom_middle",
+    "controls": [
+      { "gamepad_helper_a@common.gamepad_helper_a": {} },
+      {
+        "control": {
+          "type": "panel",
+          "size": [ 10, 0 ]
+        }
+      },
+      { "gamepad_helper_b@common.gamepad_helper_b": {} }
+    ]
   }
 
 }

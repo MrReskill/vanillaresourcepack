@@ -41,17 +41,15 @@
 
   "button_state_default": {
     "type": "image",
-    "texture": "textures/gui/newgui/classic-button",
-    "nineslice_size": 2.0,
-    "uv_size": [ 5, 5 ]
+    "texture": "textures/ui/classic-button"
   },
 
   "button_state_hover@button_state_default": {
-    "texture": "textures/gui/newgui/classic-button-hover"
+    "texture": "textures/ui/classic-button-hover"
   },
 
   "button_state_pressed@button_state_default": {
-    "texture": "textures/gui/newgui/classic-button-pressed"
+    "texture": "textures/ui/classic-button-pressed"
   },
 
   "toggle@common.toggle": {
@@ -67,21 +65,15 @@
 
   "toggle_checked_state": {
     "type": "image",
-    "texture": "textures/gui/touchgui",
+    "texture": "textures/ui/common-classic_toggle_checked_state",
     "layer": 2,
-    "nineslice_size": 3.0,
-    "uv": [ 199, 206 ],
-    "uv_size": [ 38, 20 ],
     "size": [ 38, 20 ]
   },
 
   "toggle_unchecked_state": {
     "type": "image",
-    "texture": "textures/gui/touchgui",
+    "texture": "textures/ui/common-classic_toggle_unchecked_state",
     "layer": 2,
-    "nineslice_size": 3.0,
-    "uv": [ 160, 206 ],
-    "uv_size": [ 38, 20 ],
     "size": [ 38, 20 ]
   },
 
@@ -93,11 +85,8 @@
       {
         "hover": {
           "type": "image",
-          "texture": "textures/gui/touchgui",
-          "layer": 3,
-          "nineslice_size": 3.0,
-          "uv": [ 160, 226 ],
-          "uv_size": [ 38, 20 ]
+          "texture": "textures/ui/common-classic_hover",
+          "layer": 3
         }
       }
     ]
@@ -111,11 +100,8 @@
       {
         "hover": {
           "type": "image",
-          "texture": "textures/gui/touchgui",
-          "layer": 3,
-          "nineslice_size": 3.0,
-          "uv": [ 199, 226 ],
-          "uv_size": [ 38, 20 ]
+          "texture": "textures/ui/common-classic_hover_1",
+          "layer": 3
         }
       }
     ]

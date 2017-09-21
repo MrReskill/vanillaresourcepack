@@ -1,11 +1,6 @@
 {
   "namespace": "toast_screen",
 
-  "toast_renderer": {
-    "type": "custom",
-    "renderer": "toast_renderer"
-  },
-
   "popup_anim_wait": {
     "anim_type": "wait",
     "duration": "$display_time",
@@ -33,17 +28,13 @@
 
   "xbox_icon": {
     "type": "image",
-    "texture": "textures/gui/newgui/xbox4",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 27, 27 ],
+    "texture": "textures/ui/xbox4",
     "size": [ 13, 13 ]
   },
 
   "gamer_score_icon": {
     "type": "image",
-    "texture": "textures/gui/achievements/g",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 11, 11 ],
+    "texture": "textures/ui/gamerscore",
     "size": [ 7, 7 ]
   },
 
@@ -52,7 +43,9 @@
     "texture": "#icon_path",
     "zip_folder": "#icon_zip",
     "texture_file_system": "#icon_file_system",
-    "uv": [ 0, 0 ],
+    "layer": 1,
+    "anchor_from": "left_middle",
+    "anchor_to": "left_middle",
     "size": [ 13, 13 ],
     "bindings": [
       {
@@ -68,7 +61,7 @@
         "binding_name_override": "#texture_file_system"
       },
       {
-        "binding_name": "#is_resource_pack",
+        "binding_name": "#has_icon",
         "binding_name_override": "#visible"
       }
     ]
@@ -76,12 +69,11 @@
 
   "toast_label": {
     "type": "label",
-    "color": [ 1.0, 1.0, 1.0 ],
+    "color": "$toast_text_color",
     "layer": 1,
     "shadow": false,
     "font_size": "normal",
-    "offset": [ 22, 5 ],
-    "size": [ "100%-26px", "100%" ]
+    "offset": [ 0, 5 ]
   },
 
   "popup@common.input_panel": {
@@ -92,101 +84,114 @@
       {
         "background": {
           "type": "image",
-          "uv": [ 0, 0 ],
-          "nineslice_size": 4.0,
-          "uv_size": [ 16, 16 ],
-          "texture": "textures/gui/greyBorder"
+          "texture": "textures/ui/greyBorder"
         }
       },
       {
-        "icon_trophy@toast_screen.xbox_icon": {
-          "offset": [ 6, 0 ],
-          "layer": 1,
-          "anchor_from": "left_middle",
-          "anchor_to": "left_middle",
-          "bindings": [
-            {
-              "binding_name": "#is_achievement",
-              "binding_name_override": "#visible"
-            }
-          ]
-        }
-      },
-      {
-        "icon_xbox@toast_screen.xbox_icon": {
-          "offset": [ 6, 0 ],
-          "layer": 1,
-          "anchor_from": "left_middle",
-          "anchor_to": "left_middle",
-          "bindings": [
-            {
-              "binding_name": "#is_invite",
-              "binding_name_override": "#visible"
-            }
-          ]
-        }
-      },
-      {
-        "icon_resource_pack@toast_screen.resource_pack_icon": {
-          "offset": [ 6, 0 ],
-          "layer": 1,
-          "anchor_from": "left_middle",
-          "anchor_to": "left_middle"
-        }
-      },
-      {
-        "title@toast_screen.toast_label": {
-          "text": "#toast_title",
-          "color": [ 1.0, 1.0, 1.0 ],
-          "size": [ "100% - 27px", "100% - 10px" ],
-          "offset": [ 22, 5 ],
-          "anchor_from": "top_left",
-          "anchor_to": "top_left",
-          "bindings": [
-            {
-              "binding_name": "#toast_title"
-            }
-          ]
-        }
-      },
-      {
-        "subtitle": {
+        "popup_content": {
           "type": "stack_panel",
           "orientation": "horizontal",
-          "offset": [ 22, 0 ],
-          "size": [ "100%-26px", "50%" ],
-          "anchor_from": "bottom_left",
-          "anchor_to": "bottom_left",
+          "size": [ "100%", "100%" ],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [ 6, 0 ],
+          "layer": 1,
           "controls": [
             {
               "icon_padding": {
+                "layer": 1,
                 "type": "panel",
-                "size": [ 9, 7 ],
-                "bindings": [
-                  {
-                    "binding_name": "#is_achievement",
-                    "binding_name_override": "#visible"
-                  }
-                ],
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "size": [ "100%c", "100%" ],
                 "controls": [
                   {
-                    "gamer_score_icon@toast_screen.gamer_score_icon": {
-                      "offset": [ 0, 2 ],
+                    "xbox_icon@toast_screen.xbox_icon": {
                       "layer": 1,
                       "anchor_from": "left_middle",
-                      "anchor_to": "left_middle"
+                      "anchor_to": "left_middle",
+                      "bindings": [
+                        {
+                          "binding_name": "#show_xbox_icon",
+                          "binding_name_override": "#visible"
+                        }
+                      ]
                     }
+                  },
+                  {
+                    "icon_resource_pack@toast_screen.resource_pack_icon": {}
                   }
                 ]
               }
             },
             {
-              "subtext@toast_screen.toast_label": {
-                "size": [ "default", 10 ],
-                "text": "#toast_subtitle",
-                "bindings": [
+              "text_padding": {
+                "type": "panel",
+                "size": [ "2px", "100%" ]
+              }
+            },
+            {
+              "remaining_panel": {
+                "type": "panel",
+                "size": [ "fill", "100%" ],
+                "controls": [
                   {
-                    "binding_name": "#toast_subtitle"
+                    "title@toast_screen.toast_label": {
+                      "text": "#toast_title",
+                      "color": "$toast_text_color",
+                      "size": [ "100%-10px", "100% - 10px" ],
+                      "anchor_from": "top_left",
+                      "anchor_to": "top_left",
+                      "bindings": [
+                        {
+                          "binding_name": "#toast_title"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "subtitle": {
+                      "type": "stack_panel",
+                      "orientation": "horizontal",
+                      "size": [ "100%-10px", "50%" ],
+                      "anchor_from": "bottom_left",
+                      "anchor_to": "bottom_left",
+                      "controls": [
+                        {
+                          "icon_padding": {
+                            "type": "panel",
+                            "size": [ 9, 7 ],
+                            "bindings": [
+                              {
+                                "binding_name": "#is_achievement",
+                                "binding_name_override": "#visible"
+                              }
+                            ],
+                            "controls": [
+                              {
+                                "gamer_score_icon@toast_screen.gamer_score_icon": {
+                                  "offset": [ 0, 2 ],
+                                  "layer": 1,
+                                  "anchor_from": "left_middle",
+                                  "anchor_to": "left_middle"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "subtext@toast_screen.toast_label": {
+                            "size": [ "fill", 10 ],
+                            "text": "#toast_subtitle",
+                            "bindings": [
+                              {
+                                "binding_name": "#toast_subtitle"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
                   }
                 ]
               }
@@ -197,6 +202,49 @@
     ],
     "anims": [
       "@toast_screen.popup_anim_start"
+    ]
+  },
+  
+  "join_button_icon": {
+    "type": "image",
+    "texture": "textures/ui/xbox_start_button",
+    "size": [ 26, 26 ],
+    "bindings": [
+      {
+        "binding_name": "#controller_start_icon",
+        "binding_name_override": "#texture"
+      }
+    ]
+  },
+
+  "splitscreen_join_popup": {
+    "type": "stack_panel",
+    "orientation": "horizontal",
+    "anchor_from": "top_middle",
+    "anchor_to": "top_middle",
+    "layer":  10,
+    "size": [ "100%c", 26],
+    "offset": [ 0, "60%" ],
+    "controls": [
+      {
+        "join_button_icon@toast_screen.join_button_icon": { }
+      },
+      {
+        "join_prompt_text_panel": {
+          "type": "panel",
+          "size": [ "100%c", "100%" ],
+          "controls": [
+            {
+              "join_prompt_text": {
+                "type": "label",
+                "text": "$player_join_text",
+                "color": "$toast_text_color",
+                "shadow": true
+              }
+            }
+          ]
+        }
+      }
     ]
   },
 
@@ -210,9 +258,18 @@
     "should_steal_mouse": false,
     "render_only_when_topmost": false,
     "screen_draws_last": true,
+    "$screen_content": "toast_screen.toast_screen_content"
+  },
+  
+  "toast_screen_content": {
+    "type": "panel",
+    "clips_children": true,
     "factory": {
       "name": "toast_factory",
-      "control_name": "popup@toast_screen.popup"
+      "control_ids":  {
+        "popup": "popup@toast_screen.popup",
+        "splitscreen_join_popup": "splitscreen_join_popup@toast_screen.splitscreen_join_popup"
+      }
     }
   }
 }

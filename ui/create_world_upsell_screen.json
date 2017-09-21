@@ -7,51 +7,43 @@
 
   "world_icon": {
     "type": "image",
-    "texture": "textures/gui/newgui/worldsIcon",
+    "texture": "textures/ui/worldsIcon",
     "size": [ 16, 17 ]
   },
 
   "realms_icon": {
     "type": "image",
-    "texture": "textures/gui/newgui/realmsIcon",
+    "texture": "textures/ui/realmsIcon",
     "size": [ 11, 14 ]
   },
 
   "dark_banner": {
     "type": "image",
-    "texture": "textures/gui/newgui/DarkBannerNoBorder",
-    "nineslice_size": 1.0,
-    "uv": [ 0, 0 ],
-    "uv_size": [ 2, 2 ]
+    "texture": "textures/ui/DarkBannerNoBorder"
   },
 
   "grey_banner": {
     "type": "image",
-    "texture": "textures/gui/achievements/lightgreybars",
-    "nineslice_size": 1.0,
-    "uv": [ 0, 0 ],
-    "uv_size": [ 1, 1 ]
+    "texture": "textures/ui/lightgreybars"
   },
 
   "checkmark": {
     "type": "image",
-    "texture": "textures/gui/newgui/listcheck",
+    "texture": "textures/ui/listcheck",
     "size": [ 14, 11 ],
     "color": [ 1, 1, 1 ]
   },
 
   "largex": {
     "type": "image",
-    "texture": "textures/gui/newgui/listx",
+    "texture": "textures/ui/listx",
     "size": [ 14, 11 ],
     "color": [ 0.66, 0.66, 0.66 ]
   },
 
   "realms_art_icon": {
     "type": "image",
-    "texture": "textures/gui/newgui/RealmsArt",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 647, 760 ],
+    "texture": "textures/ui/realms_art_icon",
     "size": [ 647, 760 ]
   },
 
@@ -145,7 +137,7 @@
     "size": [ "100% - 1px", 10 ],
     "offset": [ 1, 0 ],
     "text": "$label_text",
-    "color": [ 1, 1, 1 ],
+    "color": "$main_header_text_color",
     "bindings": [
       {
         "binding_type": "$price_binding_type",
@@ -172,7 +164,7 @@
     "type": "label",
     "size": [ "100%", 10 ],
     "text": "createWorldUpsell.button.trialText",
-    "color": [ 0.57, 0.29, 0.67 ],
+    "color": "$realms_text_color",
     "bindings": [
       {
         "binding_name": "#realm_trial_available",
@@ -187,14 +179,6 @@
     "size": [ "100%", 10 ],
     "text": "createWorldUpsell.button.world",
     "color": "$text_color"
-  },
-
-  "banner_text_label": {
-    "type": "label",
-    "size": [ "100%", "default" ],
-    "max_size": [ "100%", 20 ],
-    "text": "$banner_text",
-    "color": "$banner_text_color"
   },
 
   //---------------------------------------------------------------------------
@@ -365,15 +349,10 @@
                 "text": "#upsell_text",
                 "size": [ "100%", "default" ],
                 "max_size": [ "100%", 20 ],
-                "color": "#color",
+                "color": "$body_text_color",
                 "bindings": [
                   {
                     "binding_name": "#upsell_text",
-                    "binding_type": "collection",
-                    "binding_collection_name": "$collection_name"
-                  },
-                  {
-                    "binding_name": "#color",
                     "binding_type": "collection",
                     "binding_collection_name": "$collection_name"
                   }
@@ -585,30 +564,6 @@
         "from_button_id": "button.menu_cancel",
         "to_button_id": "button.menu_exit",
         "mapping_type": "global"
-      },
-      {
-        "from_button_id": "button.menu_up",
-        "to_button_id": "button.menu_up",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_down",
-        "to_button_id": "button.menu_down",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_left",
-        "to_button_id": "button.menu_left",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_right",
-        "to_button_id": "button.menu_right",
-        "mapping_type": "global",
-        "scope": "view"
       },
       {
         "from_button_id": "button.menu_tab_left",

@@ -1,0 +1,61 @@
+/********************************************************
+*   (c) Mojang. All rights reserved                     *
+*   (c) Microsoft. All rights reserved.                 *
+*********************************************************/
+
+{
+  "namespace": "sign",
+  //---------------------------------------------------------------------------
+  // CONTROLS
+  //---------------------------------------------------------------------------
+  "sign_background": {
+    "type": "image",
+    "texture": "textures/ui/sign",
+    "size": [ "192px", "93px" ],
+    "offset": [ -1, -5 ]
+  },
+
+  //---------------------------------------------------------------------------
+  // CONTENT
+  //---------------------------------------------------------------------------
+  "sign_text_multiline@common.multiline_text_edit_box": {
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "size": "$sign_screen_size",
+    "offset": [ 0, 5 ],
+    "$font_size": "large",
+    "$text_alignment": "center",
+    "constrain_to_rect": true,
+    "selected": true,
+    "can_be_deselected": false,
+    "focus_enabled": true,
+    "$text_box_name": "#sign_text_multi",
+    "$text_color_binding_type": "global",
+
+    "$text_background_default": "sign.sign_background",
+    "$text_background_hover": "sign.sign_background",
+
+    "button_mappings": [
+      {
+        "from_button_id": "button.menu_cancel",
+        "to_button_id": "button.menu_exit",
+        "handle_select": false,
+        "handle_deselect": true,
+        "mapping_type": "global"
+      }
+    ]
+  },
+  "sign_screen_content": {
+    "type": "panel",
+    "controls": [
+      { "text_edit@sign.sign_text_multiline": { } },
+      { "exit_button@common.legacy_pocket_close_button": {} }
+    ]
+  },
+  //---------------------------------------------------------------------------
+  // SCREEN
+  //---------------------------------------------------------------------------
+  "sign_screen@common.base_screen": {
+    "$screen_content": "sign.sign_screen_content"
+  }
+}

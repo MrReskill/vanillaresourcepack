@@ -8,6 +8,7 @@
       {
         "text": {
           "type": "label",
+          "color": "$body_text_color",
           "text": "#credits_text",
           "size": [ "100%", "default" ]
         }
@@ -61,9 +62,8 @@
 
   "fade_in_image": {
     "type": "image",
-    "texture": "textures/gui/newgui/White",
+    "texture": "textures/ui/White",
     "color": [ 0, 0, 0 ],
-    "nineslice_size": 1,
     "anims": [
       "@credits.anim_fade_in"
     ]
@@ -143,19 +143,7 @@
   "credits_screen_content": {
     "type": "panel",
     "$credits_duration|default": 500,
-    // Background scroll is $credits_duration + fade out
-    "$background_scroll_duration|default": 503,
     "controls": [
-      {
-        "background@common.dirt_background": {
-          "size": [ "100%", "2000%" ],
-          "tiled_scale": [ 2, 2 ],
-          "layer": 0,
-          "anims": [
-            "@credits.anim_background_scroll"
-          ]
-        }
-      },
       { "credits_stack@credits.credits_stack": { "layer": 1 } },
       {
         "vignette_renderer": {
@@ -203,7 +191,19 @@
     ]
   },
 
+  "background@common.dirt_background": {
+    // Background scroll is $credits_duration + fade out
+    "$background_scroll_duration|default": 503,
+    "size": [ "100%", "2000%" ],
+    "tiled_scale": [ 2, 2 ],
+    "layer": 0,
+    "anims": [
+      "@credits.anim_background_scroll"
+    ]
+  },
+
   "credits_screen@common.base_screen": {
-    "$screen_content": "credits.credits_screen_content"
+    "$screen_content": "credits.credits_screen_content",
+    "$screen_bg_content": "credits.background"
   }
 }

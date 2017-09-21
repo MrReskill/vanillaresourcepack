@@ -11,134 +11,216 @@
   //---------------------------------------------------------------------------
   
   "storage_header_panel": {
-    "type": "stack_panel",
-    "orientation": "vertical",
-    "anchor_from": "top_left",
-    "anchor_to": "top_left",
+    "type": "panel",
     "size": ["100%", "100%c"],
     "controls":[
       {
-        "panel":{
+        "header_panel":{
           "type": "stack_panel",
-          "orientation": "horizontal",
-          "size": ["100%", 32],
+          "orientation": "vertical",
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "size": ["100% - 4px", "100%c + 4px"],
+          "offset": [0, 2],
           "controls":[
             {
-              "search_panel":{
-                "type": "panel",
-                "size": ["fill", "100%"],
+              "panel":{
+                "type": "stack_panel",
+                "orientation": "horizontal",
+                "size": ["100%", 32],
                 "controls":[
                   {
-                    "search_control@common.text_edit_box": {
-                      "layer": 4,
-                      "size": [ "100%", "100%" ],
-                      "$text_box_name": "search_control",
-                      "$text_edit_text_control": "search_display_text",
-                      "$text_edit_box_content_binding_name": "#search_box_text",
-                      "max_length": 30
-                    }
-                  },
-                  { 
-                    "magnifying_glass":{
-                      "type": "image",
-                      "layer": 2,
-                      "anchor_from": "left_middle",
-                      "anchor_to": "left_middle",
-                      "size": [ "100%y", "100% - 10px" ],
-                      "texture": "textures/gui/newgui/magnifyingGlass",
-                      "offset": [4, 0],
-                      "alpha": 0.3,
-                      "bindings":[
+                    "search_panel":{
+                      "type": "panel",
+                      "size": ["fill", "100%"],
+                      "controls":[
                         {
-                          "binding_type": "view",
-                          "source_control_name": "search_display_text",
-                          "source_property_name": "(not #text_edit_selected and #search_panel_visible)",
-                          "target_property_name": "#visible"
-                        }
-                      ]
-                    }
-                  },
-                  { 
-                    "x_button@common.close_button":{
-                      "anchor_from": "right_middle",
-                      "anchor_to": "right_middle",
-                      "offset": [-2, 0],
-                      "visible": false,
-                      "layer": 6,
-                      "button_mappings": [
-                        {
-                          "from_button_id": "button.menu_select",
-                          "to_button_id": "button.searchClear",
-                          "mapping_type": "pressed"
+                          "search_control@common.text_edit_box": {
+                            "layer": 4,
+                            "size": [ "100%", "100%" ],
+                            "$text_box_name": "search_control",
+                            "$text_edit_text_control": "search_display_text",
+                            "$text_edit_box_content_binding_name": "#search_box_text",
+                            "max_length": 30
+                          }
                         },
-                        {
-                          "from_button_id": "button.menu_ok",
-                          "to_button_id": "button.searchClear",
-                          "mapping_type": "focused"
+                        { 
+                          "magnifying_glass":{
+                            "type": "image",
+                            "layer": 2,
+                            "anchor_from": "left_middle",
+                            "anchor_to": "left_middle",
+                            "size": [ "100%y", "100% - 10px" ],
+                            "texture": "textures/ui/magnifyingGlass",
+                            "offset": [4, 0],
+                            "alpha": 0.3,
+                            "bindings":[
+                              {
+                                "binding_type": "view",
+                                "source_control_name": "search_display_text",
+                                "source_property_name": "(not #text_edit_selected and #search_panel_visible)",
+                                "target_property_name": "#visible"
+                              }
+                            ]
+                          }
+                        },
+                        { 
+                          "x_button@common.close_button":{
+                            "anchor_from": "right_middle",
+                            "anchor_to": "right_middle",
+                            "offset": [-2, 0],
+                            "visible": false,
+                            "layer": 6,
+                            "button_mappings": [
+                              {
+                                "from_button_id": "button.menu_select",
+                                "to_button_id": "button.searchClear",
+                                "mapping_type": "pressed"
+                              },
+                              {
+                                "from_button_id": "button.menu_ok",
+                                "to_button_id": "button.searchClear",
+                                "mapping_type": "focused"
+                              }
+                            ],
+                            "bindings":[
+                              {
+                                "binding_type": "global",
+                                "binding_name": "#search_panel_visible",
+                                "binding_name_override": "#visible"
+                              }
+                            ]
+                          }
                         }
-                      ],
-                      "bindings":[
+
+                      ]
+                    }
+                  },
+                  {
+                    "container":{
+                      "type": "panel",
+                      "size": ["100%c", "100%"],
+                      "controls":[
                         {
-                          "binding_type": "global",
-                          "binding_name": "#search_panel_visible",
-                          "binding_name_override": "#visible"
+                          "multiselect_button@common_toggles.light_image_toggle": {
+                            "offset": [-1, 0],
+                            "$toggle_name": "toggle.enableMultiselect",
+                            "$button_content": "storage_management.generic_button",
+                            "$button_texture": "textures/ui/multiselection",
+                            "size": [ 32, "100%" ]
+                          }
                         }
                       ]
                     }
                   }
-
-                ]
-              }
-            },
-            {
-              "container":{
-                "type": "panel",
-                "size": ["100%c", "100%"],
-                "controls":[
-                  {
-                    "multiselect_button@common_toggles.light_image_toggle": {
-                      "offset": [-1, 0],
-                      "$toggle_name": "toggle.enableMultiselect",
-                      "$button_content": "storage_management.generic_button",
-                      "$button_texture": "textures/gui/newgui/storage/multiselection",
-                      "size": [ 32, "100%" ]
-                    }
-                  }
+                  
+                  //Uncomment this block when we have a meaningful way to sort packs
+                  //{
+                  //  "storage_grouping_dropdown@storage_management.sort_toggle": {
+                  //    "size": [ 32, "100%" ],
+                  //    "$toggle_name": "group_dropdown",
+                  //    "$toggle_state_binding_name": "#group_dropdown",
+                  //    "offset": [3, 0],
+                  //    "+bindings":[
+                  //      {
+                  //        "binding_type": "view",
+                  //        "source_control_name": "search_display_text",
+                  //        "source_property_name": "#text_edit_selected",
+                  //        "source_property_inverse": true,
+                  //        "target_property_name": "#visible"
+                  //      }
+                  //    ]
+                  //  }
+                  //},
+                  //{
+                  //  "storage_sorting_dropdown@storage_management.sort_toggle": {
+                  //    "size": [ 32, "100%" ],
+                  //    "$toggle_name": "sort_dropdown",
+                  //    "$toggle_state_binding_name": "#sort_dropdown",
+                  //    "offset": [3, 0],
+                  //    "+bindings":[
+                  //      {
+                  //        "binding_type": "view",
+                  //        "source_control_name": "search_display_text",
+                  //        "source_property_name": "#text_edit_selected",
+                  //        "source_property_inverse": true,
+                  //        "target_property_name": "#visible"
+                  //      }
+                  //    ]
+                  //  }
+                  //}
                 ]
               }
             }
-            
             //Uncomment this block when we have a meaningful way to sort packs
+            //
             //{
-            //  "storage_grouping_dropdown@storage_management.sort_toggle": {
-            //    "size": [ 32, "100%" ],
-            //    "$toggle_name": "group_dropdown",
-            //    "$toggle_state_binding_name": "#group_dropdown",
-            //    "offset": [3, 0],
-            //    "+bindings":[
+            //  "main_panel":{
+            //    "type": "panel",
+            //    "size": ["100%", 0], //Size is 0 to prevent stack panel from expanding once these become visible.
+            //    "layer": 2,
+            //    "controls":[
             //      {
-            //        "binding_type": "view",
-            //        "source_control_name": "search_display_text",
-            //        "source_property_name": "#text_edit_selected",
-            //        "source_property_inverse": true,
-            //        "target_property_name": "#visible"
-            //      }
-            //    ]
-            //  }
-            //},
-            //{
-            //  "storage_sorting_dropdown@storage_management.sort_toggle": {
-            //    "size": [ 32, "100%" ],
-            //    "$toggle_name": "sort_dropdown",
-            //    "$toggle_state_binding_name": "#sort_dropdown",
-            //    "offset": [3, 0],
-            //    "+bindings":[
+            //        "sorting_options@storage_management.filter_options":{
+            //          "$filter_prefix": "sort",
+            //          "$filter_control_name": "storage_sorting_dropdown",
+            //          "$filter_content":[
+            //            {
+            //              "content":{
+            //                "type": "stack_panel",
+            //                "size": ["100%", "100%c"],
+            //                "controls":[
+            //                  {
+            //                    "filter_button_1@storage_management.dropdown_button": {
+            //                      "$pressed_button_name": "button.filter_1",
+            //                      "$button_text": "storageManager.sortLargest"
+            //                    }
+            //                  },
+            //                  {
+            //                    "filter_button_2@storage_management.dropdown_button": {
+            //                      "$pressed_button_name": "button.filter_2",
+            //                      "$button_text": "storageManager.sortDateRecent"
+            //                    }
+            //                  },
+            //                  {
+            //                    "filter_button_3@storage_management.dropdown_button": {
+            //                      "$pressed_button_name": "button.filter_3",
+            //                      "$button_text": "storageManager.sortDateOldest"
+            //                    }
+            //                  }
+            //                ]
+            //              }
+            //            }
+            //          ]
+            //        }
+            //      },
             //      {
-            //        "binding_type": "view",
-            //        "source_control_name": "search_display_text",
-            //        "source_property_name": "#text_edit_selected",
-            //        "source_property_inverse": true,
-            //        "target_property_name": "#visible"
+            //        "grouping_options@storage_management.filter_options":{
+            //          "$filter_prefix": "group",
+            //          "$filter_control_name": "storage_grouping_dropdown",
+            //          "$filter_content":[
+            //            {
+            //              "content":{
+            //                "type": "stack_panel",
+            //                "size": ["100%", "100%c"],
+            //                "controls":[
+            //                  {
+            //                    "filter_button_1@storage_management.dropdown_button": {
+            //                      "$pressed_button_name": "button.group_1",
+            //                      "$button_text": "storageManager.groupType"
+            //                    }
+            //                  },
+            //                  {
+            //                    "filter_button_2@storage_management.dropdown_button": {
+            //                      "$pressed_button_name": "button.group_2",
+            //                      "$button_text": "storageManager.groupPack"
+            //                    }
+            //                  }
+            //                ]
+            //              }
+            //            }
+            //          ]
+            //        }
             //      }
             //    ]
             //  }
@@ -146,87 +228,13 @@
           ]
         }
       }
-      //Uncomment this block when we have a meaningful way to sort packs
-      //
-      //{
-      //  "main_panel":{
-      //    "type": "panel",
-      //    "size": ["100%", 0], //Size is 0 to prevent stack panel from expanding once these become visible.
-      //    "layer": 2,
-      //    "controls":[
-      //      {
-      //        "sorting_options@storage_management.filter_options":{
-      //          "$filter_prefix": "sort",
-      //          "$filter_control_name": "storage_sorting_dropdown",
-      //          "$filter_content":[
-      //            {
-      //              "content":{
-      //                "type": "stack_panel",
-      //                "size": ["100%", "100%c"],
-      //                "controls":[
-      //                  {
-      //                    "filter_button_1@storage_management.dropdown_button": {
-      //                      "$pressed_button_name": "button.filter_1",
-      //                      "$button_text": "storageManager.sortLargest"
-      //                    }
-      //                  },
-      //                  {
-      //                    "filter_button_2@storage_management.dropdown_button": {
-      //                      "$pressed_button_name": "button.filter_2",
-      //                      "$button_text": "storageManager.sortDateRecent"
-      //                    }
-      //                  },
-      //                  {
-      //                    "filter_button_3@storage_management.dropdown_button": {
-      //                      "$pressed_button_name": "button.filter_3",
-      //                      "$button_text": "storageManager.sortDateOldest"
-      //                    }
-      //                  }
-      //                ]
-      //              }
-      //            }
-      //          ]
-      //        }
-      //      },
-      //      {
-      //        "grouping_options@storage_management.filter_options":{
-      //          "$filter_prefix": "group",
-      //          "$filter_control_name": "storage_grouping_dropdown",
-      //          "$filter_content":[
-      //            {
-      //              "content":{
-      //                "type": "stack_panel",
-      //                "size": ["100%", "100%c"],
-      //                "controls":[
-      //                  {
-      //                    "filter_button_1@storage_management.dropdown_button": {
-      //                      "$pressed_button_name": "button.group_1",
-      //                      "$button_text": "storageManager.groupType"
-      //                    }
-      //                  },
-      //                  {
-      //                    "filter_button_2@storage_management.dropdown_button": {
-      //                      "$pressed_button_name": "button.group_2",
-      //                      "$button_text": "storageManager.groupPack"
-      //                    }
-      //                  }
-      //                ]
-      //              }
-      //            }
-      //          ]
-      //        }
-      //      }
-      //    ]
-      //  }
-      //}
     ]
   },
 
   "x_button_image": {
     "type": "image",
     "size": [ "100%", "100%" ],
-    "texture": "",
-    "nineslice_size": 1.0
+    "texture": ""
   },
 
 
@@ -314,20 +322,20 @@
     "controls":[
       {
         "selected_checkbox_image@common.checkbox_image":{
-          "$checked_image": "textures/gui/newgui/buttons/new_checkbox/check",
+          "$checked_image": "textures/ui/checkbox_check",
 
           "variables":[
             {
               "requires": "($checked_state and $button_state = hover)",
-              "$checked_image": "textures/gui/newgui/buttons/new_checkbox/checkHover"
+              "$checked_image": "textures/ui/checkbox_checkHover"
             },
             {
               "requires": "(not $checked_state and $button_state = default)",
-              "$checked_image": "textures/gui/newgui/buttons/new_checkbox/space"
+              "$checked_image": "textures/ui/checkbox_space"
             },
             {
               "requires": "(not $checked_state and $button_state = hover)",
-              "$checked_image": "textures/gui/newgui/buttons/new_checkbox/spaceHover"
+              "$checked_image": "textures/ui/checkbox_spaceHover"
             }
           ],
 
@@ -357,9 +365,6 @@
     "type": "image",
     "size": [ "100%", "100%" ],
     "texture": "",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 5, 5 ],
-    "nineslice_size": 1.0,
     "layer": 1,
     "$toggle_checked|default": false,
     "$toggle_checked_hover|default": false,
@@ -374,7 +379,7 @@
           "variables":[
             {
               "requires": "($toggle_checked or $toggle_checked_hover)",
-              "$button_texture": "textures/gui/newgui/storage/invertedmultiselecticon"
+              "$button_texture": "textures/ui/invertedmultiselecticon"
             }
           ],
 
@@ -404,21 +409,192 @@
 
   "common_label": {
     "type": "label",
-    "color": [ 0.3, 0.3, 0.3 ],
+    "color": "$light_toggle_default_text_color",
     "shadow": false,
 
     "$left_label_size": [ "65%", "default" ],
     "$right_label_size": ["default", "default"]
   },
 
+  "main_content_panel":{
+    "type": "stack_panel",
+    "orientation": "vertical",
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "size": [ "100%", "100%" ],
+    "$bright_text_color": [ 1.0, 1.0, 1.0 ],
+    "$dark_text_color": [ 0.4, 0.4, 0.4 ],
+    //"offset": "$button_offset",
+
+    "$image_visible|default": true,
+    "$check_visible|default": false,
+
+    //"$button_offset|default": [0,0],
+    "$image_size|default": [ "150%y + 2px", "100%" ],
+    "$texture_binding_type|default": "none",
+    "$texture_binding_collection|default": "",
+
+    "$name_binding_type|default": "none",
+    "$size_binding_type|default": "global",
+    "$date_binding_type|default": "global",
+    
+    "$name_binding_collection|default": "",
+    "$size_binding_collection|default": "",
+    "$date_binding_collection|default": "",
+
+    "$name_bindings":[
+      {
+        "binding_type": "$name_binding_type",
+        "binding_collection_name": "$name_binding_collection",
+        "binding_name": "$name_text"
+      },
+      {
+        "binding_type": "collection_details"
+      }
+    ],
+
+    "$size_bindings":[
+      {
+        "binding_type": "$size_binding_type",
+        "binding_collection_name": "$size_binding_collection",
+        "binding_name": "$size_text"
+      },
+      {
+        "binding_type": "collection_details"
+      }
+    ],
+
+    "$date_bindings":[
+      {
+        "binding_type": "$date_binding_type",
+        "binding_collection_name": "$date_binding_collection",
+        "binding_name": "$date_text"
+      },
+      {
+        "binding_type": "collection_details"
+      }
+    ],
+
+    "controls": [
+      {
+        "panel": {
+          "type": "stack_panel",
+          "orientation": "horizontal",
+          "size": [ "100%", "100%" ],
+          "layer": 10,
+          "controls": [
+            {
+              "spacing": {
+                "type": "panel",
+                "size": [2, "100%"]
+              }
+            },
+            {
+              "delete_checkbox@storage_management.delete_checkbox": { }
+            },
+            {
+              "image_panel":{
+                "type": "panel",
+                "size": "$image_size",
+                "visible": "$image_visible",
+                "$button_state|default": "default",
+                "controls":[
+                  {
+                    "image_border":{
+                      "type": "image",
+                      "offset": [2, 0],
+                      "size": [ "100% - 8px", "100% - 6px" ],
+                      "variables":[
+                        {
+                          "requires": "($button_state = default)",
+                          "$image_border_texture": "textures/ui/default_indent"
+                        },
+                        {
+                          "requires": "($button_state = hover)",
+                          "$image_border_texture": "textures/ui/focus_border_white"
+                        }
+                      ],
+                      "texture": "$image_border_texture",
+                      "anchor_from": "left_middle",
+                      "anchor_to": "left_middle",
+                      "layer": 1,
+                      "controls": [
+                        {
+                          "image": {
+                            "type": "image",
+                            "layer": 2,
+                            "anchor_from": "center",
+                            "anchor_to": "center",
+                            "size": [ "100% - 2px", "100% - 2px" ],
+                            "texture": "$button_texture",
+
+                            "$button_texture_zip|default": "($button_texture + _zip)",
+                            "$button_texture_zip_type|default": "$texture_binding_type",
+                            "$button_texture_file|default": "($button_texture + _file_system)",
+                            "$button_texture_file_type|default": "$texture_binding_type",
+
+                            "bindings":[
+                              {
+                                "binding_name_override": "#texture",
+                                "binding_type": "$texture_binding_type",
+                                "binding_collection_name": "$texture_binding_collection",
+                                "binding_name": "$button_texture"
+                              },
+                              {
+                                "binding_name_override": "#zip_folder",
+                                "binding_type": "$button_texture_zip_type",
+                                "binding_collection_name": "$texture_binding_collection",
+                                "binding_name": "$button_texture_zip"
+                              },
+                              {
+                                "binding_name_override": "#texture_file_system",
+                                "binding_type": "$button_texture_file_type",
+                                "binding_collection_name": "$texture_binding_collection",
+                                "binding_name": "$button_texture_file"
+                              },
+                              {
+                                "binding_type": "collection_details"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "text_panel_offset":{
+                "type": "panel",
+                "$text_panel_size|default": ["fill", "100%"],
+                "$text_panel_offset|default": [0, 0],
+
+                "size": "$text_panel_size",
+                "controls":[
+                  {
+                    "text_panel": {
+                      "type": "panel",
+                      "layer": 3,
+                      "size": [ "100%", "100%" ],
+                      "offset": "$text_panel_offset",
+                      "controls": "$text_controls"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+
   "common_main_button": {
     "type": "panel",
     "size": [ "100%", "100%" ],
     
-    "$background_texture": "textures/gui/newgui/ButtonWithBorder",
-    "$background_uv": [0,0],
-    "$background_uv_size": [ 6, 6 ],
-    "$background_nineslice_size": 2.0,
+    "$background_texture": "textures/ui/Gray",
     "$background_size": ["100% - 2px", "100%"],
     "$background_layer": 0,
     "$ignore_border|default": true,
@@ -429,9 +605,6 @@
           "type": "image",
           "layer": "$background_layer",
           "texture": "$background_texture",
-          "uv": "$background_uv",
-          "uv_size": "$background_uv_size",
-          "nineslice_size": "$background_nineslice_size",
           "size": "$background_size"
         }
       },
@@ -444,195 +617,20 @@
           "variables":[
             {
               "requires": "($button_state = default)",
-              "$border_texture": "textures/gui/newgui/Black"
+              "$border_texture": "textures/ui/Black"
             },
             {
               "requires": "($button_state = hover)",
-              "$border_texture": "textures/gui/newgui/White"
+              "$border_texture": "textures/ui/White"
             }
           ],
 
           "texture": "$border_texture",
-          "nineslice_size": 1.0,
-          "uv": [ 0, 0 ],
-          "uv_size": [ 2, 2 ],
           "size": ["100% - 2px", "100%"]
         }
       },
       {
-        "content_panel":{
-          "type": "stack_panel",
-          "orientation": "vertical",
-          "anchor_from": "top_left",
-          "anchor_to": "top_left",
-          "size": [ "100%", "100%" ],
-          "$bright_text_color": [ 1.0, 1.0, 1.0 ],
-          "$dark_text_color": [ 0.4, 0.4, 0.4 ],
-          "offset": "$button_offset",
-
-          "$image_visible|default": true,
-          "$check_visible|default": false,
-
-          "$button_offset|default": [0,0],
-          "$image_size|default": [ "150%y + 2px", "100%" ],
-          "$texture_binding_type|default": "none",
-          "$texture_binding_collection|default": "",
-
-          "$name_binding_type|default": "none",
-          "$size_binding_type|default": "global",
-          "$date_binding_type|default": "global",
-          
-          "$name_binding_collection|default": "",
-          "$size_binding_collection|default": "",
-          "$date_binding_collection|default": "",
-
-          "$name_bindings":[
-            {
-              "binding_type": "$name_binding_type",
-              "binding_collection_name": "$name_binding_collection",
-              "binding_name": "$name_text"
-            },
-            {
-              "binding_type": "collection_details"
-            }
-          ],
-
-          "$size_bindings":[
-            {
-              "binding_type": "$size_binding_type",
-              "binding_collection_name": "$size_binding_collection",
-              "binding_name": "$size_text"
-            },
-            {
-              "binding_type": "collection_details"
-            }
-          ],
-
-          "$date_bindings":[
-            {
-              "binding_type": "$date_binding_type",
-              "binding_collection_name": "$date_binding_collection",
-              "binding_name": "$date_text"
-            },
-            {
-              "binding_type": "collection_details"
-            }
-          ],
-
-          "controls": [
-            {
-              "panel": {
-                "type": "stack_panel",
-                "orientation": "horizontal",
-                "size": [ "100%", "100%" ],
-                "layer": 10,
-                "controls": [
-                  {
-                    "spacing": {
-                      "type": "panel",
-                      "size": [2, "100%"]
-                    }
-                  },
-                  {
-                    "delete_checkbox@storage_management.delete_checkbox": { }
-                  },
-                  {
-                    "image_panel":{
-                      "type": "panel",
-                      "size": "$image_size",
-                      "visible": "$image_visible",
-                      "$button_state|default": "default",
-                      "controls":[
-                        {
-                          "image_border":{
-                            "type": "image",
-                            "offset": [2, 0],
-                            "size": [ "100% - 8px", "100% - 6px" ],
-                            "variables":[
-                              {
-                                "requires": "($button_state = default)",
-                                "$image_border_texture": "textures/gui/newgui/play_screen/Indent2"
-                              },
-                              {
-                                "requires": "($button_state = hover)",
-                                "$image_border_texture": "textures/gui/newgui/focusBorder"
-                              }
-                            ],
-                            "texture": "$image_border_texture",
-                            "uv": [ 0, 0 ],
-                            "uv_size": [ 5, 5 ],
-                            "nineslice_size": 1.0,
-                            "anchor_from": "left_middle",
-                            "anchor_to": "left_middle",
-                            "layer": 1,
-                            "controls": [
-                              {
-                                "image": {
-                                  "type": "image",
-                                  "layer": 2,
-                                  "anchor_from": "center",
-                                  "anchor_to": "center",
-                                  "size": [ "100% - 2px", "100% - 2px" ],
-                                  "texture": "$button_texture",
-
-                                  "$button_texture_zip": "($button_texture + _zip)",
-                                  "$button_texture_file": "($button_texture + _file_system)",
-
-                                  "bindings":[
-                                    {
-                                      "binding_name_override": "#texture",
-                                      "binding_type": "$texture_binding_type",
-                                      "binding_collection_name": "$texture_binding_collection",
-                                      "binding_name": "$button_texture"
-                                    },
-                                    {
-                                      "binding_name_override": "#zip_folder",
-                                      "binding_type": "$texture_binding_type",
-                                      "binding_collection_name": "$texture_binding_collection",
-                                      "binding_name": "$button_texture_zip"
-                                    },
-                                    {
-                                      "binding_name_override": "#texture_file_system",
-                                      "binding_type": "$texture_binding_type",
-                                      "binding_collection_name": "$texture_binding_collection",
-                                      "binding_name": "$button_texture_file"
-                                    },
-                                    {
-                                      "binding_type": "collection_details"
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "text_panel_offset":{
-                      "type": "panel",
-                      "$text_panel_size|default": ["fill", "100%"],
-                      "$text_panel_offset|default": [0, 0],
-
-                      "size": "$text_panel_size",
-                      "controls":[
-                        {
-                          "text_panel":{
-                            "type": "panel",
-                            "layer": 3,
-                            "size": [ "100%", "100%" ],
-                            "offset": "$text_panel_offset",
-                            "controls": "$text_controls"
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            }
-          ]
+        "main_content_panel@storage_management.main_content_panel": {
         }
       }
     ]
@@ -643,7 +641,7 @@
     "size": [ "100%c", "100%" ],
     "anchor_from": "top_left",
     "anchor_to": "top_left",
-    "$glyph_texture": "textures/gui/newgui/Caution",
+    "$glyph_texture": "textures/ui/Caution",
     "$warning_binding|default": "collection",
     "visible": false,
     "controls":[
@@ -678,19 +676,66 @@
   // Storage Controls
   //---------------------------------------------------------------------------
 
-  "main_item_text@storage_management.common_main_button": {
+  "main_item_text@storage_management.main_content_panel": {
     "$image_visible": false,
     
     "$text_controls":[
       {
-        "main_label@storage_management.common_label":{
-          "size": "$left_label_size",
+        "glyph_and_name": {
+          "type": "stack_panel",
+          "size": [ "65%", "default" ],
+          "orientation": "horizontal",
           "anchor_from": "top_left",
           "anchor_to": "top_left",
           "offset": [4, 5],
 
-          "text": "$name_text",
-          "bindings": "$name_bindings"
+          "$glyph_binding": [
+            {
+              "binding_type": "global",
+              "binding_name": "('#' + $panel_prefix + _ + $binding_name)",
+              "binding_name_override": "#visible"
+            }
+          ],
+
+          "controls":[
+            {
+              "main_label@storage_management.common_label":{
+                "size": [ "default", "default" ],
+                "text": "$name_text",
+                "bindings": "$name_bindings"
+              }
+            },
+            {
+              "padding":{
+                "type": "panel",
+                "size": [2, "100%"]
+              }
+            },
+            {
+              "glyph_warning@storage_management.base_glyph":{
+                "size": [9, 9],
+                "$binding_name": "warning",
+                "$glyph_texture": "textures/ui/WarningGlyph",
+                "bindings": "$glyph_binding"
+              }
+            },
+            {
+              "glyph_error@storage_management.base_glyph":{
+                "size": [9, 9],
+                "$binding_name": "error",
+                "$glyph_texture": "textures/ui/ErrorGlyph",
+                "bindings": "$glyph_binding"
+              }
+            },
+            {
+              "glyph_update@storage_management.base_glyph":{
+                "size": [9, 9],
+                "$binding_name": "update",
+                "$glyph_texture": "textures/ui/UpdateGlyph",
+                "bindings": "$glyph_binding"
+              }
+            }
+          ]
         }
       },
       {
@@ -705,42 +750,49 @@
         }
       },
       {
-        "image": {
+        "arrow_down": {
           "type": "image",
           "layer": 2,
           "offset": [-10, 0],
           "anchor_from": "right_middle",
           "anchor_to": "right_middle",
-          "uv_size": [ 8, 8 ],
           "size": [ 8, 8 ],
-          "texture": "$viewTexture"
+          "texture": "textures/ui/arrowDown",
+          "visible": true,
+          "bindings": [
+            {
+              "binding_name": "#storage_dropdown",
+              "binding_name_override": "#visible",
+              "binding_type": "collection",
+              "binding_collection_name": "storage_panel"
+            }
+          ]
+        }
+      },
+      {
+        "arrow_right": {
+          "type": "image",
+          "layer": 2,
+          "offset": [ -10, 0 ],
+          "anchor_from": "right_middle",
+          "anchor_to": "right_middle",
+          "size": [ 8, 8 ],
+          "texture": "textures/ui/arrowRight",
+          "bindings": [
+            {
+              "binding_name": "(not #storage_dropdown)",
+              "binding_name_override": "#visible",
+              "binding_type": "collection",
+              "binding_collection_name": "storage_panel"
+            }
+          ]
         }
       }
     ]
   },
 
-  "main_item_text_checked@storage_management.main_item_text": {
-    "$viewTexture": "textures/gui/newgui/arrowDown",
-    "$background_texture": "textures/gui/newgui/ButtonWithBorderPressedNoHover"
-  },
-
-  "main_item_text_unchecked@storage_management.main_item_text": {
-    "$viewTexture": "textures/gui/newgui/arrowRight"
-  },
-
-  "main_item_text_checked_hover@storage_management.main_item_text_checked": {
-    "$background_texture": "textures/gui/newgui/ButtonWithBorderPressed"
-  },
-
-  "main_item_text_unchecked_hover@storage_management.main_item_text_unchecked": {
-    "$background_texture": "textures/gui/newgui/ButtonWithBorderHover"
-  },
-
   "grey_button@storage_management.common_main_button": {
-    "$background_texture": "textures/gui/newgui/Gray",
-    "$background_nineslice_size": 1.0,
-    "$background_uv": [ 0, 0 ],
-    "$background_uv_size": [ 2, 2 ],
+    "$background_texture": "textures/ui/Gray",
     "$background_size": [ "100%-4px", "100%-2px" ],
     "$background_layer": 2,
 
@@ -776,7 +828,7 @@
   },
 
   "world_item_text@storage_management.grey_button": {
-    "$background_texture": "textures/gui/newgui/buttons/borderless/dark",
+    "$background_texture": "textures/ui/button_borderless_dark",
     "$date_text": "('#sub_' + $panel_prefix + _date)",
     "$date_binding_type": "collection",
     "$date_binding_collection": "($panel_prefix + _panel)",
@@ -785,7 +837,7 @@
     "$game_type_binding_type": "collection",
     "$game_type_binding_collection": "($panel_prefix + _panel)",
 
-    "$game_type_bindings":[
+    "$game_type_bindings": [
       {
         "binding_type": "$game_type_binding_type",
         "binding_collection_name": "$game_type_binding_collection",
@@ -793,49 +845,48 @@
       }
     ],
 
-
-    "$text_controls":[
+    "$text_controls": [
       {
-        "main_label@storage_management.common_label":{
+        "main_label@storage_management.common_label": {
           "size": [ "55%", "50%" ],
-          "color": [1, 1, 1 ],
+          "color": "$dark_toggle_default_text_color",
           "anchor_from": "top_left",
           "anchor_to": "top_left",
-          "offset": [0, 3],
+          "offset": [ 0, 3 ],
           "text": "$name_text",
           "bindings": "$name_bindings"
         }
       },
       {
-        "world_type_label@storage_management.common_label":{
+        "world_type_label@storage_management.common_label": {
           "size": "$left_label_size",
-          "color": [ 0.6, 0.6, 0.6 ],
+          "color": "$dark_button_secondary_default_text_color",
           "anchor_from": "bottom_left",
           "anchor_to": "bottom_left",
-          "offset": [0, -3],
+          "offset": [ 0, -3 ],
           "text": "$game_type_text",
           "bindings": "$game_type_bindings"
         }
       },
       {
-        "date_label@storage_management.common_label":{
-          "color": [ 0.6, 0.6, 0.6 ],
+        "date_label@storage_management.common_label": {
+          "color": "$dark_button_secondary_default_text_color",
           "size": "$right_label_size",
           "anchor_from": "top_right",
           "anchor_to": "top_right",
-          "offset": [-5, 3],
+          "offset": [ -5, 3 ],
 
           "text": "$date_text",
           "bindings": "$date_bindings"
         }
       },
       {
-        "size_label@storage_management.common_label":{
+        "size_label@storage_management.common_label": {
           "size": "$right_label_size",
-          "color": [ 0.6, 0.6, 0.6 ],
+          "color": "$dark_button_secondary_default_text_color",
           "anchor_from": "bottom_right",
           "anchor_to": "bottom_right",
-          "offset": [-5, -3],
+          "offset": [ -5, -3 ],
 
           "text": "$size_text",
           "bindings": "$size_bindings"
@@ -851,18 +902,12 @@
 
     "controls":[
       {
-        "main_item_toggle@common.toggle":{
+        "main_item_toggle@common_toggles.light_ui_toggle": {
           "$size_text": "('#' + $panel_prefix + _size)",
-          
+
           "size": [ "100%", 30 ],
-          "$unchecked_control": "storage_management.main_item_text_unchecked",
-          "$checked_control": "storage_management.main_item_text_checked",
-          "$unchecked_hover_control": "storage_management.main_item_text_unchecked_hover",
-          "$checked_hover_control": "storage_management.main_item_text_checked_hover",
-          "$unchecked_locked_control": "storage_management.main_item_text_unchecked",
-          "$unchecked_locked_hover_control": "storage_management.main_item_text_unchecked_hover",
-          "$checked_locked_control": "storage_management.main_item_text_checked",
-          "$checked_locked_hover_control": "storage_management.main_item_text_checked_hover",
+          "$button_content_size": [ "100% - 6px", "100%" ],
+          "$button_type_panel": "storage_management.main_item_text",
 
           "$toggle_name": "('#' + $panel_prefix + _tab)",
           "$toggle_state_binding_name": "#storage_dropdown",
@@ -888,7 +933,7 @@
           "bindings": [
             {
               "binding_type": "view",
-              "source_control_name": "main_item_toggle",
+              "source_control_name": "this_toggle",
               "source_property_name": "#toggle_state",
               "target_property_name": "#visible",
               "resolve_sibling_scope": true
@@ -1019,7 +1064,7 @@
 
   //Toggle controls
   "world_controls@storage_management.storage_main_item_toggle": {
-    "$button_texture": "textures/gui/newgui/WorldDemoScreen",
+    "$button_texture": "textures/ui/WorldDemoScreen",
     "$name_text": "storageManager.contentType.worlds",
 
     "$item_template": "storage_management.world_sub_text",
@@ -1027,15 +1072,15 @@
   },
 
   "world_template_controls@storage_management.storage_main_item_toggle": {
-    "$button_texture": "textures/gui/newgui/WorldDemoScreen",
+    "$button_texture": "textures/ui/WorldDemoScreen",
     "$name_text": "storageManager.contentType.worldTemplates",
 
-    "$item_template": "storage_management.world_sub_text",
+    "$item_template": "storage_management.world_template_sub_text",
     "$panel_prefix": "world_template"
   },
 
   "resource_controls@storage_management.storage_main_item_toggle": {
-    "$button_texture": "textures/gui/newgui/op",
+    "$button_texture": "textures/ui/op",
     "$name_text": "storageManager.contentType.resourcePacks",
 
     "$item_template": "storage_management.pack_description_sub_item",
@@ -1043,7 +1088,7 @@
   },
 
   "behavior_controls@storage_management.storage_main_item_toggle": {
-    "$button_texture": "textures/gui/newgui/anvil-hammer",
+    "$button_texture": "textures/ui/anvil_icon",
     "$name_text": "storageManager.contentType.behaviorPacks",
 
     "$item_template": "storage_management.pack_description_sub_item",
@@ -1051,7 +1096,7 @@
   },
 
   "skin_controls@storage_management.storage_main_item_toggle": {
-    "$button_texture": "textures/gui/newgui/FriendsDiversity",
+    "$button_texture": "textures/ui/FriendsDiversity",
     "$name_text": "storageManager.contentType.skinPacks",
 
     "$item_template": "storage_management.basic_sub_item",
@@ -1059,7 +1104,7 @@
   },
 
   "cached_controls@storage_management.storage_main_item_toggle": {
-    "$button_texture": "textures/gui/newgui/Wrenches1",
+    "$button_texture": "textures/ui/Wrenches1",
     "$name_text": "storageManager.contentType.cachedData",
 
     "$item_template": "storage_management.texture_icon_sub_item",
@@ -1069,15 +1114,15 @@
   //Search items
   "search_world_controls@storage_management.resource_sub_item": {
     "$padding_size": [0, "fill"],
-    "$button_texture": "textures/gui/newgui/WorldDemoScreen",
+    "$button_texture": "textures/ui/WorldDemoScreen",
     "$item_template": "storage_management.world_sub_text",
     "$panel_prefix": "search"
   },
 
   "search_world_template_controls@storage_management.resource_sub_item": {
     "$padding_size": [0, "fill"],
-    "$button_texture": "textures/gui/newgui/WorldDemoScreen",
-    "$item_template": "storage_management.world_sub_text",
+    "$button_texture": "textures/ui/WorldDemoScreen",
+    "$item_template": "storage_management.world_template_sub_text",
     "$panel_prefix": "search"
   },
 
@@ -1096,14 +1141,14 @@
 
   "search_skin_controls@storage_management.resource_sub_item": {
     "$padding_size": [0, "fill"],
-    "$button_texture": "textures/gui/newgui/FriendsDiversity",
+    "$button_texture": "textures/ui/FriendsDiversity",
     "$item_template": "storage_management.basic_sub_item",
     "$panel_prefix": "search"
   },
 
   "search_cached_controls@storage_management.resource_sub_item": {
     "$padding_size": [0, "fill"],
-    "$button_texture": "textures/gui/newgui/Wrenches1",
+    "$button_texture": "textures/ui/Wrenches1",
     "$item_template": "storage_management.texture_icon_sub_item",
     "$panel_prefix": "search"
   },
@@ -1214,6 +1259,7 @@
         "item_button_panel":{
           "type": "input_panel",
           "modal": true,
+          "inline_modal": true,
           "focus_enabled": false,
           // We need to set the visibility false or we try to set focus to this object since it's modal.
           "visible": false,
@@ -1233,8 +1279,7 @@
                       "anchor_from":"top_middle",
                       "anchor_to": "top_middle",
                       "size": ["600%y - 18px", "100%"],
-                      "texture": "textures/gui/newgui/Banners",
-                      "nineslice_size": 1.0,
+                      "texture": "textures/ui/Banners",
 
                       "controls":[
                         {
@@ -1245,15 +1290,60 @@
                             "size": ["100%", "100% - 2px"],
                             "offset": [4, 2],
 
-                            "controls":[
-                              { "blank@storage_management.sub_item_blank_button":{}},
+                            "controls": [
+                              { "blank@storage_management.sub_item_blank_button": {} },
                               {
-                                "padding_0":{
-                                  "type":"panel",
-                                  "size": [2, "100%"]
+                                "padding_0": {
+                                  "type": "panel",
+                                  "size": [ 2, "100%" ]
                                 }
                               },
-                              { "blank_2@storage_management.sub_item_blank_button":{}},
+                              {
+                                "generate_texture_list_panel": {
+                                  "type": "panel",
+                                  "size": "$tray_button_size",
+                                  "$button_visible_bind": "('#sub_' + $panel_prefix + _generate_texture_list_button_visible)",
+
+                                  "controls": [
+                                    {
+                                      "blank@storage_management.sub_item_blank_button": {
+                                        "size": [ "100%", "100%" ],
+
+                                        "bindings": [
+                                          {
+                                            "binding_type": "collection",
+                                            "binding_collection_name": "($panel_prefix + _panel)",
+                                            "binding_name": "$button_visible_bind",
+                                            "binding_name_override": "(not #visible)"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "generate_texture_list_button@storage_management.sub_item_tray_button": {
+                                        "ignored": "($is_publish)",
+                                        "size": [ "100%", "100%" ],
+
+                                        "$glyph_size": [ 11, 17 ],
+                                        "$pressed_button_name": "button.generateTextureList",
+                                        "$button_texture": "textures/gui/newgui/storage/update",
+
+                                        "bindings": [
+                                          {
+                                            "binding_type": "collection_details"
+                                          },
+                                          {
+                                            "binding_type": "collection",
+                                            "binding_collection_name": "($panel_prefix + _panel)",
+                                            "binding_name": "$button_visible_bind",
+                                            "binding_name_override": "#visible"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
                               {
                                 "padding_1":{
                                   "type":"panel",
@@ -1264,7 +1354,7 @@
                                 "delete_button@storage_management.sub_item_tray_button":{
                                   "$glyph_size": [15, 17],
                                   "$pressed_button_name": "button.deleteResources",
-                                  "$button_texture": "textures/gui/newgui/storage/trash",
+                                  "$button_texture": "textures/ui/trash",
                                   "bindings": [
                                     {
                                       "binding_type": "collection_details"
@@ -1306,7 +1396,7 @@
                                           }
                                         ],
                                         "$pressed_button_name": "button.shareResources",
-                                        "$button_texture": "textures/gui/newgui/storage/windowsshare",
+                                        "$button_texture": "textures/ui/windowsshare",
                                         "$button_visible_bind": "('#sub_' + $panel_prefix + _share_button)",
                                         "bindings": [
                                           {
@@ -1336,7 +1426,7 @@
                               //  "update_button@storage_management.sub_item_tray_button":{
                               //    "$glyph_size": [11, 17],
                               //    "$pressed_button_name": "button.updateResource",
-                              //    "$button_texture": "textures/gui/newgui/storage/update",
+                              //    "$button_texture": "textures/ui/update",
                               //    "bindings": [
                               //      {
                               //        "binding_type": "collection_details",
@@ -1408,6 +1498,11 @@
               "binding_name_override": "#visible",
               "binding_name": "('#' + $panel_prefix + _optionsVisible)",
               "binding_collection_name": "($panel_prefix + _panel)"
+            },
+            {
+              "binding_name": "#is_using_gamepad",
+              "binding_name_override": "#modal",
+              "binding_type": "global"
             }
           ],
 
@@ -1420,7 +1515,8 @@
             {
               "from_button_id": "button.menu_select",
               "to_button_id": "button.deselect_resource",
-              "mapping_type": "global"
+              "mapping_type": "global",
+              "consume_event": false
             }
           ]
         }
@@ -1456,7 +1552,7 @@
     "layer": 1,
     "$button_offset": [0,0],
     "$button_type_panel": "common_buttons.button_content_panel",
-    "$new_ui_button_texture": "textures/gui/newgui/buttons/borderless/dark",
+    "$new_ui_button_texture": "textures/ui/button_borderless_dark",
     "$button_content": "common.empty_panel",
     "$content_alpha": 1,
     "$border_color": [ 0.075, 0.075, 0.075 ],
@@ -1468,6 +1564,8 @@
     "size": [ "100%", 40 ],
     "$image_size": [ "100%y + 2px", "100%" ],
     "$button_texture": "('#' + $panel_prefix + _texture)",
+    "$button_texture_zip": "('#' + $panel_prefix + _texture_zip)",
+    "$button_texture_file": "('#' + $panel_prefix + _texture_file_system)",
     "$texture_binding_type": "collection",
     "$texture_binding_collection": "($panel_prefix + _panel)"
   },
@@ -1566,19 +1664,19 @@
                   {
                     "glyph_warning@storage_management.base_glyph":{
                       "$binding_name": "warning",
-                      "$glyph_texture": "textures/gui/newgui/WarningGlyph"
+                      "$glyph_texture": "textures/ui/WarningGlyph"
                     }
                   },
                   {
                     "glyph_error@storage_management.base_glyph":{
                       "$binding_name": "error",
-                      "$glyph_texture": "textures/gui/newgui/ErrorGlyph"
+                      "$glyph_texture": "textures/ui/ErrorGlyph"
                     }
                   },
                   {
                     "glyph_update@storage_management.base_glyph":{
                       "$binding_name": "update",
-                      "$glyph_texture": "textures/gui/newgui/UpdateGlyph"
+                      "$glyph_texture": "textures/ui/UpdateGlyph"
                     }
                   },
                   {
@@ -1654,7 +1752,22 @@
 
   "world_sub_text@storage_management.world_item_text":{
     "size": [ "100%", 30 ],
-    "$check_visible": true
+    "$check_visible": true,
+    "$button_texture": "('#' + $panel_prefix + _icon_texture)",
+    "$button_texture_file": "('#' + $panel_prefix + _icon_texture_file)",
+    "$button_texture_zip_type": "none",
+    "$texture_binding_type": "collection",
+    "$texture_binding_collection": "($panel_prefix + _panel)"
+  },
+
+  "world_template_sub_text@storage_management.world_item_text":{
+    "size": [ "100%", 30 ],
+    "$check_visible": true,
+    "$button_texture": "('#' + $panel_prefix + _icon_texture)",
+    "$button_texture_file": "('#' + $panel_prefix + _icon_texture_file)",
+    "$button_texture_zip": "('#' + $panel_prefix + _icon_texture_zip)",
+    "$texture_binding_type": "collection",
+    "$texture_binding_collection": "($panel_prefix + _panel)"
   },
 
   "basic_sub_item@storage_management.icon_item_text":{
@@ -1688,7 +1801,7 @@
                 "anchor_from": "left_middle",
                 "anchor_to": "left_middle",
                 "size": [ "100%", "100% - 10px" ],
-                "texture": "textures/gui/newgui/trash",
+                "texture": "textures/ui/trash",
                 "offset": [-2, 0]
               }
             }
@@ -1753,10 +1866,10 @@
 
   "light_assets":{
     "type": "panel",
-    "$default_button_texture|default": "textures/gui/newgui/buttons/borderless/light",
-    "$hover_button_texture|default": "textures/gui/newgui/buttons/borderless/lighthover",
-    "$pressed_button_texture|default": "textures/gui/newgui/buttons/borderless/lightpressed",
-    "$locked_button_texture|default": "textures/gui/newgui/disabledButtonNoBorder",
+    "$default_button_texture|default": "textures/ui/button_borderless_light",
+    "$hover_button_texture|default": "textures/ui/button_borderless_lighthover",
+    "$pressed_button_texture|default": "textures/ui/button_borderless_lightpressed",
+    "$locked_button_texture|default": "textures/ui/disabledButtonNoBorder",
 
     "$default_color": [ 0.3, 0.3, 0.3 ],
     "$hover_color": [ 1, 1, 1 ],
@@ -1772,9 +1885,7 @@
   "button_add": {
     "type": "image",
     "layer": 1,
-    "texture": "textures/gui/newgui/onlineLight",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 9, 9 ],
+    "texture": "textures/ui/onlineLight",
     "size": [ "100%", "100% - 2px" ]
   },
 

@@ -6,48 +6,16 @@
 {
   "namespace": "common_art",
 
-  "title_image_win10": {
+  "title_image": {
     "type": "image",
     "layer": 1,
-    "texture": "textures/gui/titleOriginal",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 1936, 365 ]
-  },
-
-  "title_image_osx": {
-    "type": "image",
-    "layer": 1,
-    "texture": "textures/gui/titleOriginal",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 1936, 375 ]
-  },
-
-  "title_image_pocket": {
-    "type": "image",
-    "layer": 1,
-    "anchor_from": "top_middle",
-    "anchor_to": "top_middle",
-    "texture": "textures/gui/title",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 512, 64 ]
+    "texture": "textures/ui/title"
   },
 
   "title_image_edu": {
     "type": "image",
     "layer": 1,
-    "texture": "textures/gui/titleEdu",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 1938, 472 ]
-  },
-
-  "title_image_vr": {
-    "type": "image",
-    "layer": 1,
-    "anchor_from": "top_middle",
-    "anchor_to": "top_middle",
-    "texture": "textures/gui/titleVR",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 1936, 375 ]
+    "texture": "textures/ui/title_edu"
   },
   
   "splash_text": {
@@ -56,17 +24,19 @@
     "size": [ 0.1, 0.1 ],
     "layer": 2,
     "anchor_from": "right_middle",
-    "anchor_to": "right_middle"
+    "anchor_to": "right_middle",
+    "$splash_text_visible|default": true,
+    "visible": "$splash_text_visible"
   },
 
   "title_panel_pocket": {
     "type": "panel",
-    "offset": [ 0, "10%" ],
+    "offset": [ 0, "5%" ],
     "anchor_from": "top_middle",
     "anchor_to": "top_middle",
     "size": [ "100%", "12.5%x" ],
     "controls": [
-      { "title_image_pocket@common_art.title_image_pocket": { } },
+      { "title_image@common_art.title_image": {} },
       {
         "splash_text@splash_text": {
           "offset": [ -106, 8 ]
@@ -82,7 +52,7 @@
     "anchor_from": "top_middle",
     "anchor_to": "top_middle",
     "controls": [
-      { "title_image_win10@common_art.title_image_win10": { } },
+      { "title_image@common_art.title_image": {} },
       {
         "splash_text@splash_text": {
           "offset": [ -8, 10 ]
@@ -98,7 +68,7 @@
     "anchor_from": "top_middle",
     "anchor_to": "top_middle",
     "controls": [
-      { "title_image_osx@common_art.title_image_osx": { } },
+      { "title_image@common_art.title_image": {} },
       {
         "splash_text@splash_text": {
           "offset": [ -8, 10 ]
@@ -122,6 +92,22 @@
       }
     ]
   },
+  
+  "title_panel_firetv": {
+    "type": "panel",
+    "offset": [ 0, "10%" ],
+    "anchor_from": "top_middle",
+    "anchor_to": "top_middle",
+    "size": [ "55%", "19.37%x" ],
+    "controls": [
+      { "title_image@common_art.title_image": {} },
+      {
+        "splash_text@splash_text": {
+          "offset": [ -8, 12 ]
+        }
+      }
+    ]
+  },
 
   "title_panel_vr": {
     "type": "panel",
@@ -130,7 +116,22 @@
     "anchor_from": "top_middle",
     "anchor_to": "top_middle",
     "controls": [
-      { "title_image_vr@common_art.title_image_vr": { } },
+      { "title_image@common_art.title_image": {} },
+      {
+        "splash_text@splash_text": {
+          "offset": [ -8, 12 ]
+        }
+      }
+    ]
+  },
+   "title_panel_appletv": {
+    "type": "panel",
+    "size": [ "55%", "19.37%x" ],
+    "offset": [ 0, "10%" ],
+    "anchor_from": "top_middle",
+    "anchor_to": "top_middle",
+    "controls": [
+      { "title_image@common_art.title_image": { } },
       {
         "splash_text@splash_text": {
           "offset": [ -8, 12 ]
@@ -155,12 +156,20 @@
         "$title_panel": "title_panel_edu"
       },
       {
-        "requires": "$pocket_edition",
+        "requires": "($pocket_edition or $console_edition)",
         "$title_panel": "title_panel_pocket"
+      },
+      {
+        "requires": "$fire_tv",
+        "$title_panel": "title_panel_firetv"
       },
       {
         "requires": "$gear_vr",
         "$title_panel": "title_panel_vr"
+      },
+      {
+        "requires": "$apple_tv",
+        "$title_panel": "title_panel_appletv"
       }
     ],
     "controls": [
@@ -176,49 +185,53 @@
     "variables": [
       {
         "requires": "$win10_edition",
-        "$title_panel": "common_art.title_image_win10",
-        "$title_panel_size": [ "100%", "18.85%x" ],
+        "$title_panel": "common_art.title_image",
+        "$title_panel_size": [ "100%", "2.85%x" ],
         "$logo_max_size": [ 275, "18.85%x" ],
-        "$logo_size": [ "90%", "18.85%x" ],
-        "$title_uv": [ 0, 0 ],
-        "$title_uv_size": [ 1936, 365 ]
+        "$logo_size": [ "90%", "18.85%x" ]
       },
       {
-        "requires": "$osx_edition", 
-        "$title_panel": "common_art.title_image_osx",
-        "$title_panel_size": [ "100%", "19.37%x" ],
+        "requires": "$osx_edition",
+        "$title_panel": "common_art.title_image",
+        "$title_panel_size": [ "100%", "3.37%x" ],
         "$logo_max_size": [ 275, "19.37%x" ],
-        "$logo_size": [ "90%", "19.37%x" ],
-        "$title_uv": [ 0, 0 ],
-        "$title_uv_size": [ 1936, 375 ]
+        "$logo_size": [ "90%", "19.37%x" ]
       },
       {
         "requires": "$education_edition",
         "$title_panel": "common_art.title_image_edu",
-        "$title_panel_size": [ "100%", "24.355%x" ],
+        "$title_panel_size": [ "100%", "6.355%x" ],
         "$logo_max_size": [ 275, "24.355%x" ],
         "$logo_size": [ "90%", "24.355%x" ],
-        "$title_uv": [ 0, 0 ],
-        "$title_uv_size": [ 1938, 472 ],
         "$achievements_ignored": true
       },
-      {        
-        "requires": "$pocket_edition",
-        "$title_panel": "common_art.title_image_pocket",
-        "$title_panel_size": [ "100%", "21.769%x" ],
+      {
+        "requires": "($pocket_edition  or $console_edition)",
+        "$title_panel": "common_art.title_image",
+        "$title_panel_size": [ "100%", "5.769%x" ],
         "$logo_max_size": [ 260, "21.769%x" ],
-        "$logo_size": [ "90%", "21.769%x" ],
-        "$title_uv": [ 119, 1 ],
-        "$title_uv_size": [ 274, 63 ]
+        "$logo_size": [ "90%", "21.769%x" ]
+      },
+      {
+        "requires": "$fire_tv",
+        "$title_panel": "common_art.title_image",
+        "$title_panel_size": [ "100%", "3.37%x" ],
+        "$logo_max_size": [ 275, "19.37%x" ],
+        "$logo_size": [ "90%", "19.37%x" ]
       },
       {
         "requires": "$gear_vr",
-        "$title_panel": "common_art.title_image_vr",
+        "$title_panel": "common_art.title_image",
+        "$title_panel_size": [ "100%", "3.37%x" ],
+        "$logo_max_size": [ 275, "19.37%x" ],
+        "$logo_size": [ "90%", "19.37%x" ]
+      },
+      {
+        "requires": "$apple_tv",
+        "$title_panel": "common_art.title_image",
         "$title_panel_size": [ "100%", "19.37%x" ],
         "$logo_max_size": [ 275, "19.37%x" ],
-        "$logo_size": [ "90%", "19.37%x" ],
-        "$title_uv": [ 0, 0 ],
-        "$title_uv_size": [ 1936, 375 ]
+        "$logo_size": [ "90%", "19.37%x" ]
       }
     ],
     "controls": [
@@ -226,8 +239,6 @@
         "logo@$title_panel": {
           "size": "$logo_size",
           "max_size": "$logo_max_size",
-          "uv": "$title_uv",
-          "uv_size": "$title_uv_size",
           "anchor_from": "center",
           "anchor_to": "center"
         }

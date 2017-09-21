@@ -32,6 +32,7 @@
 
   "button_text": {
     "type": "label",
+    "color": "$generic_button_text_color",
     "layer": 1,
     "font_size": "small",
     "text": "go button",
@@ -40,11 +41,8 @@
 
   "button_image": {
     "type": "image",
-    "texture": "textures/gui/newgui/NormalButtonStroke",
+    "texture": "textures/ui/NormalButtonStroke",
     "layer": 2,
-    "nineslice_size": 4.0,
-    "uv": [ 0, 0 ],
-    "uv_size": [ 12, 12 ],
     "controls": [
       {
         "button_text@button_text": {
@@ -250,18 +248,15 @@
 
   "arrow_image": {
     "type": "image",
-    "texture": "textures/gui/newgui/arrow",
+    "texture": "textures/ui/arrow",
     "anchor_from": "left_middle",
     "anchor_to": "left_middle",
-    "uv_size": [ 16, 13 ],
-    "uv": [ 0, 0 ],
-    "size": [ 16, 13 ],
     "color": "@anim_arrow_color"
   },
 
   "walking_image": {
     "type": "image",
-    "texture": "textures/gui/newgui/walking",
+    "texture": "textures/ui/walking",
     "anchor_from": "top_left",
     "anchor_to": "top_left",
     "size": [ 23, 36 ],
@@ -286,10 +281,8 @@
     "anchor_from": "center",
     "anchor_to": "center",
     "size": [ 4, 4 ],
-    "texture": "textures/gui/newgui/Dot2",
+    "texture": "textures/ui/Dot2",
     "layer": 3,
-    "uv": [ 0, 0 ],
-    "uv_size": [ 9, 9 ],
     "color": "@anim_color_cycle",
     "offset": "@anim_move_sub_square_a"
   },
@@ -299,11 +292,8 @@
     "anchor_from": "top_left",
     "anchor_to": "center",
     "size": [ 10, 10 ],
-    "texture": "textures/gui/newgui/NormalButtonNoStroke",
+    "texture": "textures/ui/NormalButtonNoStroke",
     "layer": 2,
-    "nineslice_size": 4.0,
-    "uv": [ 0, 0 ],
-    "uv_size": [ 10, 10 ],
     "color": "@anim_color_cycle",
     "offset": "@anim_move_along_top",
     "controls": [
@@ -326,11 +316,8 @@
     "type": "image",
     "anchor_from": "top_left",
     "anchor_to": "top_left",
-    "texture": "textures/gui/newgui/NormalButtonNoStroke",
-    "layer": 2,
-    "nineslice_size": 4.0,
-    "uv": [ 0, 0 ],
-    "uv_size": [ 10, 10 ]
+    "texture": "textures/ui/NormalButtonNoStroke",
+    "layer": 2
   },
 
   "panel_1@anchored_panel": {
@@ -402,30 +389,6 @@
         "from_button_id": "button.menu_cancel",
         "to_button_id": "button.menu_exit",
         "mapping_type": "global"
-      },
-      {
-        "from_button_id": "button.menu_up",
-        "to_button_id": "button.menu_up",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_down",
-        "to_button_id": "button.menu_down",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_left",
-        "to_button_id": "button.menu_left",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_right",
-        "to_button_id": "button.menu_right",
-        "mapping_type": "global",
-        "scope": "view"
       }
     ],
     "$screen_content": "test.test_anims_screen_content"

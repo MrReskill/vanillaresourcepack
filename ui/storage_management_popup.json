@@ -31,7 +31,11 @@
                 "$fill_alpha": 0.98
               }
             },
-            { "title@popup_dialog.modal_title_text": { } },
+            { 
+              "title@popup_dialog.modal_title_text": { 
+                "$visibility_source_control_name": "two_buttons"
+              } 
+            },
             {
               "dependencies@storage_management_popup.storage_dependency_panel": {
                 "size": [ "100% - 16px", "100% - 55px" ],
@@ -126,16 +130,16 @@
 
     "controls":[
       {
-        "main_label":{
+        "main_label": {
           "type": "label",
-          "color": [ 1, 1, 1 ],
+          "color": "$main_header_text_color",
           "shadow": false,
           "size": [ "100%", 28 ],
           "anchor_from": "top_left",
           "anchor_to": "top_left",
 
           "text": "#dependency_label_text",
-          "bindings":[
+          "bindings": [
             {
               "binding_name": "#dependency_label_text"
             }
@@ -209,10 +213,7 @@
           "layer": 1,
           "anchor_from": "top_left",
           "anchor_to": "top_left",
-          "texture": "textures/gui/newgui/Banners",
-          "nineslice_size": 1.0,
-          "uv": [ 0, 0 ],
-          "uv_size": [ 4, 4 ],
+          "texture": "textures/ui/Banners",
           "size": [ "100%", "100%c" ],
           "controls":[
             {
@@ -242,15 +243,15 @@
                       "size": [ "100%", 12 ],
                       "controls":[
                         {
-                          "main_label":{
+                          "main_label": {
                             "type": "label",
-                            "color": [ 1, 1, 1 ],
+                            "color": "$body_text_color",
                             "shadow": false,
                             "size": [ "100%", "100%" ],
-                            "offset": [6, 1],
+                            "offset": [ 6, 1 ],
                             "anchor_from": "top_left",
                             "anchor_to": "top_left",
-
+                            "layer": 2,
                             "text": "storageManager.dependency.breakItem"
                           }
                         }

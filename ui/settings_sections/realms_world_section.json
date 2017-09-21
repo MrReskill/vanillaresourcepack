@@ -21,7 +21,7 @@
     "anchor_to": "left_middle",
     "$button_text": "realmsSettingsScreen.downloadWorldButton",
     "$pressed_button_name": "menu_download_world",
-    "ignored": "(not $is_pregame)"
+    "ignored": "(not $is_pregame or $apple_tv)"
   },
 
   "upload_world_button@settings_common.action_button": {
@@ -29,7 +29,7 @@
     "anchor_to": "left_middle",
     "$button_text": "realmsSettingsScreen.uploadWorldButton",
     "$pressed_button_name": "menu_upload_world",
-    "ignored": "(not $is_pregame)",
+    "ignored": "(not $is_pregame or $apple_tv)",
     "bindings": [
       {
         "binding_name": "#upload_button_enabled",

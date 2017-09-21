@@ -6,55 +6,37 @@
   //---------------------------------------------------------------------------
   "dark_thin_button": {
     "type": "image",
-    "nineslice_size": 4.0,
-    "texture": "textures/gui/newgui/play_screen/DarkButtonThinStroke1",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 7 ],
+    "texture": "textures/ui/dark_thin_button",
     "layer": 3
   },
 
   "normal_stroke_button": {
     "type": "image",
-    "nineslice_size": 4.0,
-    "texture": "textures/gui/newgui/play_screen/NormalButtonStroke",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 12, 12 ],
+    "texture": "textures/ui/normal_stroke_button",
     "layer": 3
   },
 
   "normal_thin_button": {
     "type": "image",
-    "nineslice_size": 4.0,
-    "texture": "textures/gui/newgui/play_screen/NormalButtonThinNewBevel",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 8, 8 ],
+    "texture": "textures/ui/NormalButtonThinNewBevel",
     "layer": 3
   },
 
   "hover_thin_stroke_button": {
     "type": "image",
-    "nineslice_size": 4.0,
-    "texture": "textures/gui/newgui/play_screen/HoverButtonThinStroke",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 7 ],
+    "texture": "textures/ui/hover_thin_stroke_button",
     "layer": 3
   },
 
   "hover_thin_button": {
     "type": "image",
-    "nineslice_size": 4.0,
-    "texture": "textures/gui/newgui/play_screen/HoverButtonThinNewBevel2",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 8, 8 ],
+    "texture": "textures/ui/HoverButtonThinNewBevel2",
     "layer": 3
   },
 
   "indent": {
     "type": "image",
-    "nineslice_size": 3.0,
-    "texture": "textures/gui/newgui/play_screen/Indent2",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 5, 5 ],
+    "texture": "textures/ui/default_indent",
     "layer": 3
   },
 
@@ -64,6 +46,7 @@
 
   "gamepad_action_text": {
     "type": "label",
+    "color": "$generic_button_text_color",
     "shadow": true,
     "layer": 5
   },
@@ -145,7 +128,7 @@
             {
               "back_button_text@common.button_text": {
                 "text": "controllerLayoutScreen.cancel",
-                "color": [ 1.0, 1.0, 0.2 ]
+                "color": "$generic_button_text_color"
               }
             }
           ]
@@ -157,7 +140,7 @@
             {
               "back_button_text@common.button_text": {
                 "text": "controllerLayoutScreen.cancel",
-                "color": [ 1.0, 1.0, 0.2 ],
+                "color": "$generic_button_text_color",
                 "alpha": 0.65
               }
             }
@@ -192,7 +175,7 @@
             {
               "accept_button_text@common.button_text": {
                 "text": "controllerLayoutScreen.save",
-                "color": [ 1.0, 1.0, 0.2 ]
+                "color": "$generic_button_text_color"
               }
             }
           ]
@@ -204,7 +187,7 @@
             {
               "accept_button_text@common.button_text": {
                 "text": "controllerLayoutScreen.save",
-                "color": [ 1.0, 1.0, 0.2 ],
+                "color": "$generic_button_text_color",
                 "alpha": 0.65
               }
             }
@@ -239,7 +222,7 @@
             {
               "accept_button_text@common.button_text": {
                 "text": "controls.reset",
-                "color": [ 1.0, 1.0, 0.2 ]
+                "color": "$generic_button_text_color"
               }
             }
           ]
@@ -251,7 +234,7 @@
             {
               "accept_button_text@common.button_text": {
                 "text": "controls.reset",
-                "color": [ 1.0, 1.0, 0.2 ],
+                "color": "$generic_button_text_color",
                 "alpha": 0.65
               }
             }
@@ -286,7 +269,7 @@
             {
               "accept_button_text@common.button_text": {
                 "text": "gui.yes",
-                "color": [ 1.0, 1.0, 0.2 ]
+                "color": "$generic_button_text_color"
               }
             }
           ]
@@ -298,7 +281,7 @@
             {
               "accept_button_text@common.button_text": {
                 "text": "gui.yes",
-                "color": [ 1.0, 1.0, 0.2 ],
+                "color": "$generic_button_text_color",
                 "alpha": 0.65
               }
             }
@@ -333,7 +316,7 @@
             {
               "accept_button_text@common.button_text": {
                 "text": "gui.no",
-                "color": [ 1.0, 1.0, 0.2 ]
+                "color": "$generic_button_text_color"
               }
             }
           ]
@@ -345,7 +328,7 @@
             {
               "accept_button_text@common.button_text": {
                 "text": "gui.no",
-                "color": [ 1.0, 1.0, 0.2 ],
+                "color": "$generic_button_text_color",
                 "alpha": 0.65
               }
             }
@@ -401,7 +384,7 @@
       { "action_bg@hover_thin_stroke_button": { } },
       {
         "action_text@gamepad_action": {
-          "color": [ 1.0, 1.0, 0.2 ]
+          "color": "$generic_button_text_color"
         }
       }
     ]
@@ -416,7 +399,7 @@
       { "binding_bg@hover_thin_stroke_button": { } },
       {
         "binding_text@gamepad_binding": {
-          "color": [ 1.0, 1.0, 0.2 ]
+          "color": "$generic_button_text_color"
         }
       }
     ]
@@ -623,40 +606,11 @@
   // Screen
   //---------------------------------------------------------------------------
   "gamepad_layout_screen@common.base_screen": {
-    "controls": [
-
-      { "fade_panel@cda_panel": { } },
-      { "root_panel@root_panel_common": { } }
-    ],
     "button_mappings": [
       {
         "from_button_id": "button.menu_cancel",
         "to_button_id": "button.menu_exit",
         "mapping_type": "global"
-      },
-      {
-        "from_button_id": "button.menu_up",
-        "to_button_id": "button.menu_up",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_down",
-        "to_button_id": "button.menu_down",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_left",
-        "to_button_id": "button.menu_left",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_right",
-        "to_button_id": "button.menu_right",
-        "mapping_type": "global",
-        "scope": "view"
       },
       {
         "from_button_id": "button.menu_tab_left",
@@ -670,6 +624,16 @@
         "mapping_type": "global",
         "scope": "view"
       }
+    ],
+    "$screen_content": "gamepad_layout.gamepad_layout_screen_content"
+  },
+
+  "gamepad_layout_screen_content": {
+    "type": "panel",
+    "controls": [
+
+      { "fade_panel@cda_panel": { } },
+      { "root_panel@root_panel_common": { } }
     ]
   }
 

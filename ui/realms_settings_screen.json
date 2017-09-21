@@ -40,7 +40,7 @@
     "$section_button_name|default": "name of selection toggle button",
     "$section_content_name|default": "name of class defining the content",
     "controls": [
-      { "generic_section@realms_settings.generic_section": { } }
+      { "generic_section@realms_settings.generic_section": {} }
     ]
   },
 
@@ -145,6 +145,7 @@
       {
         "loading_view": {
           "type": "label",
+          "color": "$body_text_color",
           "size": [ "default", "80px" ],
           "offset": [ 0, 10 ],
           "text": "realmsSettingsScreen.LoadingSubscription",
@@ -201,6 +202,7 @@
   //---------------------------------------------------------------------------
   "label_text": {
     "type": "label",
+    "color": "$light_button_default_text_color",
     "text": "",
     "font_size": "normal",
     "anchor_to": "top_left",
@@ -294,14 +296,14 @@
       {
         "set_branch_version_label@label_text": {
           "text": "realmsSettingsScreen.dev_current_version_label",
-          "color": "yellow",
+          "color": "$main_header_text_color",
           "size": [ "100% - 8px", 10 ]
         }
       },
       {
         "set_branch_id_label@label_text": {
           "text": "#selected_branch_commit_id",
-          "color": "yellow",
+          "color": "$main_header_text_color",
           "size": [ "100% - 8px", 10 ],
           "bindings": [
             {
@@ -341,10 +343,10 @@
       {
         "page_text@label_text": {
           "text": "#page_index_text",
-          "color": "white",
+          "color": "$sub_header_text_color",
           "anchor_from": "center",
           "anchor_to": "center",
-          "size": [ "default", "100%" ],
+          "size": [ "default", "50%" ],
           "bindings": [
             {
               "binding_name": "#page_index_text"
@@ -488,36 +490,42 @@
       },
       {
         "world_button@settings_common.section_toggle_base": {
+          "$toggle_view_binding_name": "world_button_toggle",
           "$toggle_group_forced_index": "$world_toggle_index",
-          "$glyph_uv": [ 75, 0 ],
-          "$glyph_uvsize": [ 16, 17 ],
+          "$glyph_texture": "textures/ui/world_glyph",
+          "$glyph_color_texture": "textures/ui/world_glyph_color",
+          "$glyph_size": [ 16, 17 ],
           "layer": 1,
-          "$button_label_text": "realmsSettingsScreen.gameSectionTitle",
-          "property_bag": {
+          "$button_text": "realmsSettingsScreen.gameSectionTitle",
+          "$toggle_property_bag": {
             "#panel_title": "realmsSettingsScreen.gameSectionTitle"
           }
         }
       },
       {
         "members_button@settings_common.section_toggle_base": {
+          "$toggle_view_binding_name": "members_button_toggle",
           "$toggle_group_forced_index": "$members_toggle_index",
-          "$glyph_uv": [ 100, 0 ],
-          "$glyph_uvsize": [ 22, 12 ],
+          "$glyph_texture": "textures/ui/multiplayer_glyph",
+          "$glyph_color_texture": "textures/ui/multiplayer_glyph_color",
+          "$glyph_size": [ 22, 12 ],
           "layer": 2,
-          "$button_label_text": "realmsSettingsScreen.membersSectionTitle",
-          "property_bag": {
+          "$button_text": "realmsSettingsScreen.membersSectionTitle",
+          "$toggle_property_bag": {
             "#panel_title": "realmsSettingsScreen.membersSectionTitle"
           }
         }
       },
       {
         "subscription_button@settings_common.section_toggle_base": {
+          "$toggle_view_binding_name": "subscription_button_toggle",
           "$toggle_group_forced_index": "$subscription_toggle_index",
-          "$glyph_uv": [ 100, 34 ],
-          "$glyph_uvsize": [ 15, 13 ],
+          "$glyph_texture": "textures/ui/subscription_glyph",
+          "$glyph_color_texture": "textures/ui/subscription_glyph_color",
+          "$glyph_size": [ 15, 13 ],
           "layer": 3,
-          "$button_label_text": "realmsSettingsScreen.subscriptionSectionTitle",
-          "property_bag": {
+          "$button_text": "realmsSettingsScreen.subscriptionSectionTitle",
+          "$toggle_property_bag": {
             "#panel_title": "realmsSettingsScreen.subscriptionSectionTitle"
           }
         }
@@ -525,12 +533,14 @@
       {
         "dev_options_button@settings_common.section_toggle_base": {
           "ignored": "$non_config_realms_env",
+          "$toggle_view_binding_name": "dev_options_button_toggle",
           "$toggle_group_forced_index": "$dev_options_toggle_index",
-          "$glyph_uv": [ 50, 34 ],
-          "$glyph_uvsize": [ 14, 14 ],
+          "$glyph_texture": "textures/ui/dev_glyph",
+          "$glyph_color_texture": "textures/ui/dev_glyph_color",
+          "$glyph_size": [ 14, 14 ],
           "layer": 4,
-          "$button_label_text": "realmsSettingsScreen.devOptionsSectionTitle",
-          "property_bag": {
+          "$button_text": "realmsSettingsScreen.devOptionsSectionTitle",
+          "$toggle_property_bag": {
             "#panel_title": "realmsSettingsScreen.devOptionsSectionTitle"
           }
         }
@@ -547,27 +557,27 @@
     "controls": [
       {
         "world_section@realms_settings.generic_section_wrapper": {
-          "$section_button_name|default": "world_button",
+          "$section_button_name|default": "world_button_toggle",
           "$section_content_name|default": "realms_world_section.panel_content"
         }
       },
       {
         "players_section@realms_settings.generic_section_wrapper": {
-          "$section_button_name|default": "members_button",
+          "$section_button_name|default": "members_button_toggle",
           "$section_content_name|default": "realms_whitelist.friends_panel",
           "$friend_panel_size": [ "100%", "100%c" ]
         }
       },
       {
         "subscription_section@realms_settings.generic_section_wrapper": {
-          "$section_button_name|default": "subscription_button",
+          "$section_button_name|default": "subscription_button_toggle",
           "$section_content_name|default": "realms_settings.subscriptions_section"
         }
       },
       {
         "dev_options_section@realms_settings.generic_section_wrapper": {
           "ignored": "$non_config_realms_env",
-          "$section_button_name|default": "dev_options_button",
+          "$section_button_name|default": "dev_options_button_toggle",
           "$section_content_name|default": "branch_section"
         }
       }

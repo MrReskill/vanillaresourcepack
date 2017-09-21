@@ -8,10 +8,8 @@
 
   "Xbox_icon": {
     "type": "image",
-    "texture": "textures/gui/newgui/xbox4",
+    "texture": "textures/ui/xbox4",
     "layer": 3,
-    "uv": [ 0, 0 ],
-    "uv_size": [ 27, 27 ],
     "size": [ 20, 20 ]
   },
 
@@ -27,46 +25,18 @@
         }
       },
       {
-        "new_button_label@common.new_button_label": {
+        "button_label": {
+          "type": "label",
+          "color": "$text_color",
           "text": "xbox.signInLong"
         }
       }
     ]
   },
 
-  "xbl_signin_button@common.new_button": {
+  "xbl_signin_button@common_buttons.light_content_button": {
     "$pressed_button_name": "button.xbl_signin",
-    "controls": [
-      {
-        "default@common.new_button_state_default": {
-          "controls": [
-            {
-              "xbl_signin_label@xbl_optional_signin.xbl_signin_label": { }
-            }
-          ]
-        }
-      },
-      {
-        "hover@common.new_button_state_hover": {
-          "controls": [
-            {
-              "xbl_signin_label@xbl_optional_signin.xbl_signin_label": { }
-            }
-          ]
-        }
-      },
-      {
-        "pressed@common.new_button_state_pressed": {
-          "controls": [
-            {
-              "xbl_signin_label@xbl_optional_signin.xbl_signin_label": {
-                "offset": [ 0, 1 ]
-              }
-            }
-          ]
-        }
-      }
-    ]
+    "$button_content": "xbl_optional_signin.xbl_signin_label"
   },
 
 
@@ -78,7 +48,6 @@
     "texture": "#texture",
     "size": [ "137.667%y", "100% - 2px" ],
     "offset": [ 1, 1 ],
-    "uv_size": [ 413, 300 ],
     "bindings": [
       {
         "binding_name": "#texture"
@@ -89,11 +58,8 @@
   "dialog_image_with_border": {
     "type": "image",
     "layer": 1,
-    "texture": "textures/gui/newgui/Grey",
+    "texture": "textures/ui/Grey",
     "size": [ "100%c + 2px", "100%" ],
-    "uv": [ 0, 0 ],
-    "uv_size": [ 2, 2 ],
-    "nineslice_size": 1,
     "controls": [
       {
         "dialog_image@xbl_optional_signin.dialog_image": { }
@@ -120,7 +86,7 @@
                 "size": [ "100% - 16px", "default" ],
                 "text": "#message",
                 "layer": 2,
-                "color": [ 1, 1, 1 ],
+                "color": "$body_text_color",
                 "bindings": [
                   {
                     "binding_name": "#message"
@@ -147,7 +113,7 @@
           "anchor_to": "top_middle",
           "offset": [ 0, 7 ],
           "layer": 2,
-          "color": [ 0, 0, 0 ],
+          "color": "$title_text_color",
           "bindings": [
             {
               "binding_name": "#title"
@@ -198,30 +164,6 @@
         "from_button_id": "button.menu_cancel",
         "to_button_id": "button.menu_exit",
         "mapping_type": "global"
-      },
-      {
-        "from_button_id": "button.menu_up",
-        "to_button_id": "button.menu_up",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_down",
-        "to_button_id": "button.menu_down",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_left",
-        "to_button_id": "button.menu_left",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_right",
-        "to_button_id": "button.menu_right",
-        "mapping_type": "global",
-        "scope": "view"
       }
     ],
     "$screen_content": "xbl_optional_signin.xbl_optional_signin_screen_content"

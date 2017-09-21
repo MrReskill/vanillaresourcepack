@@ -9,10 +9,8 @@
 
   "Xbox_icon": {
     "type": "image",
-    "texture": "textures/gui/newgui/xbox4",
+    "texture": "textures/ui/xbox4",
     "layer": 3,
-    "uv": [ 0, 0 ],
-    "uv_size": [ 27, 27 ],
     "size": [ 20, 20 ]
   },
 
@@ -24,69 +22,41 @@
         "Xbox_icon@Xbox_icon": {
           "anchor_from": "left_middle",
           "anchor_to": "left_middle",
-          "offset": [10, 0]
+          "offset": [6, 0]
         }
       },
       {
-        "new_button_label@common.new_button_label": {
-          "size": [ "100%-34px", "default" ],          
-          "offset": [-2, 0],
+        "button_label": {
+          "type": "label",
+          "size": [ "100%-30px", "default" ],
+          "offset": [ -2, 0 ],
           "anchor_from": "right_middle",
           "anchor_to": "right_middle",
-          "text": "xbox.signinFree"
+          "text": "xbox.signinFree",
+          "color": "$text_color"
         }
       }
     ]
   },
 
-  "xbl_signin_button@common.new_button": {
+  "xbl_signin_button@common_buttons.light_content_button": {
     "$pressed_button_name": "button.xbl_signin",
-    "controls": [
-      {
-        "default@common.new_button_state_default": {
-          "controls": [
-            {
-              "xbl_signin_label@xbl_first_launch.xbl_signin_label": { }
-            }
-          ]
-        }
-      },
-      {
-        "hover@common.new_button_state_hover": {
-          "controls": [
-            {
-              "xbl_signin_label@xbl_first_launch.xbl_signin_label": { }
-            }
-          ]
-        }
-      },
-      {
-        "pressed@common.new_button_state_pressed": {
-          "controls": [
-            {
-              "xbl_signin_label@xbl_first_launch.xbl_signin_label": {
-                "offset": [ 0, 1 ]
-              }
-            }
-          ]
-        }
-      }
-    ]
+    "$button_content": "xbl_first_launch.xbl_signin_label"
   },
 
   "title_image_panel": {
     "type": "panel",    
     "controls": [
-    {
+      {
         "message_label": {
-          "type": "label",          
-          "size": ["100%-93px", "100% - 3px" ],
+          "type": "label",
+          "size": [ "100%-93px", "100% - 3px" ],
           "anchor_from": "top_middle",
           "anchor_to": "top_middle",
-          "offset": [-45, 1],
+          "offset": [ -45, 1 ],
           "text": "#message",
           "layer": 2,
-          "color": [ 1,1,1 ],
+          "color": "$body_text_color",
           "bindings": [
             {
               "binding_name": "#message"
@@ -100,10 +70,9 @@
           "layer": 1,
           "anchor_from": "top_right",
           "anchor_to": "top_right",
-          "texture": "textures/gui/newgui/train",
+          "texture": "textures/ui/train",
           "offset": [ -2, 1 ],
-          "size": [ 82, 75 ],
-          "uv_size": [ 267, 243 ]
+          "size": [ 82, 75 ]
         }
       },
       {
@@ -132,12 +101,12 @@
       {
         "title_label": {
           "type": "label",
-          "offset": [0, 8],
+          "offset": [ 0, 8 ],
           "text": "xblLogin.LoginMessageTitle",
           "anchor_from": "top_middle",
           "anchor_to": "top_middle",
           "layer": 2,
-          "color": [ 0, 0, 0 ]
+          "color": "$title_text_color"
         }
       },
       {
@@ -175,30 +144,6 @@
         "from_button_id": "button.menu_cancel",
         "to_button_id": "button.menu_exit",
         "mapping_type": "global"
-      },
-      {
-        "from_button_id": "button.menu_up",
-        "to_button_id": "button.menu_up",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_down",
-        "to_button_id": "button.menu_down",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_left",
-        "to_button_id": "button.menu_left",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_right",
-        "to_button_id": "button.menu_right",
-        "mapping_type": "global",
-        "scope": "view"
       }
     ],
     "$screen_content": "xbl_first_launch.xbl_first_launch_screen_content"

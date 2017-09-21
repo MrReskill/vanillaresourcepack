@@ -12,6 +12,7 @@
 
   "panel_text": {
     "type": "label",
+    "color": "$main_header_text_color",
     "layer": 5,
     "anchor_from": "center",
     "anchor_to": "center",
@@ -80,7 +81,7 @@
       {
         "realm_screenshot_texture": {
           "type": "image",
-          "texture": "textures/gui/newgui/WorldDemoScreen",
+          "texture": "textures/ui/WorldDemoScreen",
           "layer": 5,
           "anchor_to": "center",
           "anchor_from": "center",
@@ -103,7 +104,7 @@
 
   "realm_owner_label@realms_pending_invitations.panel_text": {
     "text": "#realm_owner",
-    "color": [ 0.65, 0.65, 0.65 ],
+    "color": "$dark_button_secondary_default_text_color",
     "bindings": [
       {
         "binding_name": "#realm_owner",
@@ -165,7 +166,7 @@
 
   "accept_button_content": {
     "type": "image",
-    "texture": "textures/gui/newgui/realms_green_check",
+    "texture": "textures/ui/realms_green_check",
     "anchor_to": "center",
     "anchor_from": "center",
     //"layer": 6,
@@ -174,7 +175,7 @@
 
   "decline_button_content": {
     "type": "image",
-    "texture": "textures/gui/newgui/realms_red_x",
+    "texture": "textures/ui/realms_red_x",
     "anchor_to": "center",
     "anchor_from": "center",
     //"layer": 6,
@@ -222,7 +223,7 @@
     "anchor_from": "top_right",
     "size": [ "60px", "100%" ],
     "offset": [ 0, 0.5 ],
-    "color": [ 0.65, 0.65, 0.65 ],
+    "color": "$dark_button_secondary_default_text_color",
     "layer": 5,
     "bindings": [
       {
@@ -474,30 +475,6 @@
         "from_button_id": "button.menu_cancel",
         "to_button_id": "button.menu_exit",
         "mapping_type": "global"
-      },
-      {
-        "from_button_id": "button.menu_up",
-        "to_button_id": "button.menu_up",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_down",
-        "to_button_id": "button.menu_down",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_left",
-        "to_button_id": "button.menu_left",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_right",
-        "to_button_id": "button.menu_right",
-        "mapping_type": "global",
-        "scope": "view"
       }
     ],
     "$screen_content": "realms_pending_invitations.realms_invitation_screen_content"

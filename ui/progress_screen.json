@@ -6,9 +6,9 @@
   "popup_dialog_base@popup_dialog.popup_dialog": {
     "size": [ "90%", "90%" ],
     "$left_button_press": "button.confirm_download", //"button.download_resourcepack",
-    "$left_button_text": "skins.buy.closeButton", //"progress.resourcepack.download",
+    "$left_button_text": "gui.close", //"progress.resourcepack.download",
     "$right_button_press": "button.deny_packs", //"button.close_dialog",
-    "$right_button_text": "skins.buy.closeButton", //"progress.resourcepack.cancel",
+    "$right_button_text": "gui.close", //"progress.resourcepack.cancel",
     "controls": [
       { "background@popup_dialog.popup_dialog_bg": { } },
       {
@@ -29,7 +29,7 @@
           "layer": 100,
           "type": "label",
           "size": [ "100c%", 10 ],
-          "color": [ 0, 0, 0 ],
+          "color": "$dark_body_text_color",
           "offset": [ "0.75%", "-16%" ],
           "anchor_from": "bottom_left",
           "anchor_to": "bottom_left",
@@ -46,7 +46,7 @@
         "totalSelectedSize": {
           "type": "label",
           "size": [ "50c%", 10 ],
-          "color": [ 0, 0, 0 ],
+          "color": "$dark_body_text_color",
           "offset": [ "-0.75%", "-16%" ],
           "anchor_from": "bottom_right",
           "anchor_to": "bottom_right",
@@ -89,6 +89,7 @@
       {
         "control": {
           "type": "label",
+          "color": "$sub_header_text_color",
           "anchor_from": "left_middle",
           "anchor_to": "left_middle",
           "text": "$checkbox_label_text",
@@ -248,13 +249,10 @@
             {
               "control": {
                 "type": "image",
-                "nineslice_size": 1.0,
-                "texture": "textures/gui/newgui/dialog-background-atlas",
+                "texture": "textures/ui/control",
                 "layer": -10,
                 "size": [ "100% - 16px", "100%c" ],
-                "uv": [ 14, 101 ],
-                "uv_size": [ 2, 2 ],
-                "alpha": "$fill_alpha",
+                "alpha": 1,
                 "controls": [
                   {
                     "content_panel": {
@@ -273,7 +271,7 @@
                             "type": "label",
                             "offset": [ 0, 8 ],
                             "size": [ "95%", 10 ],
-                            "color": [ 0.275, 0.275, 0.275 ],
+                            "color": "$title_text_color",
                             "shadow": false,
                             "text": "$title_text"
                           }
@@ -289,7 +287,7 @@
                             "layer": 101,
                             "type": "label",
                             "size": [ "100%", "default" ],
-                            "color": [ 1, 1, 1 ],
+                            "color": "$body_text_color",
                             "text": "$description_text"
                           }
                         },
@@ -305,7 +303,8 @@
                             "enabled": "$use_top_button",
                             "size": "$button_size",
                             "$pressed_button_name": "$top_button_press",
-                            "$binding_condition": "none",
+                            "$button_binding_condition": "once",
+                            "$button_text_binding_type": "global",
                             "$button_text": "$top_button_text"
                           }
                         },
@@ -321,7 +320,8 @@
                           "middle_button@popup_dialog.popup_dialog_button_with_binding": {
                             "size": "$button_size",
                             "$pressed_button_name": "$middle_button_press",
-                            "$binding_condition": "once",
+                            "$button_binding_condition": "once",
+                            "$button_text_binding_type": "global",
                             "$button_text": "$middle_button_text"
                           }
                         },
@@ -411,13 +411,11 @@
 
   "normal_stroke_button": {
     "type": "image",
-    "nineslice_size": 4.0,
-    "texture": "textures/gui/newgui/NormalButtonThinStroke",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 7 ]
+    "texture": "textures/ui/NormalButtonThinStroke"
   },
   "progress_screen_text": {
     "type": "label",
+    "color": "$loading_text_color",
     "anchor_to": "center",
     "anchor_from": "center",
     "layer": 2,
@@ -460,13 +458,13 @@
   "progress_loading_bars": {
     "type": "image",
     "layer": 2,
-    "texture": "textures/gui/newgui/loading_bar",
+    "texture": "textures/ui/loading_bar",
     "anchor_from": "center",
     "anchor_to": "center",
     "offset": [ 0, 24 ],
     "size": [ 64, 8 ],
     "uv_size": [ 64, 8 ],
-    "uv": "@bar_animation",
+    "uv": "@progress.bar_animation",
     "color": [ 0.7, 0.7, 0.7, 1.0 ],
     "bindings": [
       {
@@ -476,6 +474,44 @@
     ]
   },
 
+  "fancy_progress_loading_bars": {
+    "type": "panel",
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "size": [ "90%", 5 ],
+    "layer": 5,
+    "controls": [
+      {
+        "full_progress_bar_icon@achievement.full_progress_bar_icon_base": {
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#loading_bar_percentage",
+              "binding_name_override": "#clip_ratio"
+            }
+          ]
+        }
+      },
+      {
+        "empty_progress_bar_icon@achievement.empty_progress_bar_icon": {
+          "layer": 1
+        }
+      },
+      {
+        "progress_bar_nub@achievement.progress_bar_nub": {
+          "size": [ "100% - 10px", 5 ],
+          "layer": 4
+        }
+      }
+    ],
+    "bindings": [
+      {
+        "binding_name": "#loading_bar_visible",
+        "binding_name_override": "#visible"
+      }
+    ]
+  },
+  
   "progress_bar": {
     "type": "custom",
     "renderer": "progress_bar_renderer",
@@ -485,16 +521,16 @@
     "primary_color": [ 0.5, 1.0, 0.5, 1.0 ],
     "bindings": [
       {
-        "binding_name_override": "#progress_bar_visible",
-        "binding_name": "#loading_bar_visible"
+        "binding_name": "#loading_bar_visible",
+        "binding_name_override": "#progress_bar_visible"
       },
       {
-        "binding_name_override": "#progress_bar_total_amount",
-        "binding_name": "#loading_bar_total_amount"
+        "binding_name": "#loading_bar_total_amount",
+        "binding_name_override": "#progress_bar_total_amount"
       },
       {
-        "binding_name_override": "#progress_bar_current_amount",
-        "binding_name": "#loading_bar_current_amount"
+        "binding_name": "#loading_bar_current_amount",
+        "binding_name_override": "#progress_bar_current_amount"
       }
     ]
   },
@@ -576,11 +612,13 @@
   "modal_progress_panel_no_cancel": {
     "type": "panel",
     "size": "$modal_screen_size",
+    "$background_fill_alpha|default": 0.8,
     "controls": [
       {
         "common_panel@common.common_panel": {
           "$dialog_background": "dialog_background_hollow_4",
-          "$show_close_button": false
+          "$fill_alpha": "$background_fill_alpha",
+          "$show_close_button": false          
         }
       },
       {
@@ -607,10 +645,12 @@
   "modal_progress_panel_with_cancel": {
     "type": "panel",
     "size": "$modal_screen_size",
+    "$background_fill_alpha|default": 0.8,
     "controls": [
       {
         "common_panel@common.common_panel": {
           "$dialog_background": "dialog_background_hollow_2",
+          "$fill_alpha": "$background_fill_alpha",          
           "$show_close_button": false
         }
       },
@@ -664,12 +704,83 @@
 
   "realms_loading_progress_screen@progress_screen": {
     "$screen_content": "progress.progress_screen_content",
-    "$background": "common.portal_background"
+    "$screen_bg_content": "common.portal_background"
   },
 
   "world_loading_progress_screen@progress_screen": {
-    "$screen_content": "progress.progress_screen_content",
-    "$background": "common.dirt_background"
+    "$screen_content": "progress.world_convert_modal_progress_screen_content"
+  },
+
+  "world_loading_screen_background@common.dirt_background": {
+    "tiled_scale": [ 2, 2 ]
+  },
+
+  "overworld_loading_background@world_loading_screen_background": {
+    "texture": "textures/blocks/dirt",
+    "controls": [
+      {
+        "background_gradient": {
+          "type": "custom",
+          "renderer": "gradient_renderer",
+          "color1": [ 0, 0, 0, 0.5 ],
+          "color2": [ 0, 0, 0, 0.7 ],
+          "ignored": "$is_holographic"
+        }
+      }
+    ]
+  },
+
+  "overworld_loading_progress_screen@world_loading_progress_screen": {
+    "$screen_bg_content": "progress.overworld_loading_background"
+  },
+
+  "nether_loading_background@world_loading_screen_background": {
+    "texture": "textures/blocks/netherrack",
+    "color": [0.5, 0.5, 0.5],
+    "controls": [
+      {
+        "background_gradient": {
+          "type": "custom",
+          "renderer": "gradient_renderer",
+          "color1": [ 0.3, 0.3, 0.3, 0.2 ],
+          "color2": [ 0.5, 0.188, 0.188, 0.4 ],
+          "ignored": "$is_holographic"
+        }
+      }
+    ]
+  },
+
+  "nether_loading_progress_screen@world_loading_progress_screen": {
+    "$screen_bg_content": "progress.nether_loading_background"
+  },
+
+  "theend_loading_background@world_loading_screen_background": {
+    "texture": "textures/blocks/end_stone",
+    "controls": [
+      {
+        "background_gradient": {
+          "type": "custom",
+          "renderer": "gradient_renderer",
+          "color1": [ 0, 0, 0, 0.2 ],
+          "color2": [ 0, 0, 0, 0.4 ],
+          "ignored": "$is_holographic"
+        }
+      }
+    ]
+  },
+
+  "theend_loading_progress_screen@world_loading_progress_screen": {
+    "$screen_bg_content": "progress.theend_loading_background"
+  },
+
+
+  "world_saving_progress_screen@progress_screen": {
+    "$screen_content": "progress.world_save_modal_progress_screen_content"
+  },
+
+
+  "world_convert_modal_progress_screen@progress.progress_screen": {
+    "$screen_content": "progress.world_convert_modal_progress_screen_content"
   },
 
   "progress_screen@common.base_screen": {
@@ -683,6 +794,18 @@
     ]
   },
 
+  "popup_dialog_factory": {
+    "type": "factory",
+    "control_ids": {
+      "test": "dialog@progress.popup_dialog_base",
+      "add_on_only": "add_on_only@progress.add_on_only",
+      "add_on_with_optional_texture_pack": "add_on_only@progress.add_on_with_optional_texture_pack",
+      "add_on_with_texture_pack": "add_on_only@progress.add_on_with_texture_pack",
+      "texture_pack_optional": "add_on_only@progress.texture_pack_optional",
+      "texture_pack_required": "add_on_only@progress.texture_pack_required"
+    }
+  },
+
   "progress_screen_content": {
     "type": "panel",
     "variables": [
@@ -690,40 +813,18 @@
         "requires": "$desktop_screen",
         "$button_state_default_base": "common.button_state_default",
         "$button_state_hover_base": "common.button_state_hover",
-        "$button_state_pressed_base": "common.button_state_pressed",
-        "$render_dirt_bg": true
+        "$button_state_pressed_base": "common.button_state_pressed"
       },
       {
         "requires": "$pocket_screen",
         "$button_state_default_base": "common-classic.button_state_default",
         "$button_state_hover_base": "common-classic.button_state_hover",
-        "$button_state_pressed_base": "common-classic.button_state_pressed",
-        "$render_dirt_bg": true
+        "$button_state_pressed_base": "common-classic.button_state_pressed"
       }
     ],
     "controls": [
       { "progress_content_panel@progress.progress_content_panel": { } },
-      {
-        "background@$background": {
-          "visible": "$render_dirt_bg"
-        }
-      },
-      {
-        "popup_dialog_factory": {
-          "type": "factory",
-          "control_ids": {
-            "test": "dialog@progress.popup_dialog_base",
-            "add_on_only": "add_on_only@progress.add_on_only",
-            "add_on_with_optional_texture_pack": "add_on_only@progress.add_on_with_optional_texture_pack",
-            "add_on_with_texture_pack": "add_on_only@progress.add_on_with_texture_pack",
-            "texture_pack_optional": "add_on_only@progress.texture_pack_optional",
-            "texture_pack_required": "add_on_only@progress.texture_pack_required"
-            //"no_connection": "@skin_pack_purchase.popup_dialog__no_connection",
-            //"purchase_failed": "@skin_pack_purchase.popup_dialog__purchase_failed",
-            //"purchase_in_progress": "@skin_pack_purchase.popup_dialog__purchase_in_progress"
-          }
-        }
-      }
+      { "popup_dialog_factory@progress.popup_dialog_factory": { } }
     ]
   },
 
@@ -746,15 +847,13 @@
         "requires": "$desktop_screen",
         "$button_state_default_base": "progress.normal_stroke_button",
         "$button_state_hover_base": "progress.normal_stroke_button",
-        "$button_state_pressed_base": "progress.normal_stroke_button",
-        "$render_dirt_bg": true
+        "$button_state_pressed_base": "progress.normal_stroke_button"
       },
       {
         "requires": "$pocket_screen",
         "$button_state_default_base": "common-classic.button_state_default",
         "$button_state_hover_base": "common-classic.button_state_hover",
-        "$button_state_pressed_base": "common-classic.button_state_pressed",
-        "$render_dirt_bg": true
+        "$button_state_pressed_base": "common-classic.button_state_pressed"
       }
     ],
     "controls": [
@@ -777,6 +876,174 @@
             }
           ]
         }
+      }
+    ]
+  },
+  
+  "world_modal_progress_panel": {
+    "type": "panel",
+    "size": "$world_modal_screen_size",
+    "variables": [
+      {
+        "requires": "$desktop_screen",
+        "$button_state_default_base": "common.button_state_default",
+        "$button_state_hover_base": "common.button_state_hover",
+        "$button_state_pressed_base": "common.button_state_pressed"
+      },
+      {
+        "requires": "$pocket_screen",
+        "$button_state_default_base": "common-classic.button_state_default",
+        "$button_state_hover_base": "common-classic.button_state_hover",
+        "$button_state_pressed_base": "common-classic.button_state_pressed"
+      }
+    ],
+    "controls": [
+      {
+        "common_panel@common.common_panel": {
+          "$dialog_background": "dialog_background_hollow_3",
+          "$show_close_button": false
+        }
+      },
+      {
+        "base_content": {
+          "type": "panel",
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          // magic offset to make the scroll clipping perfect
+          "size": [ "100%-12px", "100%-12px" ],
+          "offset": [ 6, 6 ],
+          "controls": [
+            {
+              "progress_title_text@progress.progress_title_text": {
+                "color": "$title_text_color",
+                "anchor_from": "top_middle",
+                "anchor_to": "top_middle",
+                "offset": [ 0, 3 ]
+              }
+            },
+            {
+              "progress_bar_text@progress.progress_bar_text": {
+                "localize": false,
+                "size": [ "default", 40 ],
+                "max_size": [ "100% - 8px", 40 ],
+                "offset": [ 0, -3 ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "inside_content": {
+          "type": "stack_panel",
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "size": [ "100%-12px", "100%c" ],
+          "controls": [
+            {
+              "loading_bar_panel": {
+                "type": "panel",
+                "size": [ "100%", "100%c" ],
+                "controls": [
+                  {
+                    "fancy_progress_loading_bars@progress.fancy_progress_loading_bars": {}
+                  }
+                ]
+              }
+            },
+            {
+              "vertical_padding": {
+                "type": "panel",
+                "size": [ 0, 5 ]
+              }
+            },
+            {
+              "modal_button_panel@progress.modal_button_panel": {
+                "anchor_from": "bottom_middle",
+                "anchor_to": "bottom_middle",
+                "size": [ "100%", "100%c" ],
+                "bindings": [
+                  {
+                    "binding_name": "#cancel_visible",
+                    "binding_name_override": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "vertical_padding_2": {
+                "type": "panel",
+                "size": [ 0, 14 ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+  "world_convert_modal_progress_screen_content": {
+    "type": "panel",
+
+    "layer": 2,
+
+    "controls": [
+      {
+        "title_panel_content@common_art.title_panel_content": {
+          "$splash_text_visible": false,
+          "layer": -1
+        }
+      },
+      {
+        "world_modal_progress_panel@progress.world_modal_progress_panel": {}
+      },
+      { "popup_dialog_factory@progress.popup_dialog_factory": {} }
+    ]
+  },
+
+  "world_save_modal_progress_screen_content": {
+    "type": "panel",
+    "controls": [
+      {
+        "title_panel_content@common_art.title_panel_content": {
+          "$splash_text_visible": false
+        }
+      },
+      {
+        "world_modal_progress_panel@progress.world_modal_progress_panel": {}
+      },
+      {
+        "save_icon@progress.auto_save": {}
+      },
+      { "popup_dialog_factory@progress.popup_dialog_factory": {} }
+    ]
+  },
+
+    "auto_save_animation": {
+    "anim_type": "flip_book",
+    "initial_uv": [ 0, 0 ],
+    "frame_count": 9,
+    "frame_step": 18,
+    "fps": 10,
+    "reversible": true,
+    "easing": "linear",
+    "next": "@bar_forward"
+  },
+
+  "auto_save": {
+    "type": "image",
+    "layer": 31,
+    "texture": "textures/ui/auto_save",
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "offset": [ 0, 20 ],
+    "size": [ 18, 30 ],
+    "uv_size": [ 18, 30 ],
+    "uv": "@auto_save_animation",
+    "disable_anim_fast_forward": true,
+    "bindings": [
+      {
+        "binding_name": "#auto_save_animation_visible",
+        "binding_name_override": "#visible"
       }
     ]
   }

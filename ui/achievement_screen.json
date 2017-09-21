@@ -330,16 +330,16 @@
     "type": "label",
     "size": [ "default", 10 ],
     "text": "achievementScreen.gamerscore:",
-    "color": [ 1.0, 1.0, 1.0 ],
+    "color": "$achievement_text_color",
     "shadow": false
   },
 
   "gamer_score_value_label": {
     "type": "label",
-    "size": [ "default", 10 ], 
+    "size": [ "default", 10 ],
     "text": "#gamerscore_value",
-    "color": [ 1.0, 1.0, 1.0 ],
-    "shadow": false,    
+    "color": "$achievement_text_color",
+    "shadow": false,
     "bindings": [
       {
         "binding_name": "#gamerscore_value"
@@ -349,18 +349,18 @@
 
   "achievement_label": {
     "type": "label",
-    "size": [ "default", 10 ],   
+    "size": [ "default", 10 ],
     "text": "achievementScreen.achievements:",
-    "color": [ 1.0, 1.0, 1.0 ],
+    "color": "$achievement_text_color",
     "shadow": false
   },
 
   "achievement_value_label": {
     "type": "label",
-    "size": [ "default", 10 ], 
+    "size": [ "default", 10 ],
     "text": "#achievements_value",
-    "color": [ 1.0, 1.0, 1.0 ],
-    "shadow": false,    
+    "color": "$achievement_text_color",
+    "shadow": false,
     "bindings": [
       {
         "binding_name": "#achievements_value"
@@ -372,16 +372,16 @@
     "type": "label",
     "size": [ "default", 10 ],
     "text": "achievementScreen.timeplayed:",
-    "color": [ 1.0, 1.0, 1.0 ],
+    "color": "$achievement_text_color",
     "shadow": false
   },
 
   "time_played_value_label": {
     "type": "label",
-    "size": [ "default", 10 ], 
+    "size": [ "default", 10 ],
     "text": "#time_played_value",
-    "color": [ 1.0, 1.0, 1.0 ],
-    "shadow": false,    
+    "color": "$achievement_text_color",
+    "shadow": false,
     "bindings": [
       {
         "binding_name": "#time_played_value"
@@ -391,6 +391,7 @@
 
   "percentage_label": {
     "type": "label",
+    "color": "$achievement_text_color",
     "font_size": "normal",
     "text": "#achievement_percentage",
     "shadow": false,
@@ -718,7 +719,7 @@
     "anchor_from": "top_left",
     "anchor_to": "top_left",
     "text": "#achievement_name",
-    "color": [ 1.0, 1.0, 1.0 ],
+    "color": "$achievement_text_color",
     "shadow": false,
     "layer": 1,
     "bindings": [
@@ -732,8 +733,6 @@
 
   "achievement_icon": {
     "type": "image",
-    //"texture": "#texture",
-    "uv": [ 0, 0 ],
     "bindings": [
       {
         "binding_name": "#texture_name",
@@ -758,6 +757,7 @@
 
   "achievement_desc": {
     "type": "label",
+    "color": "$achievement_text_color",
     "anchor_from": "top_left",
     "anchor_to": "top_left",
     "font_size": "normal",
@@ -776,7 +776,7 @@
   "achievement_gamer_score_value": {
     "type": "label",
     "text": "#achievement_gamer_score",
-    "color": [ 1.0, 1.0, 1.0 ],
+    "color": "$achievement_text_color",
     "font_size": "normal",
     "shadow": false,
     "bindings": [
@@ -791,7 +791,7 @@
   "achievement_world_score_value": {
     "type": "label",
     "text": "#achievement_world_score",
-    "color": [ 1.0, 1.0, 1.0 ],
+    "color": "$achievement_text_color",
     "font_size": "normal",
     "shadow": false,
     "bindings": [
@@ -860,17 +860,17 @@
     "anchor_to": "bottom_right",
     "controls": [
       {
-        "full_progress_bar_icon@full_progress_bar_icon": {
+        "full_progress_bar_icon@achievement.full_progress_bar_icon": {
           "layer": 2
         }
       },
       {
-        "empty_progress_bar_icon@empty_progress_bar_icon": {
+        "empty_progress_bar_icon@achievement.empty_progress_bar_icon": {
           "layer": 1
         }
       },
       {
-        "progress_bar_nub@progress_bar_nub": {
+        "progress_bar_nub@achievement.progress_bar_nub": {
           "size": [ "100% - 10px", 5 ],
           "layer": 4
         }
@@ -890,7 +890,6 @@
           "size": [ "78.571428571%y", "100%" ], // scales off of the size of the panel maintaining aspect ratio, x = 11/14y
           "color": [ 0.545, 0.745, 0.384 ],
           "clip_direction": "down",
-          "nineslice_size": 0.0,
           "controls": [
 
           ],
@@ -906,8 +905,7 @@
         "trophy_icon_1@trophy_icon": {
           "layer": 2,
           "size": [ "78.5714285%y", "100%" ], // scales off of the size of the panel maintaining aspect ratio, x = 11/14y
-          "color": [ 1.0, 1.0, 1.0 ],
-          "nineslice_size": 0.0
+          "color": [ 1.0, 1.0, 1.0 ]
         }
       },
       {
@@ -963,17 +961,12 @@
 
   "header_background": {
     "type": "image",
-    "nineslice_size": [ 6.0, 20.0, 6.0, 6.0 ],
-    "texture": "textures/gui/achievements/fillalpha",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 14, 28 ]
+    "texture": "textures/ui/achievements_dialog"
   },
 
   "grey_alpha_background": {
     "type": "image",
-    "texture": "textures/gui/achievements/solidtransparency",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 2, 2 ],
+    "texture": "textures/ui/solidtransparency",
     "alpha": 0.7
   },
 
@@ -986,54 +979,37 @@
 
   "normal_thin_button": {
     "type": "image",
-    "nineslice_size": 4.0,
-    "texture": "textures/gui/newgui/play_screen/NormalButtonThinNewBevel",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 8, 8 ]
+    "texture": "textures/ui/NormalButtonThinNewBevel"
   },
 
   "trophy_icon": {
     "type": "image",
-    "texture": "textures/gui/achievements/trophy",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 11, 14 ]
+    "texture": "textures/ui/trophy_banner_icon"
   },
 
   "gamer_score_icon": {
     "type": "image",
-    "texture": "textures/gui/achievements/g",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 11, 11 ]
+    "texture": "textures/ui/gamerscore"
   },
 
   "clock_icon": {
     "type": "image",
-    "texture": "textures/gui/achievements/clock",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 11, 11 ]
+    "texture": "textures/ui/clock"
   },
 
   "main_banner": {
     "type": "image",
-    "texture": "textures/gui/achievements/mainbanners",
-    "uv": [ 0, 0 ],
-    "nineslice_size": 1.0,
-    "uv_size": [ 3, 3 ]
+    "texture": "textures/ui/mainbanners"
   },
 
   "grey_banner": {
     "type": "image",
-    "texture": "textures/gui/achievements/lightgreybars",
-    "nineslice_size": 1.0,
-    "uv": [ 0, 0 ],
-    "uv_size": [ 1, 1 ]
+    "texture": "textures/ui/lightgreybars"
   },
 
   "achievement_locked_icon": {
     "type": "image",
-    "texture": "textures/gui/achievements/lock",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 7 ],
+    "texture": "textures/ui/achievement_locked_icon",
     "anchor_from": "top_left",
     "anchor_to": "top_left",
     "size": [ 7, 7 ]
@@ -1041,20 +1017,17 @@
 
   "empty_progress_bar_icon": {
     "type": "image",
-    "texture": "textures/gui/achievements/hotdogempty",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 13, 5 ],
-    "nineslice_size": [ 6.0, 1.0, 6.0, 1.0 ]
+    "texture": "textures/ui/experiencebarempty"
   },
 
-  "full_progress_bar_icon": {
+  "full_progress_bar_icon_base": {
     "type": "image",
-    "texture": "textures/gui/achievements/hotdogfull",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 13, 5 ],
-    "nineslice_size": [ 1.0, 0.0, 1.0, 0.0 ],
+    "texture": "textures/ui/experiencebarfull",
     "clip_direction": "left",
-    "clip_pixelperfect": false,
+    "clip_pixelperfect": false
+  },
+  
+  "full_progress_bar_icon@achievement.full_progress_bar_icon_base": {  
     "bindings": [
       {
         "binding_name": "#progress_percentage",
@@ -1067,33 +1040,24 @@
 
   "progress_bar_nub": {
     "type": "image",
-    "texture": "textures/gui/achievements/nub",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 11, 5 ],
+    "texture": "textures/ui/experiencenub",
     "tiled": true
   },
 
   "worlds_icon": {
     "type": "image",
-    "texture": "textures/gui/newgui/World",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 16, 16 ]
+    "texture": "textures/ui/World"
   },
 
   "worlds_greyed_icon": {
     "type": "image",
-    "texture": "textures/gui/newgui/World",
-    "grayscale": true,
-    "uv": [ 0, 0 ],
-    "uv_size": [ 16, 16 ]
+    "texture": "textures/ui/World",
+    "grayscale": true
   },
 
   "focus_border": {
     "type": "image",
-    "texture": "textures/gui/newgui/focusBorder",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 5, 5 ],
-    "nineslice_size": 1.0,
+    "texture": "textures/ui/focus_border_white",
     "color": [ 0.7, 0.7, 0.7 ]
   },
 
@@ -1108,31 +1072,7 @@
         "from_button_id": "button.menu_cancel",
         "to_button_id": "button.menu_exit",
         "mapping_type": "global"
-      },
-      {
-        "from_button_id": "button.menu_up",
-        "to_button_id": "button.menu_up",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_down",
-        "to_button_id": "button.menu_down",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_left",
-        "to_button_id": "button.menu_left",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_right",
-        "to_button_id": "button.menu_right",
-        "mapping_type": "global",
-        "scope": "view"
-      }
+      }      
     ],
     "$screen_content": "achievement.achievement_screen_content"
   },

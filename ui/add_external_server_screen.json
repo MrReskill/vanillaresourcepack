@@ -6,9 +6,9 @@
 {
   "namespace": "add_external_server",
 
-  "play_button@common.new_button": {
+  "play_button@common_buttons.light_text_button": {
     "$pressed_button_name": "button.play_button",
-    "$button_label_text": "addExternalServerScreen.playButtonLabel",
+    "$button_text": "addExternalServerScreen.playButtonLabel",
     "ignored": "$edit_mode",
     "bindings": [
       {
@@ -19,7 +19,7 @@
   },
 
   "play_disabled_button@play_button": {
-    "$text_color": [ 0.5, 0.5, 0.5, 0.5 ],
+    "$text_color": "$light_button_locked_text_color",
     "bindings": [
       {
         "binding_name": "#play_button_disabled",
@@ -32,15 +32,15 @@
     ]
   },
 
-  "remove_button@common.new_button": {
+  "remove_button@common_buttons.light_text_button": {
     "$pressed_button_name": "button.remove_button",
-    "$button_label_text": "addExternalServerScreen.removeButtonLabel",
+    "$button_text": "addExternalServerScreen.removeButtonLabel",
     "visible": "($edit_mode)"
   },
 
-  "save_button@common.new_button": {
+  "save_button@common_buttons.light_text_button": {
     "$pressed_button_name": "button.save_button",
-    "$button_label_text": "addExternalServerScreen.saveButtonLabel",
+    "$button_text": "addExternalServerScreen.saveButtonLabel",
     "bindings": [
       {
         "binding_name": "#save_button_enabled",
@@ -54,7 +54,7 @@
   },
 
   "save_disabled_button@save_button": {
-    "$text_color": [ 0.5, 0.5, 0.5, 0.5 ],
+    "$text_color": "$light_button_locked_text_color",
     "bindings": [
       {
         "binding_name": "#save_button_disabled",
@@ -78,6 +78,7 @@
       {
         "name_label": {
           "type": "label",
+          "color": "$sub_header_text_color",
           "anchor_from": "top_left",
           "anchor_to": "top_left",
           "layer": 1,
@@ -97,7 +98,6 @@
           "max_length": "$max_length",
           "text_type": "$text_type",
           "$place_holder_text": "$placeholder_label",
-          "$place_holder_text_color": [ 0.8, 0.8, 0.8 ],
           "$text_edit_box_binding_condition": "once"
         }
       }
@@ -108,7 +108,7 @@
     "type": "label",
     "layer": 1,
     "text": "#title_text",
-    "color": [ 0.275, 0.275, 0.275 ],
+    "color": "$title_text_color",
     "shadow": false,
     "bindings": [
       {
@@ -254,31 +254,7 @@
         "from_button_id": "button.menu_cancel",
         "to_button_id": "button.menu_exit",
         "mapping_type": "global"
-      },
-      {
-        "from_button_id": "button.menu_up",
-        "to_button_id": "button.menu_up",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_down",
-        "to_button_id": "button.menu_down",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_left",
-        "to_button_id": "button.menu_left",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_right",
-        "to_button_id": "button.menu_right",
-        "mapping_type": "global",
-        "scope": "view"
-      }
+      }      
     ],
     "$screen_content": "add_external_server.add_external_server_screen_content"
   },
@@ -290,7 +266,7 @@
         "root_panel": {
           "type": "panel",
           "controls": [
-            { "gamepad_helpers@add_external_server.gamepad_helpers": { } },
+            { "gamepad_helpers@add_external_server.gamepad_helpers": {} },
             { "main_panel@add_external_server.main_panel": { "layer": 1 } }
           ]
         }

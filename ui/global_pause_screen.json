@@ -8,6 +8,7 @@
 
   "message": {
     "type": "label",
+    "color": "$body_text_color",
     "anchor_to": "center",
     "anchor_from": "center",
     "layer": 2,
@@ -15,16 +16,15 @@
     "text": "globalPauseScreen.message"
   },
 
-  "quit_button@common_buttons.light_text_button": {
+  "quit_button@common_buttons.light_text_form_fitting_button": {
     "$pressed_button_name": "button.menu_quit",
-    "size": [ "10%", 24 ],
     "$button_text": "globalPauseScreen.quit",
     "layer": 2,
     "offset": [ 0, "10%" ]
   },
 
   "globalpause_screen@common.base_screen": {
-    "$screen_content": "pause_screen_content"
+    "$screen_content": "globalpause.pause_screen_content"
   },
   "pause_screen_content": {
     "type": "panel",
@@ -40,20 +40,17 @@
       {
         "transparentFill": {
           "type": "image",
-          "nineslice_size": 1.0,
-          "texture": "textures/gui/newgui/dialog-background-atlas",
+          "texture": "textures/ui/control",
           "layer": -1,
           "size": [ "100%", "100%" ],
-          "uv": [ 14, 101 ],
-          "uv_size": [ 2, 2 ],
           "alpha": "$fill_alpha"
         }
       },
       {
-        "message@message": {}
+        "message@globalpause.message": {}
       },
       {
-        "quit_button@quit_button": {}
+        "quit_button@globalpause.quit_button": {}
       }
     ]
   }

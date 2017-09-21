@@ -3,6 +3,7 @@
 
   "generic_label": {
     "type": "label",
+    "color": "$body_text_color",
     "anchor_from": "center",
     "anchor_to": "center",
     "shadow": true
@@ -18,19 +19,19 @@
     "$icon_text_color": [ 0.0, 0.0, 0.0 ],
     "controls": [
       {
-        "grey_gamepad_helper_a@common.grey_gamepad_helper_a": {
+        "gamepad_helper_a@common.gamepad_helper_a": {
           "anchor_from": "left_middle",
           "anchor_to": "left_middle"
         }
       },
       {
-        "grey_gamepad_helper_b@common.grey_gamepad_helper_b": {
+        "gamepad_helper_b@common.gamepad_helper_b": {
           "anchor_from": "center",
           "anchor_to": "center"
         }
       },
       {
-        "grey_gamepad_helper_x@common.grey_gamepad_helper_x": {
+        "gamepad_helper_x@common.gamepad_helper_x": {
           "anchor_from": "right_middle",
           "anchor_to": "right_middle"
         }
@@ -40,11 +41,10 @@
 
   // Backgrounds //
 
-  "background_image@common.sprite_sheet_base": {
+  "background_image": {
+    "type": "image",
     "size": [ "100%", "100%" ],
-    "nineslice_size": 4.0,
-    "uv": [ 0, 0 ],
-    "uv_size": [ 16, 16 ]
+    "texture": "textures/ui/background_panel"
   },
 
   // Inventory Grids //
@@ -114,6 +114,15 @@
           "anchor_from": "bottom_middle",
           "anchor_to": "bottom_middle"
         }
+      },
+      {
+        "lapis@enchanting.lapis_image": {
+          "offset": [ 0, -8 ],
+          "texture": "textures/ui/lapis",
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "layer": 6
+        }
       }
     ]
   },
@@ -122,7 +131,7 @@
 
   "enchant_text_runes@enchanting.enchant_runes": {
     "size": [ "100% - 29px", "100% - 6px" ],
-    "color": [ 0.408, 0.368, 0.29, 1.0 ]
+    "color": "$enchanting_runes_fail_color"
   },
   "show_highlighted_slot_control@common.pocket_ui_highlight_selected_slot": {
     "visible": false,
@@ -146,19 +155,16 @@
       }
     ]
   },
-  "inactive_background@common.sprite_sheet_base": {
-    "uv": [ 0, 32 ],
-    "uv_size": [ 8, 8 ],
-    "nineslice_size": 3
+  "inactive_background": {
+    "type": "image",
+    "texture": "textures/ui/pocket_button_pressed"
   },
   "dark_background@enchanting.dark_background": {
-    "nineslice_size": 1
   },
   "dark_background_hover@enchanting_pocket.dark_background": {
 
   },
   "active_background@enchanting.active_background": {
-    "nineslice_size": 1
   },
   "active_background_hover@enchanting_pocket.active_background": {
   },
@@ -286,22 +292,22 @@
             {
               "button1@enchant_button_panel": {
                 "grid_position": [ 0, 0 ],
-                "$uvs": [ 3, 2 ],
-                "$uvus": [ 3, 18 ]
+                "$texture_selectable": "textures/ui/dust_selectable_1",
+                "$texture_unselectable": "textures/ui/dust_unselectable_1"
               }
             },
             {
               "button2@enchant_button_panel": {
                 "grid_position": [ 0, 1 ],
-                "$uvs": [ 18, 2 ],
-                "$uvus": [ 18, 18 ]
+                "$texture_selectable": "textures/ui/dust_selectable_2",
+                "$texture_unselectable": "textures/ui/dust_unselectable_2"
               }
             },
             {
               "button3@enchant_button_panel": {
                 "grid_position": [ 0, 2 ],
-                "$uvs": [ 34, 2 ],
-                "$uvus": [ 34, 18 ]
+                "$texture_selectable": "textures/ui/dust_selectable_3",
+                "$texture_unselectable": "textures/ui/dust_unselectable_3"
               }
             }
           ]
@@ -317,12 +323,11 @@
     "renderer": "inventory_item_renderer",
     "anchor_from": "center",
     "anchor_to": "center",
-    "size": [ 18, 18 ]
+    "size": [ 16, 16 ]
   },
-  "confirm_default_control@common.sprite_sheet_base": {
-    "uv": [ 8, 32 ],
-    "uv_size": [ 8, 8 ],
-    "nineslice_size": 2
+  "confirm_default_control": {
+    "type": "image",
+    "texture": "textures/ui/pocket_button_default"
   },
   "enchanting_confirm_button@common.button": {
     "size": [ 120, 30 ],
@@ -333,16 +338,15 @@
       { "default@enchanting_pocket.confirm_default_control": { } },
       { "hover@enchanting_pocket.confirm_default_control": { } },
       {
-        "pressed@common.sprite_sheet_base": {
-          "uv": [ 0, 32 ],
-          "uv_size": [ 8, 8 ],
-          "nineslice_size": 2
+        "pressed": {
+          "type": "image",
+          "texture": "textures/ui/pocket_button_pressed"
         }
       },
       {
-        "arrow_active@common.sprite_sheet_base": {
-          "uv": [ 73, 36 ],
-          "uv_size": [ 22, 15 ],
+        "arrow_active": {
+          "type": "image",
+          "texture": "textures/ui/arrow_active",
           "size": [ 22, 15 ],
           "layer": 1,
           "bindings": [
@@ -354,9 +358,9 @@
         }
       },
       {
-        "arrow_inactive@common.sprite_sheet_base": {
-          "uv": [ 73, 20 ],
-          "uv_size": [ 22, 15 ],
+        "arrow_inactive": {
+          "type": "image",
+          "texture": "textures/ui/arrow_inactive",
           "size": [ 22, 15 ],
           "layer": 1,
           "bindings": [
@@ -584,10 +588,7 @@
       {
         "header_background": {
           "type": "image",
-          "nineslice_size": [ 3, 3, 3, 6 ],
-          "texture": "textures/gui/newgui/TopBar",
-          "uv": [ 0, 0 ],
-          "uv_size": [ 5, 8 ]
+          "texture": "textures/ui/header_bar"
         }
       },
       { "legacy_pocket_close_button@common.legacy_pocket_close_button": { } },
@@ -599,7 +600,7 @@
           "controls": [
             {
               "title_label@enchanting_pocket.generic_label": {
-                "text": "tile.enchanting_table.name",
+                "text": "$container_title",
                 "layer": 1
               }
             }
@@ -641,15 +642,10 @@
     "controls": [
       { "gamepad_helpers@enchanting_pocket.gamepad_helpers": { "layer": 2 } },
       { "header@enchanting_pocket.header": { "layer": 2 } },
-      { "bg@enchanting_pocket.background_image": { } },
-      { "hold_icon@common.inventory_take_progress_icon_button": { } },
-      { "flying_item_renderer@common.flying_item_renderer": { } },
-      {
-        "selected_item_details_factory": {
-          "type": "factory",
-          "control_name": "@pocket_containers.selected_item_details"
-        }
-      },
+      { "bg@enchanting_pocket.background_image": {} },
+      { "hold_icon@common.inventory_take_progress_icon_button": {} },
+      { "flying_item_renderer@common.flying_item_renderer": {} },
+      { "selected_item_details_factory@common.selected_item_details_factory": {} },
       {
         "enchant_error_factory": {
           "type": "factory",

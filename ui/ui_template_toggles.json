@@ -49,66 +49,216 @@
   },
 
 
-  "dark_ui_toggle@light_ui_toggle": {
-    "$default_texture": "textures/gui/newgui/buttons/borderless/dark",
-    "$hover_texture": "textures/gui/newgui/buttons/borderless/darkpressednohover",
-    "$pressed_texture": "textures/gui/newgui/buttons/borderless/darkhover",
-    "$pressed_no_hover_texture": "textures/gui/newgui/buttons/borderless/darkpressed",
+  "dark_ui_toggle@common_toggles.light_ui_toggle": {
+    "$template_toggle": "common_toggles.dark_template_toggle"
+  },
 
-    "$default_color": [ 1, 1, 1 ],
-    "$hover_color": [ 1, 1, 1 ]
+  "dark_template_toggle@common_toggles.light_template_toggle": {
+    "$default_texture|default": "textures/ui/button_borderless_dark",
+    "$hover_texture|default": "textures/ui/button_borderless_darkpressednohover",
+    "$pressed_texture|default": "textures/ui/button_borderless_darkhover",
+    "$pressed_no_hover_texture|default": "textures/ui/button_borderless_darkpressed",
+
+    "$default_text_color|default": "$dark_toggle_default_text_color",
+    "$hover_text_color|default": "$dark_toggle_hover_text_color",
+    "$default_checked_text_color|default": "$dark_toggle_checked_default_text_color",
+    "$hover_checked_text_color|default": "$dark_toggle_checked_hover_text_color",
+
+    "$default_glyph_color|default": "$dark_glyph_toggle_default_color",
+    "$hover_glyph_color|default": "$dark_glyph_toggle_hover_color",
+    "$default_checked_glyph_color|default": "$dark_glyph_toggle_checked_default_color",
+    "$hover_checked_glyph_color|default": "$dark_glyph_toggle_checked_hover_color"
+  },
+
+  "light_template_toggle@common.toggle": {
+    "$unchecked_control|default": "common_toggles.toggle_unchecked",
+    "$checked_control|default": "common_toggles.toggle_checked",
+    "$unchecked_hover_control|default": "common_toggles.toggle_unchecked_hover",
+    "$checked_hover_control|default": "common_toggles.toggle_checked_hover",
+    "$unchecked_locked_control|default": "common_toggles.toggle_locked",
+    "$unchecked_locked_hover_control|default": "common_toggles.toggle_locked",
+    "$checked_locked_control|default": "common_toggles.toggle_locked",
+    "$checked_locked_hover_control|default": "common_toggles.toggle_locked",
+
+    "$default_texture|default": "textures/ui/button_borderless_light",
+    "$hover_texture|default": "textures/ui/button_borderless_lightpressednohover",
+    "$pressed_texture|default": "textures/ui/button_borderless_lighthover",
+    "$pressed_no_hover_texture|default": "textures/ui/button_borderless_lightpressed",
+    "$locked_texture|default": "textures/ui/disabledButtonNoBorder",
+
+    "$default_text_color|default": "$light_toggle_default_text_color",
+    "$hover_text_color|default": "$light_toggle_hover_text_color",
+    "$default_checked_text_color|default": "$light_toggle_checked_default_text_color",
+    "$hover_checked_text_color|default": "$light_toggle_checked_hover_text_color",
+
+    "$default_glyph_color|default": "$light_glyph_toggle_default_color",
+    "$hover_glyph_color|default": "$light_glyph_toggle_hover_color",
+    "$default_checked_glyph_color|default": "$light_glyph_toggle_checked_default_color",
+    "$hover_checked_glyph_color|default": "$light_glyph_toggle_checked_hover_color",
+
+    "$checked_image|default": "common.empty_panel",
+    "$unchecked_image|default": "common.empty_panel",
+    "$default_border_color": "$light_border_toggle_default_color",
+    "$hover_border_color": "$light_border_toggle_hover_color",
+    "$locked_alpha": 1,
+
+    "$toggle_binding_type|default": "none",
+    "$toggle_enabled_binding_type|default": "none",
+    "$toggle_tab_focus_binding_type|default": "none",
+    "$toggle_tab_focus_id_binding_type|default": "none",
+    "$toggle_tab_focus_override_left_binding_type|default": "none",
+    "$toggle_tab_focus_override_right_binding_type|default": "none",
+    "$toggle_tab_focus_override_down_binding_type|default": "none",
+    "$toggle_tab_focus_override_up_binding_type|default": "none",
+    "$toggle_on_hover_binding_type|default": "none",
+    "$toggle_tab_focus_binding_name|default": "",
+    "$toggle_tab_focus_id_binding_name|default": "",
+    "$toggle_tab_focus_override_right|default": "#focus_override_right",
+    "$toggle_tab_focus_override_down|default": "#focus_override_down",
+    "$toggle_tab_focus_override_up|default": "#focus_override_up",
+    "$toggle_tab_focus_override_left|default": "#focus_override_left",
+    "$toggle_on_hover_binding_name|default": "",
+    "$toggle_focus_wrap_enabled|default": true,
+
+    "$button_mappings|default": [
+      {
+        "from_button_id": "button.menu_select",
+        "to_button_id": "button.menu_select",
+        "mapping_type": "pressed"
+      },
+      {
+        "from_button_id": "button.menu_ok",
+        "to_button_id": "button.menu_ok",
+        "mapping_type": "focused"
+      },
+      {
+        "ignored": "(not $enable_directional_toggling)",
+        "from_button_id": "button.menu_left",
+        "to_button_id": "$toggle_off_button",
+        "mapping_type": "pressed",
+        "input_mode_condition": "gamepad_and_not_gaze"
+      },
+      {
+        "ignored": "(not $enable_directional_toggling)",
+        "from_button_id": "button.menu_right",
+        "to_button_id": "$toggle_on_button",
+        "mapping_type": "pressed",
+        "input_mode_condition": "gamepad_and_not_gaze"
+      }
+    ],
+
+    "focus_wrap_enabled": "$toggle_focus_wrap_enabled",
+
+    "$custom_toggle_binding_type|default": "none",
+    "$custom_toggle_binding_condition|default": "visible",
+    "$custom_toggle_state_binding_name|default": "",
+    "$custom_toggle_state_binding_name_override|default": "",
+
+    "button_mappings": "$button_mappings",
+
+    "bindings": [
+      {
+        "binding_type": "$toggle_binding_type",
+        "binding_condition": "$toggle_binding_condition",
+        "binding_collection_name": "$toggle_grid_collection_name",
+        "binding_name": "$toggle_state_binding_name",
+        "binding_name_override": "#toggle_state"
+      },
+      {
+        "binding_type": "$toggle_enabled_binding_type",
+        "binding_condition": "$toggle_enabled_binding_condition",
+        "binding_collection_name": "$toggle_grid_collection_name",
+        "binding_name": "$toggle_enabled_binding_name",
+        "binding_name_override": "#enabled"
+      },
+      {
+        "binding_collection_name": "$toggle_grid_collection_name",
+        "binding_type": "collection_details"
+      },
+      {
+        "binding_type": "$toggle_tab_focus_binding_type",
+        "binding_name": "$toggle_tab_focus_binding_name",
+        "binding_name_override": "#default_focus_precedence"
+      },
+      {
+        "binding_type": "$toggle_tab_focus_id_binding_type",
+        "binding_collection_name": "$toggle_grid_collection_name",
+        "binding_name": "$toggle_tab_focus_id_binding_name",
+        "binding_name_override": "#focus_identifier"
+      },
+      {
+        "binding_type": "$toggle_tab_focus_override_right_binding_type",
+        "binding_collection_name": "$toggle_grid_collection_name",
+        "binding_name": "$toggle_tab_focus_override_right",
+        "binding_name_override": "#focus_change_right"
+      },
+      {
+        "binding_type": "$toggle_tab_focus_override_left_binding_type",
+        "binding_collection_name": "$toggle_grid_collection_name",
+        "binding_name": "$toggle_tab_focus_override_left",
+        "binding_name_override": "#focus_change_left"
+      },
+      {
+        "binding_type": "$toggle_tab_focus_override_down_binding_type",
+        "binding_collection_name": "$toggle_grid_collection_name",
+        "binding_name": "$toggle_tab_focus_override_down",
+        "binding_name_override": "#focus_change_down"
+      },
+      {
+        "binding_type": "$toggle_tab_focus_override_up_binding_type",
+        "binding_collection_name": "$toggle_grid_collection_name",
+        "binding_name": "$toggle_tab_focus_override_up",
+        "binding_name_override": "#focus_change_up"
+      },
+      {
+        "binding_type": "$toggle_on_hover_binding_type",
+        "binding_name": "$toggle_on_hover_binding_name",
+        "binding_name_override": "#toggle_on_hover"
+      },
+      {
+        "binding_type": "$custom_toggle_binding_type",
+        "binding_condition": "$custom_toggle_binding_condition",
+        "binding_collection_name": "$toggle_grid_collection_name",
+        "binding_name": "$custom_toggle_state_binding_name",
+        "binding_name_override": "$custom_toggle_state_binding_name_override"
+      }
+    ]
   },
 
   "light_ui_toggle": {
     "type": "panel",
 
+    "$toggle_view_binding_name|default": "this_toggle",
+    "$template_toggle|default": "common_toggles.light_template_toggle",
+
+    "controls": [
+      {
+        // done as a child to allow for parent bindings
+        "$toggle_view_binding_name@$template_toggle": {
+        }
+      }
+    ]
+  },
+
+  "switch_toggle@common_toggles.light_image_toggle": {
     "$unchecked_control": "common_toggles.toggle_unchecked",
     "$checked_control": "common_toggles.toggle_checked",
     "$unchecked_hover_control": "common_toggles.toggle_unchecked_hover",
     "$checked_hover_control": "common_toggles.toggle_checked_hover",
-    "$unchecked_locked_control": "common_toggles.toggle_unchecked",
-    "$unchecked_locked_hover_control": "common_toggles.toggle_unchecked",
-    "$checked_locked_control": "common_toggles.toggle_checked",
-    "$checked_locked_hover_control": "common_toggles.toggle_checked",
+    "$unchecked_locked_control": "common_toggles.toggle_unchecked_locked",
+    "$unchecked_locked_hover_control": "common_toggles.toggle_unchecked_locked",
+    "$checked_locked_control": "common_toggles.toggle_checked_locked",
+    "$checked_locked_hover_control": "common_toggles.toggle_checked_locked",
 
-    "$default_texture": "textures/gui/newgui/buttons/borderless/light",
-    "$hover_texture": "textures/gui/newgui/buttons/borderless/lightpressednohover",
-    "$pressed_texture": "textures/gui/newgui/buttons/borderless/lighthover",
-    "$pressed_no_hover_texture": "textures/gui/newgui/buttons/borderless/lightpressed",
+    "$default_texture": "textures/ui/toggle_off",
+    "$hover_texture": "textures/ui/toggle_on",
+    "$pressed_texture": "textures/ui/toggle_off_hover",
+    "$pressed_no_hover_texture": "textures/ui/toggle_on_hover",
+    "$unchecked_locked_texture": "textures/ui/toggle_off",
+    "$checked_locked_texture": "textures/ui/toggle_on",
 
-    "$default_color": [ 0.3, 0.3, 0.3 ],
-    "$hover_color": [ 1, 1, 1 ],
-    "$checked_image|default": "common.empty_panel",
-    "$unchecked_image|default": "common.empty_panel",
-    "$default_border_color": [ 0.075, 0.075, 0.075 ],
-    "$hover_border_color": [ 1, 1, 1 ],
-
-    "$toggle_binding_type|default": "none",
-    "$toggle_enabled_binding_type|default": "none",
-    "$toggle_view_binding_name|default": "this_toggle",
-    "controls": [
-      {
-        // done as a child to allow for parent bindings
-        "$toggle_view_binding_name@common.toggle": {
-          "bindings": [
-            {
-              "binding_type": "$toggle_binding_type",
-              "binding_condition": "$toggle_binding_condition",
-              "binding_collection_name": "$toggle_grid_collection_name",
-              "binding_name": "$toggle_state_binding_name",
-              "binding_name_override": "#toggle_state"
-            },
-            {
-              "binding_type": "$toggle_enabled_binding_type",
-              "binding_condition": "$toggle_enabled_binding_condition",
-              "binding_collection_name": "$toggle_grid_collection_name",
-              "binding_name": "$toggle_enabled_binding_name",
-              "binding_name_override": "#enabled"
-            }
-          ]
-        }
-      }
-    ]
+    "$border_visible": false,
+    "$locked_alpha": 0.5
   },
 
 
@@ -156,54 +306,77 @@
 
 
   "dark_ui_toggle_collection@light_ui_toggle_collection": {
-    "$default_texture": "textures/gui/newgui/buttons/borderless/dark",
-    "$hover_texture": "textures/gui/newgui/buttons/borderless/darkpressednohover",
-    "$pressed_texture": "textures/gui/newgui/buttons/borderless/darkhover",
-    "$pressed_no_hover_texture": "textures/gui/newgui/buttons/borderless/darkpressed",
+    "$default_texture|default": "textures/ui/button_borderless_dark",
+    "$hover_texture|default": "textures/ui/button_borderless_darkpressednohover",
+    "$pressed_texture|default": "textures/ui/button_borderless_darkhover",
+    "$pressed_no_hover_texture|default": "textures/ui/button_borderless_darkpressed",
 
-    "$default_color": [ 1, 1, 1 ],
-    "$hover_color": [ 1, 1, 1 ]
+    "$default_text_color|default": "$dark_toggle_default_text_color",
+    "$hover_text_color|default": "$dark_toggle_hover_text_color",
+    "$default_checked_text_color|default": "$dark_toggle_checked_default_text_color",
+    "$hover_checked_text_color|default": "$dark_toggle_checked_hover_text_color",
+
+    "$default_glyph_color|default": "$dark_glyph_toggle_default_color",
+    "$hover_glyph_color|default": "$dark_glyph_toggle_hover_color",
+    "$default_checked_glyph_color|default": "$dark_glyph_toggle_checked_default_color",
+    "$hover_checked_glyph_color|default": "$dark_glyph_toggle_checked_hover_color"
   },
 
   "light_ui_toggle_collection": {
     "type": "panel",
 
-    "$unchecked_control": "common_toggles.toggle_unchecked",
-    "$checked_control": "common_toggles.toggle_checked",
-    "$unchecked_hover_control": "common_toggles.toggle_unchecked_hover",
-    "$checked_hover_control": "common_toggles.toggle_checked_hover",
-    "$unchecked_locked_control": "common_toggles.toggle_locked",
-    "$unchecked_locked_hover_control": "common_toggles.toggle_locked",
-    "$checked_locked_control": "common_toggles.toggle_locked",
-    "$checked_locked_hover_control": "common_toggles.toggle_locked",
+    "$unchecked_control|default": "common_toggles.toggle_unchecked",
+    "$checked_control|default": "common_toggles.toggle_checked",
+    "$unchecked_hover_control|default": "common_toggles.toggle_unchecked_hover",
+    "$checked_hover_control|default": "common_toggles.toggle_checked_hover",
+    "$unchecked_locked_control|default": "common_toggles.toggle_locked",
+    "$unchecked_locked_hover_control|default": "common_toggles.toggle_locked",
+    "$checked_locked_control|default": "common_toggles.toggle_locked",
+    "$checked_locked_hover_control|default": "common_toggles.toggle_locked",
 
-    "$default_texture": "textures/gui/newgui/buttons/borderless/light",
-    "$hover_texture": "textures/gui/newgui/buttons/borderless/lightpressednohover",
-    "$pressed_texture": "textures/gui/newgui/buttons/borderless/lighthover",
-    "$pressed_no_hover_texture": "textures/gui/newgui/buttons/borderless/lightpressed",
-    "$locked_texture": "textures/gui/newgui/disabledButtonNoBorder",
+    "$default_texture|default": "textures/ui/button_borderless_light",
+    "$hover_texture|default": "textures/ui/button_borderless_lightpressednohover",
+    "$pressed_texture|default": "textures/ui/button_borderless_lighthover",
+    "$pressed_no_hover_texture|default": "textures/ui/button_borderless_lightpressed",
+    "$locked_texture|default": "textures/ui/disabledButtonNoBorder",
 
-    "$default_color": [ 0.3, 0.3, 0.3 ],
-    "$hover_color": [ 1, 1, 1 ],
+    "$default_text_color|default": "$light_toggle_default_text_color",
+    "$hover_text_color|default": "$light_toggle_hover_text_color",
+    "$default_checked_text_color|default": "$light_toggle_checked_default_text_color",
+    "$hover_checked_text_color|default": "$light_toggle_checked_hover_text_color",
+
+    "$default_glyph_color|default": "$light_glyph_toggle_default_color",
+    "$hover_glyph_color|default": "$light_glyph_toggle_hover_color",
+    "$default_checked_glyph_color|default": "$light_glyph_toggle_checked_default_color",
+    "$hover_checked_glyph_color|default": "$light_glyph_toggle_checked_hover_color",
+
     "$checked_image|default": "common.empty_panel",
     "$unchecked_image|default": "common.empty_panel",
-    "$default_border_color": [ 0.075, 0.075, 0.075 ],
-    "$hover_border_color": [ 1, 1, 1 ],
+    "$default_border_color": "$dark_border_toggle_default_color",
+    "$hover_border_color": "$dark_border_toggle_hover_color",
+    "$locked_alpha": 1,
 
     "$toggle_binding_type|default": "none",
     "$toggle_enabled_binding_type|default": "none",
+    "$toggle_tab_focus_binding_type|default": "none",
+    "$toggle_on_hover_binding_type|default": "none",
     "$toggle_view_binding_name|default": "this_toggle",
-    
+    "$toggle_tab_focus_binding_name|default": "",
+    "$toggle_on_hover_binding_name|default": "",
+
     "$toggle_unchecked|default": false,
     "$toggle_unchecked_hover|default": false,
     "$toggle_checked|default": false,
     "$toggle_checked_hover|default": false,
     "$toggle_locked|default": false,
 
+    "$toggle_focus_wrap_enabled|default": true,
+
     "controls": [
       {
         // done as a child to allow for parent bindings
         "$toggle_view_binding_name@common.toggle": {
+          "focus_wrap_enabled": false,
           "bindings": [
             {
               "binding_type": "$toggle_binding_type",
@@ -222,6 +395,16 @@
             {
               "binding_type": "collection_details",
               "binding_collection_name": "$toggle_grid_collection_name"
+            },
+            {
+              "binding_type": "$toggle_tab_focus_binding_type",
+              "binding_name": "$toggle_tab_focus_binding_name",
+              "binding_name_override": "#default_focus_precedence"
+            },
+            {
+              "binding_type": "$toggle_on_hover_binding_type",
+              "binding_name": "$toggle_on_hover_binding_name",
+              "binding_name_override": "#toggle_on_hover"
             }
           ]
         }
@@ -229,10 +412,32 @@
     ]
   },
 
+  "switch_toggle_collection@common_toggles.light_image_toggle_collection": {
+    "$unchecked_control": "common_toggles.toggle_unchecked",
+    "$checked_control": "common_toggles.toggle_checked",
+    "$unchecked_hover_control": "common_toggles.toggle_unchecked_hover",
+    "$checked_hover_control": "common_toggles.toggle_checked_hover",
+    "$unchecked_locked_control": "common_toggles.toggle_unchecked_locked",
+    "$unchecked_locked_hover_control": "common_toggles.toggle_unchecked_locked",
+    "$checked_locked_control": "common_toggles.toggle_checked_locked",
+    "$checked_locked_hover_control": "common_toggles.toggle_checked_locked",
+
+    "$default_texture": "textures/ui/toggle_off",
+    "$hover_texture": "textures/ui/toggle_on",
+    "$pressed_texture": "textures/ui/toggle_off_hover",
+    "$pressed_no_hover_texture": "textures/ui/toggle_on_hover",
+    "$unchecked_locked_texture": "textures/ui/toggle_off",
+    "$checked_locked_texture": "textures/ui/toggle_on",
+
+    "$border_visible": false,
+    "$locked_alpha": 0.5
+  },
+
   "toggle_unchecked@common_buttons.new_ui_button_panel": {
     "$new_ui_button_texture": "$default_texture",
     "$content_alpha": 1,
-    "$text_color": "$default_color",
+    "$text_color": "$default_text_color",
+    "$glyph_color": "$default_glyph_color",
     "$toggle_image": "$unchecked_image",
     "$border_layer": 1,
     "$border_color": "$default_border_color",
@@ -243,7 +448,8 @@
   "toggle_checked@common_buttons.new_ui_button_panel": {
     "$new_ui_button_texture": "$hover_texture",
     "$content_alpha": 1,
-    "$text_color": "$default_color",
+    "$text_color": "$default_checked_text_color",
+    "$glyph_color": "$default_checked_glyph_color",
     "$toggle_image": "$checked_image",
     "$border_layer": 2,
     "$border_color": "$default_border_color",
@@ -254,7 +460,8 @@
   "toggle_unchecked_hover@common_buttons.new_ui_button_panel": {
     "$new_ui_button_texture": "$pressed_texture",
     "$content_alpha": 1,
-    "$text_color": "$hover_color",
+    "$text_color": "$hover_text_color",
+    "$glyph_color": "$hover_glyph_color",
     "$toggle_image": "$unchecked_image",
     "$border_layer": 3,
     "$border_color": "$hover_border_color",
@@ -265,8 +472,8 @@
   "toggle_checked_hover@common_buttons.new_ui_button_panel": {
     "$new_ui_button_texture": "$pressed_no_hover_texture",
     "$content_alpha": 1,
-    "$text_color": "$hover_color",
-    "$glyph_color": "$hover_color",
+    "$text_color": "$hover_checked_text_color",
+    "$glyph_color": "$hover_checked_glyph_color",
     "$toggle_image": "$checked_image",
     "$border_layer": 4,
     "$border_color": "$hover_border_color",
@@ -276,10 +483,35 @@
 
   "toggle_locked@common_buttons.new_ui_button_panel": {
     "$new_ui_button_texture": "$locked_texture",
-    "$content_alpha": 1,
-    "$text_color": "$default_color",
+    "$content_alpha": "$locked_alpha",
+    "$text_color": "$default_text_color",
+    "$glyph_color": "$default_glyph_color",
     "$toggle_image": "$unchecked_image",
     "$button_image": "common_buttons.locked_button_image",
+    "$border_layer": 1,
+    "$border_color": "$default_border_color",
+    "$toggle_locked": true,
+    "layer": 1
+  },
+
+  "toggle_unchecked_locked@common_buttons.new_ui_button_panel": {
+    "$new_ui_button_texture": "$unchecked_locked_texture",
+    "$content_alpha": "$locked_alpha",
+    "$text_color": "$default_text_color",
+    "$glyph_color": "$default_glyph_color",
+    "$toggle_image": "$unchecked_image",
+    "$border_layer": 1,
+    "$border_color": "$default_border_color",
+    "$toggle_locked": true,
+    "layer": 1
+  },
+
+  "toggle_checked_locked@common_buttons.new_ui_button_panel": {
+    "$new_ui_button_texture": "$checked_locked_texture",
+    "$content_alpha": "$locked_alpha",
+    "$text_color": "$default_text_color",
+    "$glyph_color": "$default_glyph_color",
+    "$toggle_image": "$checked_image",
     "$border_layer": 1,
     "$border_color": "$default_border_color",
     "$toggle_locked": true,
@@ -289,7 +521,7 @@
   "toggle_image": {
     "type": "panel",
     "controls": [
-      { "image@$toggle_image": { } }
+      { "image@$toggle_image": {} }
     ]
   },
 
@@ -301,25 +533,25 @@
 
   "radio_off_icon": {
     "type": "image",
-    "texture": "textures/gui/newgui/settings/radio_off",
+    "texture": "textures/ui/radio_off",
     "size": [ 10, 10 ]
   },
 
   "radio_off_hover_icon": {
     "type": "image",
-    "texture": "textures/gui/newgui/settings/radio_off_hover",
+    "texture": "textures/ui/radio_off_hover",
     "size": [ 10, 10 ]
   },
 
   "radio_on_icon": {
     "type": "image",
-    "texture": "textures/gui/newgui/settings/radio_on",
+    "texture": "textures/ui/radio_on",
     "size": [ 10, 10 ]
   },
-      
+
   "radio_on_hover_icon": {
     "type": "image",
-    "texture": "textures/gui/newgui/settings/radio_on_hover",
+    "texture": "textures/ui/radio_on_hover",
     "size": [ 10, 10 ]
   }
 }

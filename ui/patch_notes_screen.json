@@ -3,9 +3,8 @@
 
   "solid_texture": {
     "type": "image",
-    "texture": "textures/gui/newgui/White",
-    "color": [ 0.0, 0.0, 0.0 ],
-    "nineslice_size": 1
+    "texture": "textures/ui/White",
+    "color": [ 0.0, 0.0, 0.0 ]
   },
 
   "image_with_background@patch_notes.solid_texture": {
@@ -64,9 +63,7 @@
       {
         "black_background": {
           "type": "image",
-          "texture": "textures/gui/achievements/mainbanners",
-          "nineslice_size": 1,
-          "uv_size": [ 3, 3 ],
+          "texture": "textures/ui/mainbanners",
           "size": [ "100%", "100%c+6px" ],
 
           "controls": [
@@ -98,12 +95,7 @@
           "type": "label",
           "color": "$text_color",
           "text": "$button_text",
-          "size": [ "100%-4px", "default" ],
-          "bindings": [
-            {
-              "binding_name": "$button_text"
-            }
-          ]
+          "size": [ "default", "default" ]
         }
       }
     ]
@@ -113,7 +105,7 @@
     "controls": [
       {
         "button_label2@patch_notes.button_label_panel": {
-          "$button_text": "#store_button_offer_text"
+          "$button_text": "skins.picker.unlock.button"
         }
       }
     ]
@@ -224,8 +216,10 @@
             {
               "patch_notes_text": {
                 "type": "label",
+                "color": "$body_text_color",
                 "size": [ "100%-4px", "default" ],
                 "text": "#patch_description",
+                "font_type": "smooth",
                 "bindings": [
                   {
                     "binding_name": "#patch_description",
@@ -272,13 +266,6 @@
   },
 
   "patch_notes_screen@common.base_screen": {
-    "$screen_content": "patch_notes.patch_notes_dialog",
-    "button_mappings": [
-      {
-        "from_button_id": "button.menu_cancel",
-        "to_button_id": "button.menu_exit",
-        "mapping_type": "global"
-      }
-    ]
+    "$screen_content": "patch_notes.patch_notes_dialog"    
   }
 }

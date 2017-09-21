@@ -6,33 +6,20 @@
 {
   "namespace": "invite",
 
-  "label": {
-    "type": "label",
-    "anchor_from": "center",
-    "anchor_to": "center",
-    "offset": [ 0, 0 ],
-    "color": "white"
-  },
-
   //Black bordered box is used for the grid item and around the gamerpic
   "black_border": {
     "type": "image",
-    "texture": "textures/gui/newgui/MainBanners",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 3, 3 ],
-    "nineslice_size": 1.0
+    "texture": "textures/ui/mainbanners"
   },
 
   "black_border_hover@black_border": {
-    "texture": "textures/gui/newgui/MainBannersHover"
+    "texture": "textures/ui/MainBannersHover"
   },
 
   //Gamerpic uses the black border and an image that will come from XBL
   "gamerpic": {
     "type": "image",
     "texture": "#texture",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 64, 64 ],
     "texture_file_system": "#texture_file_system",
     "bindings": [
       {
@@ -69,13 +56,11 @@
   //Status image - 2 images with flipped visibility
   "status_image": {
     "type": "image",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 8, 8 ],
     "size": [ 8, 8 ]
   },
 
   "online_image@status_image": {
-    "texture": "textures/gui/newgui/online",
+    "texture": "textures/ui/online",
     "bindings": [
       {
         "binding_name": "#online_visible",
@@ -87,7 +72,7 @@
   },
 
   "offline_image@status_image": {
-    "texture": "textures/gui/newgui/offline",
+    "texture": "textures/ui/offline",
     "bindings": [
       {
         "binding_name": "#offline_visible",
@@ -154,6 +139,7 @@
   //Since there's no flow panel we use the color switch codes to build up the string from multiple inputs
   "friend_label": {
     "type": "label",
+    "color": "$body_text_color",
     "size": [ "100%-60px", "50%" ]
   },
 
@@ -355,11 +341,13 @@
   },
 
   "frame_label@label": {
+    "type": "label",
     "anchor_from": "top_left",
     "anchor_to": "top_left",
     "size": [ "default", 10 ],
     "offset": [ 1, 2 ],
-    "layer": 3
+    "layer": 3,
+    "color": "$body_text_color"
   },
 
   "friend_panel": {
@@ -381,7 +369,7 @@
             {
               "frame_label@frame_label": {
                 "text": "$err_message_text",
-                "color": [ 1, 0, 0 ]
+                "color": "$error_text_color"
               }
             }
           ]
@@ -577,30 +565,6 @@
         "from_button_id": "button.menu_cancel",
         "to_button_id": "button.menu_exit",
         "mapping_type": "global"
-      },
-      {
-        "from_button_id": "button.menu_up",
-        "to_button_id": "button.menu_up",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_down",
-        "to_button_id": "button.menu_down",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_left",
-        "to_button_id": "button.menu_left",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_right",
-        "to_button_id": "button.menu_right",
-        "mapping_type": "global",
-        "scope": "view"
       }
     ],
     "$screen_content": "invite.invite_screen_content"

@@ -29,60 +29,13 @@
 
   "screenshot_frame": {
     "type": "image",
-    "texture": "textures/gui/newgui/portfolio/screenshot_frame",
+    "texture": "textures/ui/screenshot_frame",
     "layer": 1,
     "anchor_from": "center",
-    "anchor_to": "center",
-    "nineslice_size": 0
+    "anchor_to": "center"
   },
 
-  "trash_default": {
-    "type": "image",
-    "texture": "textures/gui/newgui/portfolio/trash_default",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 11, 12 ]
-  },
-
-  "trash_hover": {
-    "type": "image",
-    "texture": "textures/gui/newgui/portfolio/trash_hover",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 11, 12 ]
-  },
-
-  "trash_pressed": {
-    "type": "image",
-    "texture": "textures/gui/newgui/portfolio/trash_pressed",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 11, 12 ]
-  },
-
-  "photo_trash_button": {
-    "type": "button",
-    "focus_enabled": true,
-    "size": [ 11, 12 ],
-    "layer": 1,
-    "default_control": "default",
-    "hover_control": "hover",
-    "pressed_control": "pressed",
-    "anchor_from": "bottom_middle",
-    "anchor_to": "bottom_middle",
-    "bindings": [
-      {
-        "binding_name": "#trash_visibility_left",
-        "binding_name_override": "#visible",
-        "binding_type": "collection",
-        "binding_collection_name": "photos"
-      }
-    ],
-    "controls": [
-      { "default@trash_default": { } },
-      { "hover@trash_hover": { } },
-      { "pressed@trash_pressed": { } }
-    ]
-  },
-
-  "photo_trash_button_left@photo_trash_button": {
+  "photo_trash_button_left@edu_common.photo_trash_button": {
     "offset": [ "25%-50%x", "-85%y" ],
     "anchor_from": "bottom_left",
     "anchor_to": "bottom_left",
@@ -98,11 +51,16 @@
         "from_button_id": "button.menu_select",
         "to_button_id": "button.portfolio_delete_photo_left",
         "mapping_type": "pressed"
+      },
+      {
+        "from_button_id": "button.menu_ok",
+        "to_button_id": "button.portfolio_delete_photo_left",
+        "mapping_type": "focused"
       }
     ]
   },
 
-  "photo_trash_button_right@photo_trash_button": {
+  "photo_trash_button_right@edu_common.photo_trash_button": {
 
     "offset": [ "-25%+50%x", "-85%y" ],
 
@@ -121,6 +79,11 @@
         "from_button_id": "button.menu_select",
         "to_button_id": "button.portfolio_delete_photo_right",
         "mapping_type": "pressed"
+      },
+      {
+        "from_button_id": "button.menu_ok",
+        "to_button_id": "button.portfolio_delete_photo_right",
+        "mapping_type": "focused"
       }
     ]
   },
@@ -129,16 +92,16 @@
     "type": "label",
     "offset": [ 0, -24 ],
     "layer": 1,
-    "size": [ 40, 30 ],
+    "size": [ 60, 30 ],
     "text": "#item_name",
-    "color": [ 0.25, 0.25, 0.25, 1.0 ],
+    "color": "$dark_body_text_color",
     "anchor_from": "top_middle",
     "anchor_to": "top_middle",
     "shadow": false
   },
 
   "photo_number_left@photo_number": {
-    "offset": [ "-24%", "5%" ],
+    "offset": [ "-22%", "5%" ],
     "bindings": [
       {
         "binding_name": "#photo_page_item_name_left",
@@ -151,7 +114,7 @@
 
   "photo_number_right@photo_number": {
 
-    "offset": [ "26%", "5%" ],
+    "offset": [ "28%", "5%" ],
     "bindings": [
       {
         "binding_name": "#photo_page_item_name_right",
@@ -164,9 +127,7 @@
 
   "photo_corner_bl": {
     "type": "image",
-    "texture": "textures/gui/newgui/portfolio/photo_corner_bl",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 19, 19 ],
+    "texture": "textures/ui/photo_corner_bl",
     "size": [ 19, 19 ],
     "offset": [ -1, 1 ],
     "layer": 1,
@@ -176,9 +137,7 @@
 
   "photo_corner_br": {
     "type": "image",
-    "texture": "textures/gui/newgui/portfolio/photo_corner_br",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 19, 19 ],
+    "texture": "textures/ui/photo_corner_br",
     "size": [ 19, 19 ],
     "offset": [ 1, 1 ],
     "layer": 1,
@@ -188,9 +147,7 @@
 
   "photo_corner_tr": {
     "type": "image",
-    "texture": "textures/gui/newgui/portfolio/photo_corner_tr",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 19, 19 ],
+    "texture": "textures/ui/photo_corner_tr",
     "size": [ 19, 19 ],
     "offset": [ 1, -1 ],
     "layer": 1,
@@ -200,9 +157,7 @@
 
   "photo_corner_tl": {
     "type": "image",
-    "texture": "textures/gui/newgui/portfolio/photo_corner_tl",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 19, 19 ],
+    "texture": "textures/ui/photo_corner_tl",
     "size": [ 19, 19 ],
     "offset": [ -1, -1 ],
     "layer": 1,
@@ -232,21 +187,21 @@
     "anchor_from": "bottom_middle", // the parent
     "anchor_to": "bottom_middle", // this control
     "constrain_to_rect": true,
-		"enabled_newline": true,
-		"layer": 100,
+    "enabled_newline": true,
+    "layer": 100,
     "$text_edit_binding_name": "#text_box_item_name",
     "property_bag": {
       "#property_field": "#item_name"
     },
-    "max_length": 1000, // use the parent area	
+    "max_length": 1000, // use the parent area
     "size": [ "85%", 26 ],
-		"offset": [0, 0],
+    "offset": [ 0, 0 ],
     "$place_holder_text": "portfolioScreen.caption",
-    "$place_holder_text_color": [ 0.5, 0.5, 0.5, 1 ],
     "$text_edit_box_content_binding_type": "collection",
     "$text_edit_box_grid_collection_name": "photos",
-    "$text_box_name": "#text_box_photos",		
-		"controls": [
+    "$text_box_name": "#text_box_photos",
+    "$text_color_binding_type": "global",
+    "controls": [
       {
         "clipper_panel": {
           "type": "panel",
@@ -255,7 +210,7 @@
           "anchor_to": "center",
           "clips_children": true,
           "$disabled_color|default": "$color",
-          "$color": [ 0.0, 0.0, 0.0, 1.0 ],
+
           "controls": [
             {
               "display_text@common.text_edit_box_label": {
@@ -298,9 +253,9 @@
           ]
         }
       },
-      { "default@portfolio.text_edit_box_default_indent": { } },
-      { "hover@portfolio.text_edit_box_hover_indent": { } },
-      { "pressed@portfolio.text_edit_box_hover_indent": { } }
+      { "default@portfolio.text_edit_box_default_indent": {} },
+      { "hover@portfolio.text_edit_box_hover_indent": {} },
+      { "pressed@portfolio.text_edit_box_hover_indent": {} }
 
     ]
   },
@@ -354,23 +309,17 @@
   // -----------------------------------------
   "prev_button_default": {
     "type": "image",
-    "texture": "textures/gui/newgui/portfolio/arrow_l_default",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 9 ]
+    "texture": "textures/ui/arrow_l_default"
   },
 
   "prev_button_hover": {
     "type": "image",
-    "texture": "textures/gui/newgui/portfolio/arrow_l_hover",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 9 ]
+    "texture": "textures/ui/arrow_l_hover"
   },
 
   "prev_button_pressed": {
     "type": "image",
-    "texture": "textures/gui/newgui/portfolio/arrow_l_pressed",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 9 ]
+    "texture": "textures/ui/arrow_l_pressed"
   },
 
   "photo_page_prev_button@common.button": {
@@ -416,23 +365,17 @@
   // -----------------------------------------
   "next_button_default": {
     "type": "image",
-    "texture": "textures/gui/newgui/portfolio/arrow_r_default",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 9 ]
+    "texture": "textures/ui/arrow_r_default"
   },
 
   "next_button_hover": {
     "type": "image",
-    "texture": "textures/gui/newgui/portfolio/arrow_r_hover",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 9 ]
+    "texture": "textures/ui/arrow_r_hover"
   },
 
   "next_button_pressed": {
     "type": "image",
-    "texture": "textures/gui/newgui/portfolio/arrow_r_pressed",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 9 ]
+    "texture": "textures/ui/arrow_r_pressed"
   },
 
   "photo_page_next_button@common.button": {
@@ -476,82 +419,20 @@
   //---------------------------------------------------------------------------
   // EXPORT SHOTS
   //---------------------------------------------------------------------------
-  "export_button_default": {
-    "type": "image",
-    "texture": "textures/gui/newgui/portfolio/grey_button_default",
-    "nineslice_size": 2.0,
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 7 ]
-  },
 
-  "export_button_hover": {
-    "type": "image",
-    "texture": "textures/gui/newgui/portfolio/grey_button_hover",
-    "nineslice_size": 2.0,
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 7 ]
-  },
-
-  "export_button_pressed": {
-    "type": "image",
-    "texture": "textures/gui/newgui/portfolio/grey_button_pressed",
-    "nineslice_size": 2.0,
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 7 ]
-  },
-
-  "export_text@common.button_text": {
-    "text": "portfolioScreen.export",
-    "color": [ 0.25, 0.25, 0.25, 1.0 ],
-    "shadow": false,
-    "offset": [ 0, 1 ],
-    "anchor_from": "center",
-    "anchor_to": "center"
-  },
-
-  "export_button@common.button": {
+  "export_button@common_buttons.light_text_button": {
     "type": "button",
     "size": [ 120, 20 ],
+    "$button_text": "portfolioScreen.export",
+    "$pressed_button_name": "button.portfolio_export",
     "layer": 1,
     "anchor_from": "bottom_middle",
     "anchor_to": "bottom_middle",
     "offset": [ 0, 30 ],
-    "default_control": "default",
-    "hover_control": "hover",
-    "pressed_control": "pressed",
-    "button_mappings": [
-      {
-        "from_button_id": "button.menu_select",
-        "to_button_id": "button.portfolio_export",
-        "mapping_type": "pressed"
-      },
-      {
-        "from_button_id": "button.menu_ok",
-        "to_button_id": "button.portfolio_export",
-        "mapping_type": "focused"
-      }
-    ],
     "bindings": [
       {
         "binding_name": "#export_visibility",
         "binding_name_override": "#visible"
-      }
-    ],
-    "controls": [
-      {
-        "default@export_button_default": {
-          "controls": [ { "export_text@export_text": { } } ]
-        }
-      },
-      {
-        "hover@export_button_hover": {
-          "controls": [ { "export_text@export_text": { } } ]
-        }
-      },
-      {
-        "pressed@export_button_pressed": {
-          "controls": [ { "export_text@export_text": { "offset": [ 1, 2 ] } } ]
-        }
       }
     ]
   },
@@ -564,31 +445,24 @@
   //---------------------------------------------------------------------------
   "book_binding": {
     "type": "image",
-    "texture": "textures/gui/newgui/portfolio/book_binding",
+    "texture": "textures/ui/book_binding",
     "layer": 1,
-    "uv": [ 0, 0 ],
-    "uv_size": [ 5, 2 ],
     "anchor_from": "top_middle",
     "anchor_to": "top_middle",
     "offset": [ 0, 7 ],
-    "size": [ "1.5%", "100%-7px" ],
-    "nineslice_size": [ 0, 0, 0, 1 ]
+    "size": [ "1.5%", "100%-7px" ]
   },
 
   "book_spine": {
     "type": "image",
-    "texture": "textures/gui/newgui/portfolio/book_spine",
-    "layer": 1,
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 1 ]
+    "texture": "textures/ui/book_spine",
+    "layer": 1
   },
 
   "book_background": {
     "type": "image",
-    "texture": "textures/gui/newgui/portfolio/book_frame",
+    "texture": "textures/ui/book_frame",
     "layer": 1,
-    "uv": [ 0, 0 ],
-    "nineslice_size": 21.0,
     "anchor_from": "center",
     "anchor_to": "center",
     "controls": [
@@ -621,10 +495,7 @@
       {
         "header_background": {
           "type": "image",
-          "nineslice_size": [ 3, 3, 3, 6 ],
-          "texture": "textures/gui/newgui/TopBar",
-          "uv": [ 0, 0 ],
-          "uv_size": [ 5, 8 ]
+          "texture": "textures/ui/header_bar"
         }
       }
     ]
@@ -632,23 +503,17 @@
 
   "close_button_default": {
     "type": "image",
-    "texture": "textures/gui/newgui/portfolio/x_default",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 7 ]
+    "texture": "textures/ui/x_default"
   },
 
   "close_button_hover": {
     "type": "image",
-    "texture": "textures/gui/newgui/portfolio/x_hover",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 7 ]
+    "texture": "textures/ui/x_hover"
   },
 
   "close_button_pressed": {
     "type": "image",
-    "texture": "textures/gui/newgui/portfolio/x_pressed",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 7, 7 ]
+    "texture": "textures/ui/x_pressed"
   },
 
   "close_button": {
@@ -681,6 +546,39 @@
     ]
   },
 
+  //---------------------------------------------------------------------------
+  // No pics alert
+  //---------------------------------------------------------------------------
+  "alert_label": {
+    "layer": 11,
+    "type": "label",
+    "size": [ "100%", "default" ],
+    "text_alignment": "center",
+    "color": "$body_text_color"
+  },
+
+  "no_photo_alert_content": {
+    "type": "stack_panel",
+    "orientation": "vertical",
+    "size": [ "100%", "100%c" ],
+    "controls": [
+      { "p0@portfolio.alert_label": { "text": "portfolioScreen.nopics0" } },
+      { "p1@portfolio.alert_label": { "text": "portfolioScreen.nopics1" } }
+    ]
+  },
+
+  "no_photo_alert_ok@common.empty_panel": {
+    "controls": [
+      {
+        "ok_button@common_buttons.light_text_button": {
+          "type": "button",
+          "size": [ 150, 20 ],
+          "$button_text": "gui.ok",
+          "$pressed_button_name": "button.no_photo_alert_ok"
+        }
+      }
+    ]
+  },
 
   // -----------------------------------------------
   //
@@ -698,6 +596,18 @@
   },
 
   "portfolio_screen@common.base_screen": {
+    "button_mappings": [
+      {
+        "from_button_id": "button.menu_cancel",
+        "to_button_id": "button.menu_exit",
+        "mapping_type": "global"
+      }
+    ],
+    "$screen_content": "portfolio.portfolio_screen_content"
+  },
+
+  "portfolio_screen_content": {
+    "type": "panel",
     "controls": [
       {
         "root_panel@root_panel": {
@@ -726,37 +636,18 @@
             { "export_button@export_button": { } }
           ]
         }
-      }
-    ],
-    "button_mappings": [
-      {
-        "from_button_id": "button.menu_cancel",
-        "mapping_type": "global"
       },
       {
-        "from_button_id": "button.menu_up",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_down",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_left",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_right",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_cancel",
-        "to_button_id": "button.menu_exit",
-        "mapping_type": "global"
+        "no_photos_alert@common_dialogs.main_panel_small_title_one_button": {
+          "size": [ 300, 125 ],
+          "layer": 10,
+          "$fill_alpha": 1.0,
+          "visible": "$no_pick_alert_visible",
+
+          "$text_name": "item.portfolio.name",
+          "$child_control": "portfolio.no_photo_alert_content",
+          "$button_panel": "portfolio.no_photo_alert_ok"
+        }
       }
     ]
   }

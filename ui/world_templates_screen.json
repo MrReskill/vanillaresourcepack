@@ -12,13 +12,13 @@
 
   "world_icon": {
     "type": "image",
-    "texture": "textures/gui/newgui/worldsIcon",
+    "texture": "textures/ui/worldsIcon",
     "size": [ 16, 17 ]
   },
 
   "realms_icon": {
     "type": "image",
-    "texture": "textures/gui/newgui/realmsIcon",
+    "texture": "textures/ui/realmsIcon",
     "size": [ 11, 14 ]
   },
 
@@ -55,10 +55,7 @@
 
   "label_background": {
     "type": "image",
-    "texture": "textures/gui/achievements/mainbanners",
-    "uv": [ 0, 0 ],
-    "nineslice_size": 1.0,
-    "uv_size": [ 3, 3 ]
+    "texture": "textures/ui/mainbanners"
   },
 
 
@@ -121,6 +118,7 @@
 
   "world_button_label": {
     "type": "label",
+    "color": "$dark_button_default_text_color",
     "size": [ "default", 10 ],
     "max_size": [ "100%", 10 ],
     "text": "$button_label",
@@ -138,6 +136,7 @@
     "$pressed_button_name": "button.generate_random",
     "anchor_from": "top_left",
     "anchor_to": "top_left",
+    "default_focus_precedence":  1,
     "$button_text": "#generate_random_button_text",
     "$button_text_binding_type": "global"
   },
@@ -171,6 +170,7 @@
                   {
                     "label": {
                       "type": "label",
+                      "color": "$body_text_color",
                       "size": [ "100%", 10 ],
                       "anchor_from": "top_left",
                       "anchor_to": "top_left",
@@ -210,6 +210,7 @@
       {
         "info_label": {
           "type": "label",
+          "color": "$body_text_color",
           "max_size": [ "100%", 20 ],
           "text": "selectTemplate.realmInfo",
           "layer": 1
@@ -230,7 +231,7 @@
 
   "icon_lock": {
     "type": "image",
-    "texture": "textures/gui/newgui/lock",
+    "texture": "textures/ui/lock",
     "size": [ 8, 8 ]
   },
 
@@ -259,7 +260,7 @@
 
   "icon_unlock": {
     "type": "image",
-    "texture": "textures/gui/newgui/unLock",
+    "texture": "textures/ui/unLock",
     "size": [ 10, 8 ]
   },
 
@@ -292,7 +293,7 @@
 
   "world_list_text": {
     "type": "label",
-    "color": "$dark_text_color",
+    "color": "$dark_button_secondary_default_text_color",
     "shadow": false
   },
 
@@ -300,9 +301,6 @@
     "type": "image",
     "size": [ "100%c + 2px", "100%" ],
     "texture": "$border_texture",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 5, 5 ],
-    "nineslice_size": 1.0,
     "anchor_from": "left_middle",
     "anchor_to": "left_middle",
     "layer": 1,
@@ -311,11 +309,10 @@
         "picture": {
           "type": "image",
           "layer": 1,
+          "force_texture_reload": true,
           "texture": "#screenshot_texture",
           "zip_folder": "#screenshot_zip_folder",
           "texture_file_system": "#screenshot_file_system",
-          "uv": [ 0, 0 ],
-          "uv_size": [ 160, 92 ],
           "size": [ "173.91%y", "100% - 2px" ],
           "bindings": [
             {
@@ -344,7 +341,7 @@
 
   "world_template_name@world_templates.world_list_text": {
     "text": "#world_template_name",
-    "color": "$bright_text_color",
+    "color": "$dark_button_default_text_color",
     "bindings": [
       {
         "binding_name": "#world_template_name",
@@ -370,6 +367,7 @@
   "world_template_lock": {
     "type": "panel",
     "size": [ 10, 10 ],
+    "visible" : "(not $education_edition)",
     "controls": [
       {
         "lock_panel@world_templates.lock_panel": {
@@ -463,19 +461,19 @@
     "variables": [
       {
         "requires": "$default_state",
-        "$border_texture": "textures/gui/newgui/play_screen/Indent2"
+        "$border_texture": "textures/ui/default_indent"
       },
       {
         "requires": "$hover_state",
-        "$border_texture": "textures/gui/newgui/focusBorder"
+        "$border_texture": "textures/ui/focus_border_white"
       },
       {
         "requires": "$pressed_state",
-        "$border_texture": "textures/gui/newgui/focusBorder"
+        "$border_texture": "textures/ui/focus_border_white"
       },
       {
         "requires": "$locked_state",
-        "$border_texture": "textures/gui/newgui/play_screen/Indent2"
+        "$border_texture": "textures/ui/default_indent"
       }
     ],
     "controls": [
@@ -492,8 +490,6 @@
 
   "world_template_item_button@common_buttons.dark_content_button": {
     "$button_content": "world_templates.world_template_content_panel",
-    "$bright_text_color": [ 1.0, 1.0, 1.0 ],
-    "$dark_text_color": [ 0.6, 0.6, 0.6 ],
     "bindings": [
       {
         "binding_type": "collection_details",
@@ -533,8 +529,6 @@
     "collection_name": "world_templates",
     "$collection_name": "world_templates",
     "$pressed_button_name": "button.menu_world_template_clicked",
-    "$bright_text_color": [ 1.0, 1.0, 1.0 ],
-    "$dark_text_color": [ 0.6, 0.6, 0.6 ],
     "bindings": [
       {
         "binding_name": "#world_template_item_grid_dimension"
@@ -562,8 +556,6 @@
     "collection_name": "invalid_world_templates",
     "$collection_name": "invalid_world_templates",
     "$pressed_button_name": "button.menu_invalid_world_template_clicked",
-    "$bright_text_color": [ 1.0, 0.1, 0.1 ],
-    "$dark_text_color": [ 0.6, 0.1, 0.1 ],
     "bindings": [
       {
         "binding_name": "#invalid_world_template_item_grid_dimension"
@@ -591,8 +583,6 @@
     "collection_name": "loading_world_templates",
     "$collection_name": "loading_world_templates",
     "$pressed_button_name": "button.menu_loading_world_template_clicked",
-    "$bright_text_color": [ 0.1, 1.0, 0.1 ],
-    "$dark_text_color": [ 0.1, 0.6, 0.1 ],
     "bindings": [
       {
         "binding_name": "#loading_world_template_item_grid_dimension"
@@ -760,6 +750,19 @@
           "anchor_from": "top_left",
           "anchor_to": "top_left"
         }
+      },
+      {
+        // This padding is needed for Bug #69266, to ensure the last item from three world_template grids above can be fully scrolled into view (required for proper focus when using controller), due to the way the focusable buttons inside the grid items are 1 pixel *taller* than their parent grid item thus not fitting into the vertical space measured for this stack panel
+        "padding_for_world_template_grid_item_overdraw": {
+          "type": "panel",
+          "size": [ "100%", 2 ],
+          "bindings": [
+            {
+              "binding_name": "#templates_padding_visible",
+              "binding_name_override": "#visible"
+            }
+          ]
+        }
       }
     ]
   },
@@ -774,30 +777,6 @@
         "from_button_id": "button.menu_cancel",
         "to_button_id": "button.menu_exit",
         "mapping_type": "global"
-      },
-      {
-        "from_button_id": "button.menu_up",
-        "to_button_id": "button.menu_up",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_down",
-        "to_button_id": "button.menu_down",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_left",
-        "to_button_id": "button.menu_left",
-        "mapping_type": "global",
-        "scope": "view"
-      },
-      {
-        "from_button_id": "button.menu_right",
-        "to_button_id": "button.menu_right",
-        "mapping_type": "global",
-        "scope": "view"
       }
     ],
     "$default_text_color": [ 0.3, 0.3, 0.3 ],

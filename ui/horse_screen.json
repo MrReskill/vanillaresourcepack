@@ -3,39 +3,32 @@
 
   "renderer_bg": {
     "type": "image",
-    "texture": "textures/gui/spritesheet",
-    "uv": [ 0, 32 ],
-    "uv_size": [ 8, 8 ],
-    "nineslice_size": 1.0
+    "texture": "textures/ui/pocket_button_pressed"
   },
 
   "overlay_image": {
     "type": "image",
-    "uv": [ 0, 0 ],
-    "uv_size": [ 16, 16 ],
     "alpha": 0.5
   },
 
   "saddle_image@horse.overlay_image": {
-    "texture": "textures/gui/newgui/empty_horse_slot_saddle"
+    "texture": "textures/ui/empty_horse_slot_saddle"
   },
 
   "armor_image@horse.overlay_image": {
-    "texture": "textures/gui/newgui/empty_horse_slot_armor"
+    "texture": "textures/ui/empty_horse_slot_armor"
+  },
+
+  "carpet_image@horse.overlay_image": {
+    "texture": "textures/ui/empty_llama_slot_carpet"
   },
 
   "horse_label@common.section_heading_label": {
     "anchor_from": "top_left",
     "anchor_to": "top_left",
     "offset": [ 7, 7 ],
-    "text": "#text",  // is this a hack?
-    "layer": 5,
-    "bindings": [
-      {
-        "binding_name": "#horse_name_loc",
-        "binding_name_override": "#text"
-      }
-    ]
+    "text": "$container_title",
+    "layer": 5
   },
 
   "equip_grid": {
@@ -101,11 +94,47 @@
           "anchor_to": "top_left",
           "size": [ 16, 16 ],
           "offset": [ 1, 1 ],
-          "layer": 4
+          "layer": 4,
+          "bindings": [
+            {
+              "binding_name": "#has_saddle_slot",
+              "binding_name_override": "#visible"
+            }
+          ]
         }
       },
       {
-        "armor@horse.armor_image": {
+        "armor_0@horse.armor_image": {
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "size": [ 16, 16 ],
+          "offset": [ 1, 1 ],
+          "layer": 4,
+          "bindings": [
+            {
+              "binding_name": "#has_only_armor_slot",
+              "binding_name_override": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "carpet_0@horse.carpet_image": {
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "size": [ 16, 16 ],
+          "offset": [ 1, 1 ],
+          "layer": 4,
+          "bindings": [
+            {
+              "binding_name": "#has_only_carpet_slot",
+              "binding_name_override": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "armor_1@horse.armor_image": {
           "anchor_from": "top_left",
           "anchor_to": "top_left",
           "size": [ 16, 16 ],
@@ -113,7 +142,22 @@
           "layer": 4,
           "bindings": [
             {
-              "binding_name": "#has_armor_slot",
+              "binding_name": "#has_armor_and_saddle_slot",
+              "binding_name_override": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "carpet_1@horse.carpet_image": {
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "size": [ 16, 16 ],
+          "offset": [ 1, 19 ],
+          "layer": 4,
+          "bindings": [
+            {
+              "binding_name": "#has_carpet_and_saddle_slot",
               "binding_name_override": "#visible"
             }
           ]
@@ -130,15 +174,6 @@
     "controls": [
       { "inv_bg_panel@horse.inv_bg_panel": { } },
       { "inv_grid@horse.inv_grid": { } }
-    ]
-  },
-
-  "horse_panel": {
-    "type": "panel",
-    "size": [ "100%", "100%" ],
-    "controls": [
-      { "equip_panel@horse.equip_panel": { } },
-      { "inv_panel@horse.inv_panel": { } }
     ]
   },
 
@@ -179,17 +214,20 @@
   "horse_panel": {
     "type": "panel",
     "controls": [
-      { "container_gamepad_helpers@common.container_gamepad_helpers": { } },
-      { "screen_background@common.screen_background": { } },
+      { "container_gamepad_helpers@common.container_gamepad_helpers": {} },
+      { "flying_item_renderer@common.flying_item_renderer": {} },
       {
         "root_panel@common.root_panel": {
           "layer": 1,
           "controls": [
-            { "input_panel@common.input_panel": { } },
-            { "common_panel@common.common_panel": { } },
+            {
+              "common_panel@common.common_panel": {
+                "$use_compact_close_button": true
+              }
+            },
 
-            { "horse_section_label@horse.horse_label": { } },
-            { "inv_panel@horse.inv_panel": { } },
+            { "horse_section_label@horse.horse_label": {} },
+            { "inv_panel@horse.inv_panel": {} },
 
             {
               "equipment@horse.equip_panel": {
@@ -202,9 +240,9 @@
               }
             },
 
-            { "inventory_panel_bottom_half_with_label@common.inventory_panel_bottom_half_with_label": { } },
-            { "hotbar_grid_template@common.hotbar_grid_template": { } },
-            { "inventory_selected_icon_button@common.inventory_selected_icon_button": { } }
+            { "inventory_panel_bottom_half_with_label@common.inventory_panel_bottom_half_with_label": {} },
+            { "hotbar_grid_template@common.hotbar_grid_template": {} },
+            { "inventory_selected_icon_button@common.inventory_selected_icon_button": {} }
           ]
         }
       }
@@ -217,16 +255,14 @@
     "variables": [
       {
         "requires": "$desktop_screen",
-        "$visible_screen": "horse.horse_panel"
+        "$screen_content": "horse.horse_panel",
+        "$screen_bg_content": "common.screen_background"
       },
       {
         "requires": "$pocket_screen",
-        "$visible_screen": "horse_pocket.horse_panel",
+        "$screen_content": "horse_pocket.horse_panel",
         "$close_on_player_hurt": true
       }
-    ],
-    "controls": [
-      { "screen@$visible_screen": { } }
     ]
   }
 }
